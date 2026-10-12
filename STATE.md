@@ -1,7 +1,7 @@
 # STATE
 
 ## Contador global de pruebas
-55  (H001 6 · H002 8 · H003 4 · H004 4 · H005 6 · H006 12 · H007 6 · H008 3 · H010 2 · H011 4)
+61  (… H010 2 · H011 4 · H012 4 · H013 2; detalle en HYPOTHESES.md)
 
 ## Qué se está haciendo
 Cerradas (10, todas rechazadas). Meta-review 1 escrita (reports/meta_review.md): cambio
@@ -11,9 +11,11 @@ Reglas: Sharpe mensual; alfa vs B&H y nulo aleatorio; variantes registradas ante
 ejecutar; tests 1–3 por experimento; liquidaciones pesimistas.
 
 ## Siguiente paso exacto
-H012: descargar klines 1h de futuros trimestrales BTC/ETH (futures/um, símbolos
-BTCUSDT_YYMMDD) + spot 1h ya disponible; fijar variantes en HYPOTHESES.md antes de
-ejecutar; motor con tests 1–3; G2 en vencimientos 2021–2022.
+1. H012 (basis trimestral): G3 superado (reports/h012_g3.json: OOS 3,6 %/año sobre
+   capital, Sharpe 1,73, MDD 2,2 %, IC95 > 0, positiva 2023/24/25) pero solo 24 ops.
+   G4: aplicar la variante elegida (θ=5 %, salida anticipada) SIN rediseñar a los
+   trimestrales COIN-M de 12 monedas no usadas (data/cm.log) + costes ×2 + vecinos.
+2. H013: leer reports/h013_g3.json (G3 walk-forward 2023–2025) y decidir.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
@@ -21,4 +23,4 @@ ejecutar; motor con tests 1–3; G2 en vencimientos 2021–2022.
   verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
 
 ## Hipótesis activa
-H012 (G0 escrito).
+H012 (G4) y H013 (G3).
