@@ -104,6 +104,11 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Predicción falsable: cartera semanal larga en los 5 perps (top 50 por volumen) con
   funding medio de 7 días más negativo y corta en los 5 más positivos cobra funding
   neto > costes y su retorno de precio no lo anula; Sharpe OOS > 0, IC95 > 0.
+- Variantes fijadas (2026-10-12, antes de ver resultados): mismo universo, rebalanceo,
+  costes y tamaño que H005 (top 50 por volumen 30 d, ≥ 90 días, lunes 00:00 UTC,
+  5 largos + 5 cortos, 0,5 de capital por lado). Orden por funding medio de los eventos
+  de los D días previos (ts < lunes 00:00), D ∈ {3, 7, 14} → 3 variantes.
+  Largo = funding más bajo; corto = funding más alto. Train 2020–2022.
 
 ### H009 — Reversión del basis spot-perp
 - Quién pierde: traders impacientes que empujan el perp lejos del spot.

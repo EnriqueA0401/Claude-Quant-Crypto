@@ -41,7 +41,9 @@ def panel():
     return P(o), P(c), P(h), P(qv), P(fd).fillna(0.0)
 
 
-def run(o, c, h, qv, fd, L, direction, end=None):
+def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None):
+    """score_fn(sun, mon, names) -> Series (mayor = largo). Por defecto, retorno de L
+    semanas hasta el close del domingo (momentum)."""
     mondays = o.index[o.index.dayofweek == 0]
     if end is not None:
         mondays = mondays[mondays < end]
@@ -56,7 +58,10 @@ def run(o, c, h, qv, fd, L, direction, end=None):
             continue
         alive = o.loc[mon].notna() & (first <= sun - pd.Timedelta("90D"))
         liquid = vol30.loc[sun][alive].nlargest(50).index
-        past = c.loc[sun, liquid] / c.loc[sun - pd.Timedelta(weeks=L), liquid] - 1
+        if score_fn is None:
+            past = c.loc[sun, liquid] / c.loc[sun - pd.Timedelta(weeks=L), liquid] - 1
+        else:
+            past = score_fn(sun, mon, liquid)
         past = past.dropna()
         if len(past) < 2 * N_SIDE:
             continue
