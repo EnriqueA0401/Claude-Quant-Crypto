@@ -82,3 +82,19 @@ def download_metrics(symbols: list[str]) -> None:
         _, keys = s3_list(f"data/futures/um/daily/metrics/{s}/", delimiter=None)
         paths += [k[len("data/"):] for k in keys if k.endswith(".zip")]
     download(sorted(paths), workers=24)
+
+
+def download_spot_daily(symbols: list[str]) -> None:
+    """Klines spot 1d mensuales (incluidos pares deslistados) para `symbols`."""
+    pre, _ = s3_list("data/spot/monthly/klines/")
+    spot = {p.rstrip("/").split("/")[-1] for p in pre}
+    todo = [s for s in symbols if s in spot]
+
+    def files(sym):
+        _, keys = s3_list(f"data/spot/monthly/klines/{sym}/1d/", delimiter=None)
+        return [k[len("data/"):] for k in keys if k.endswith(".zip")]
+
+    with ThreadPoolExecutor(16) as ex:
+        paths = sorted(p for lst in ex.map(files, todo) for p in lst)
+    print(f"{len(todo)} pares con spot, {len(paths)} ficheros", flush=True)
+    download(paths, workers=24)

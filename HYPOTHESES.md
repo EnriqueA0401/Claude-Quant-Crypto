@@ -12,10 +12,10 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | rechazada | G2 | G3: OOS Sharpe 0,36, IC95 incluye 0, solo gana 2025, MDD 57 % | 6 | B |
 | H006 | eventos de listado | nuevos perps caen tras su listado | rechazada | G2 | G3: OOS +0,5 %/evento, t=0,25; negativa 2 de 3 años | 12 | B |
 | H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | rechazada | G1 | G2: ningún bloque significativo; todos netos < 0 | 6 | C |
-| H008 | carry cross-sectional (Koijen et al. 2018, adaptado) | largo perps con funding más negativo, corto los más positivos | en curso | G2 | G2: 76–80 %/año, Sharpe 1,9, IC95 > 0 (D=3,7) | 3 | A |
+| H008 | carry cross-sectional (Koijen et al. 2018, adaptado) | largo perps con funding más negativo, corto los más positivos | rechazada | G2 | G3: OOS −10 %/año (funding +33 %, precio −33 %, costes −10 %) | 3 | A |
 | H009 | microestructura / basis | reversión del basis spot-perp extremo (delta-neutral) | pendiente | - | - | 0 | B |
 | H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | pendiente | - | - | 0 | B |
-| H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | pendiente | - | - | 0 | B |
+| H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | en curso | G0 | - | 0 | A |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -125,3 +125,13 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Predicción falsable: cash-and-carry (largo spot + corto perp) en altcoins con spot en
   Binance y funding medio de 7 días > umbral supera el rendimiento de stablecoins
   (≥ 5 %/año sobre capital) neto de 4 lados de costes, con ≥ 100 entradas OOS.
+- Evidencia previa (H008, OOS 2023–2025): la pata de funding de un long/short de altcoins
+  cobró ~33 %/año sobre 0,5 de capital por lado; el precio se lo comió. Cubrir el precio
+  con spot es la forma directa de aislar ese funding.
+- Variantes fijadas (2026-10-12, antes de ver resultados): semanal (lunes 00:00 UTC).
+  Universo: top 50 por volumen perp de 30 d con ≥ 90 días de perp y de spot USDT.
+  Elegir los 5 con mayor funding medio de los D días previos (ts < lunes), D ∈ {3, 7};
+  filtro θ ∈ {ninguno, media > 3e-4 por evento} → 4 variantes. Por par: largo spot +
+  corto perp, 0,1 de capital por pata (1x). Costes por lado: spot 0,10 % + 0,10 %
+  slippage; perp 0,05 % + 0,10 %. Funding real. Liquidación del corto si high perp ≥ 2×
+  entrada: pata perp −100 %, la pata spot conserva su retorno real. Train 2020–2022.
