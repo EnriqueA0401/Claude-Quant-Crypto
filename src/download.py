@@ -65,7 +65,10 @@ def download(paths: list[str], workers: int = 16) -> None:
             if done % 100 == 0 or done == len(paths):
                 print(f"{done}/{len(paths)} ({len(missing)} inexistentes)", flush=True)
     MANIFEST.write_text(json.dumps(man, indent=1, sort_keys=True) + "\n")
-    (DATA / "missing.json").write_text(json.dumps(sorted(missing), indent=1) + "\n")
+    mpath = DATA / "missing.json"
+    prev = set(json.loads(mpath.read_text())) if mpath.exists() else set()
+    prev -= set(man)  # ficheros que ahora sí existen
+    mpath.write_text(json.dumps(sorted(prev | set(missing)), indent=1) + "\n")
 
 
 if __name__ == "__main__":

@@ -91,3 +91,36 @@ def _record(rel_path: str, digest: str) -> None:
     if man.get(rel_path) != digest:
         man[rel_path] = digest
         MANIFEST.write_text(json.dumps(man, indent=1, sort_keys=True) + "\n")
+
+
+def _read_zip(path: Path) -> bytes:
+    with zipfile.ZipFile(path) as z:
+        return z.read(z.namelist()[0])
+
+
+def load_klines(market: str, symbol: str, interval: str = "1h") -> pd.DataFrame:
+    """market: 'spot' o 'um'. Concatena los zips mensuales ya descargados."""
+    sub = "spot" if market == "spot" else "futures/um"
+    # mensuales primero; los diarios rellenan huecos de los mensuales
+    files = (sorted((DATA / sub / "monthly/klines" / symbol / interval).glob("*.zip"))
+             + sorted((DATA / sub / "daily/klines" / symbol / interval).glob("*.zip")))
+    if not files:
+        raise FileNotFoundError(f"sin datos {market} {symbol} {interval}")
+    df = pd.concat([parse_klines(_read_zip(f)) for f in files])
+    return df[~df.index.duplicated(keep="first")].sort_index()
+
+
+def load_funding(symbol: str) -> pd.Series:
+    """Tasa de funding por evento (USDT-M), indexada por hora de liquidación.
+
+    calc_time trae a veces milisegundos de desfase (08:00:00.003); se redondea al
+    minuto para que el funding de las 08:00 lo pague la posición mantenida hasta
+    las 08:00 (bar 07:00 en el backtester: intervalo (open[t], open[t+1]]).
+    """
+    files = sorted((DATA / "futures/um/monthly/fundingRate" / symbol).glob("*.zip"))
+    if not files:
+        raise FileNotFoundError(f"sin funding {symbol}")
+    df = pd.concat([pd.read_csv(io.BytesIO(_read_zip(f))) for f in files])
+    ts = pd.to_datetime(df["calc_time"].astype("int64"), unit="ms", utc=True).dt.round("1min")
+    s = pd.Series(df["last_funding_rate"].astype(float).values, index=ts, name="funding")
+    return s[~s.index.duplicated(keep="first")].sort_index()

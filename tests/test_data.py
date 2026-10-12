@@ -32,3 +32,17 @@ def test_validate_detects_gaps_and_duplicates():
     assert rep["duplicates"] == 1
     assert rep["missing_bars"] == 1
     assert rep["bad_ohlc"] == 0
+
+
+def test_load_funding_rounds_ms_offset(tmp_path, monkeypatch):
+    import zipfile
+    from src import data
+    d = tmp_path / "futures/um/monthly/fundingRate/XUSDT"
+    d.mkdir(parents=True)
+    csv = "calc_time,funding_interval_hours,last_funding_rate\n1704096000003,8,0.0001\n"
+    with zipfile.ZipFile(d / "XUSDT-fundingRate-2024-01.zip", "w") as z:
+        z.writestr("x.csv", csv)
+    monkeypatch.setattr(data, "DATA", tmp_path)
+    s = data.load_funding("XUSDT")
+    assert s.index[0] == pd.Timestamp("2024-01-01 08:00", tz="UTC")
+    assert s.iloc[0] == 0.0001

@@ -5,7 +5,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 
 | id | fuente | racional (resumen) | estado | gate | motivo | variantes | prio |
 |----|--------|--------------------|--------|------|--------|-----------|------|
-| H001 | anomalía conocida (carry) | cash-and-carry: largo spot + corto perp cobra funding | pendiente | - | - | 0 | A |
+| H001 | anomalía conocida (carry) | cash-and-carry: largo spot + corto perp cobra funding | en curso | G1 | sesgo supervivencia pendiente para G4 | 0 | A |
 | H002 | Liu & Tsyvinski (2021) | momentum de series temporales en BTC/ETH | pendiente | - | - | 0 | A |
 | H003 | propia / crowding | funding extremo predice retorno negativo del perp | pendiente | - | - | 0 | A |
 | H004 | microestructura | reversión tras cascadas de liquidación (caída + OI cae) | pendiente | - | - | 0 | B |
