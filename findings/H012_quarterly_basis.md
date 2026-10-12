@@ -46,3 +46,21 @@ rendimiento de stablecoins) y no generaliza.
 `python3 experiments/h012_quarterly_basis.py`, `h012_g3_walkforward.py`,
 `h012_g4_robustness.py`. Tests: tests/test_h012.py. Motor acelerado con numpy
 (resultados idénticos comprobados).
+
+## Revisión por checklist (paso 5) y re-ejecución — 2026-10-13
+El revisor encontró un error grave de datos: varios ficheros de trimestrales siguen
+semanas después del vencimiento con barras congeladas (0 operaciones). El motor tomaba
+el vencimiento del final de los datos, así que entraba en contratos ya liquidados
+(BTC/ETH 230929 en octubre de 2023), con la pata spot sin cubrir. También señaló que
+los trimestrales COIN-M de altcoins tienen un 6–54 % de barras sin operaciones.
+Corregido: corte en el vencimiento programado (YYMMDD 08:00 UTC), barras sin
+operaciones excluidas de señal y fills, y último precio negociado si la posición está
+abierta (tests en tests/test_h012.py).
+- **G3 corregido: OOS 3,30 %/año, Sharpe 1,56, MDD −1,1 %, IC95 > 0, 18 entradas.**
+- Rendimiento sobre capital desplegado ≈ 4,1–4,8 %/año: **no cumple la predicción de G0
+  (≥ 5 %)** y no supera al efectivo/USDT en 2023–2025 (≈ 4–5 %). Exceso sobre caja ≤ 0.
+- Con cobertura de unidades iguales (en vez de nocional igual) el Sharpe baja a ~1,4.
+- Capital pequeño: el lote mínimo del trimestral BTC (0,001 BTC ≈ 100 USD) deja hasta
+  un 20 % de error de cobertura con 250 USD por pata; no modelado.
+Veredicto sin cambios: rechazada. Lección para G1: validar siempre la última barra de
+un futuro contra su fecha de vencimiento y el número de operaciones por barra.

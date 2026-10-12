@@ -29,12 +29,23 @@ HOLDOUT = pd.Timestamp("2025-10-01", tz="UTC")
 HPY = 24 * 365
 
 
-def load(base):
-    spot = load_klines("spot", base)[["open", "close"]]
+def clean_contract(k: pd.DataFrame, name: str) -> pd.DataFrame:
+    """Corta el contrato en su vencimiento programado (YYMMDD 08:00 UTC: último bar
+    07:00) y marca como NaN las barras sin operaciones (precio congelado). Revisión
+    paso 5: algunos ficheros siguen semanas tras el vencimiento con barras muertas."""
+    exp = pd.Timestamp("20" + name.split("_")[1], tz="UTC") + pd.Timedelta("8h")
+    k = k[k.index < exp].copy()
+    if "trades" in k:
+        k.loc[k["trades"] <= 0, ["open", "high", "close"]] = np.nan
+    return k[["open", "high", "close"]]
+
+
+def load(base, market="um"):
+    spot = load_klines("spot", base if market == "um" else base + "T")[["open", "close"]]
     futs = {}
-    for d in sorted((DATA / "futures/um/monthly/klines").glob(f"{base}_*")):
-        k = load_klines("um", d.name)[["open", "high", "close"]]
-        futs[d.name] = k
+    for d in sorted((DATA / f"futures/{market}/monthly/klines").glob(f"{base}_*")):
+        if (d / "1h").exists():
+            futs[d.name] = clean_contract(load_klines(market, d.name), d.name)
     return spot, futs
 
 
@@ -49,14 +60,17 @@ def run(spot, futs, theta, exit_rule, end=None):
     order = sorted(futs)
     n = len(idx)
     rows = np.zeros((n, 6))   # pos, basis_pnl, cost, rebalance, liquidated, entry
-    cur, ref, s_ref, pos = None, np.nan, np.nan, 0.0
+    cur, ref, s_ref, pos, last_f = None, np.nan, np.nan, 0.0, np.nan
     pending = None            # contrato a abrir en el open del bar siguiente
     exit_next = False
     for t in range(n - 1):
         cost = reb = liq = ent = 0.0
+        if pending is not None and np.isnan(al[pending]["open"][t]):
+            pending = None                            # sin precio negociado: no hay fill
         if pending is not None:                       # entrada en open[t]
             cur, pos, ent = pending, 1.0, 1.0
             ref = al[cur]["open"][t]
+            last_f = ref
             s_ref = so[t]                           # unidades fijas desde la entrada
             cost += W * (CS + CF)
             pending = None
@@ -67,10 +81,15 @@ def run(spot, futs, theta, exit_rule, end=None):
         if pos:
             f = al[cur]
             fo, fh = f["open"][t], f["high"][t]
+            if np.isnan(fo):                          # barra sin operaciones: último precio
+                fo = last_f
+            if np.isnan(fh):
+                fh = fo
             is_last = is_last_bar[cur][t]
             f1 = f["close"][t] if is_last else f["open"][t + 1]
             if np.isnan(f1):                         # hueco en el futuro: sin cambio
                 f1 = fo
+            last_f = f1
             if fh >= ref * (2 - MMR):
                 # corto liquidado: se pierde el margen; el spot se vende al mismo nivel
                 # (+100 % sobre la referencia como mucho)

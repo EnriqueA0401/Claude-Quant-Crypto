@@ -7,7 +7,7 @@
 Cerradas (14, todas rechazadas): H001–H013. La mejor: H012 (basis trimestral BTC/ETH:
 OOS 3,6 %/año, Sharpe 1,7) rechazada en G4 (no generaliza a altcoins; 24 ops).
 Pendiente: H014 (ejecución maker). Meta-review 1 en reports/meta_review.md.
-Reglas: Sharpe mensual; alfa vs B&H y nulo aleatorio; variantes registradas antes de
+Reglas: comparar con el rendimiento de caja (≈ 4–5 %/año en 2023–25); Sharpe mensual; alfa vs B&H y nulo aleatorio; variantes registradas antes de
 ejecutar; tests 1–3 por experimento; liquidaciones pesimistas; desempates deterministas.
 
 ## Siguiente paso exacto

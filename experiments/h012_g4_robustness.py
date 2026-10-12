@@ -25,14 +25,8 @@ COINS = ["ADA", "BCH", "BNB", "DOT", "EOS", "ETC", "FIL", "LINK", "LTC", "SOL", 
 
 
 def load_cm(coin):
-    spot = load_klines("spot", f"{coin}USDT")[["open", "close"]]
-    futs = {}
-    for d in sorted((DATA / "futures/cm/monthly/klines").glob(f"{coin}USD_*")):
-        if (d / "1h").exists():
-            f = load_klines("cm", d.name)[["open", "high", "close"]]
-            if f.index[-1] < h12.HOLDOUT:
-                futs[d.name] = f
-    return spot, futs
+    spot, futs = h12.load(f"{coin}USD", market="cm")
+    return spot, {c: f for c, f in futs.items() if len(f) and f.index[-1] < h12.HOLDOUT}
 
 
 def with_costs(mult):

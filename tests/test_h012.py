@@ -93,3 +93,19 @@ def test_liquidation_total_loss_is_margin_minus_capped_spot():
     liq_bar = int(np.flatnonzero(out["liquidated"])[0])
     total = out["basis"].iloc[:liq_bar + 1].sum()
     assert total == pytest.approx(h12.W * 1.0 - h12.W * 1.0, abs=1e-12)
+
+
+def test_clean_contract_cuts_at_scheduled_expiry_and_masks_dead_bars():
+    i = pd.date_range("2021-03-20", "2021-04-10", freq="1h", tz="UTC")
+    k = pd.DataFrame({"open": 100.0, "high": 101.0, "close": 100.5, "trades": 5}, index=i)
+    k.loc[k.index[10], "trades"] = 0
+    c = h12.clean_contract(k, "BTCUSDT_210326")
+    assert c.index[-1] == pd.Timestamp("2021-03-26 07:00", tz="UTC")
+    assert np.isnan(c["open"].iloc[10])
+
+
+def test_nan_future_bar_while_held_uses_last_price():
+    fut = _fut(0, 100.0, 24 * 30, 102.0)
+    fut.iloc[100, :] = np.nan                            # barra sin operaciones
+    out = h12.run(_spot(), {"X_1": fut}, 0.05, "expiry")
+    assert out["net"].notna().all()

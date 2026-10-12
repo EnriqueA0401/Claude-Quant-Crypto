@@ -21,6 +21,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H014 | meta-review 1 | ejecución maker con modelo de cola (aggTrades) | pendiente | - | - | 0 | C |
 | H015 | Bali, Cakici & Whitelaw (2011); crypto: lottery demand | efecto MAX: los pares con mayor subida diaria máxima del mes rinden menos | pendiente | - | - | 0 | A |
 | H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | pendiente | - | - | 0 | A |
+| H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | pendiente | - | - | 0 | B |
+| H018 | práctica (K33): purgas de apalancamiento diarias | largo BTC/ETH 1–4 semanas tras caída diaria de OI > 10 % | pendiente | - | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -212,3 +214,17 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Variantes fijadas (2026-10-13, antes de ver resultados): mismo motor y rebalanceo
   cada 4 semanas. Riesgo = volatilidad diaria de 30 días o beta frente a BTC de 60 días
   → 2 variantes. Igual peso (sin escalar por volatilidad).
+
+### H017 — Tendencia multi-moneda (ensemble)
+- Quién pierde: compradores tardíos y tenedores que no reducen riesgo en las caídas.
+- Predicción falsable: cartera largo/plano sobre los 20 perps más líquidos (con
+  deslistados), señal = media de rupturas Donchian de varios horizontes, tamaño inverso
+  a la volatilidad; alfa frente a buy & hold de BTC > 0 en 2023–2025 (juzgar solo OOS).
+- Nota previa: TS momentum en BTC/ETH (H002) ya falló; el alfa publicado puede venir de
+  2017 y 2021.
+
+### H018 — Purga de apalancamiento diaria
+- Quién pierde: vendedores forzosos en una purga de apalancamiento de todo un día.
+- Predicción falsable: tras un día con caída de OI > 10 % (y precio a la baja), un
+  largo de 1–4 semanas en BTC/ETH (y en el universo con métricas para llegar a ≥ 100
+  eventos) bate a largos en fechas aleatorias neto de costes y funding.

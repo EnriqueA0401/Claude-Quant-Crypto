@@ -29,7 +29,8 @@ def scores(c):
     btc = lr["BTCUSDT"]
 
     def max30(sun, mon, names):
-        return -r.loc[sun - pd.Timedelta("29D"):sun, names].max(min_count=20)
+        w = r.loc[sun - pd.Timedelta("29D"):sun, names]
+        return -w.max().where(w.notna().sum() >= 20)
 
     def max5(sun, mon, names):
         w = r.loc[sun - pd.Timedelta("29D"):sun, names]
