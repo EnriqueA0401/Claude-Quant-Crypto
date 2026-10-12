@@ -148,7 +148,64 @@ def run(D, O, H, C, Q, first_bar, fund_events, F):
     }
 
 
+def debug_week(D, mon, O, H, C, Q, first_bar, fund_events, F):
+    """Imprime universo, scores, posiciones, r y fsum de una semana."""
+    mon = pd.Timestamp(mon, tz="UTC")
+    idx = O.index
+    sun = mon - DAY
+    nxt = mon + pd.Timedelta(days=7)
+    qv30 = Q.rolling(30, min_periods=20).sum()
+    elig = [s for s in O.columns if not np.isnan(O.at[mon, s])
+            and first_bar[s] <= sun - pd.Timedelta(days=90)
+            and not np.isnan(qv30.at[sun, s])]
+    elig.sort(key=lambda s: -qv30.at[sun, s])
+    univ = elig[:TOP_LIQ]
+    print(f"== D={D} mon={mon.date()} eligible={len(elig)} univ={len(univ)}")
+    print("  univ:", univ)
+    lo = mon - pd.Timedelta(days=D)
+    sc = []
+    for s in univ:
+        f = fund_events.get(s)
+        if f is None:
+            continue
+        ev = f[(f.index >= lo) & (f.index < mon)]
+        if len(ev):
+            sc.append((float(ev.mean()), s, len(ev)))
+    sc.sort(key=lambda x: (x[0], x[1]))
+    print("  scores:", [(s, f"{m:.6f}", n) for m, s, n in sc])
+    days = idx[(idx >= mon) & (idx < nxt)]
+    for side, names, w in (("L", [s for _, s, _ in sc[:N_SIDE]], W),
+                           ("S", [s for _, s, _ in sc[-N_SIDE:]], -W)):
+        for s in names:
+            p0 = float(O.loc[days, s].dropna().iloc[0])
+            p1 = O.at[nxt, s]
+            if np.isnan(p1):
+                p1 = float(C.loc[days, s].dropna().iloc[-1])
+            r = p1 / p0 - 1
+            if w < 0 and H.loc[days, s].max() >= 2 * p0:
+                r = 1.0
+            fs = float(F.loc[days, s].sum())
+            print(f"  {side} {s:12s} p0={p0:.6g} p1={p1:.6g} r={r:+.5f} fsum={fs:+.6f} pnl={w*r - w*fs:+.6f}")
+
+
+def load_cached():
+    import pickle
+    cache = Path("/tmp/claude-0/-home-user-Claude-Quant-Crypto/d19d4462-a4d1-5a19-968f-d7ab82638a9c/scratchpad/h008_panels.pkl")
+    if cache.exists():
+        return pickle.loads(cache.read_bytes())
+    out = load_all()
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_bytes(pickle.dumps(out))
+    return out
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "debug":
+        _, O, H, C, Q, first_bar, fund_events, F = load_cached()
+        for arg in sys.argv[2:]:
+            D, mon = arg.split(":")
+            debug_week(int(D), mon, O, H, C, Q, first_bar, fund_events, F)
+        return
     syms, O, H, C, Q, first_bar, fund_events, F = load_all()
     res = {"n_symbols_dirs": len(syms), "n_symbols_loaded": O.shape[1],
            "n_symbols_funding": len(fund_events), "variants": {}}

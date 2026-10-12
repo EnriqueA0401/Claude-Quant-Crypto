@@ -131,7 +131,9 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Variantes fijadas (2026-10-12, antes de ver resultados): semanal (lunes 00:00 UTC).
   Universo: top 50 por volumen perp de 30 d con ≥ 90 días de perp y de spot USDT.
   Elegir los 5 con mayor funding medio de los D días previos (ts < lunes), D ∈ {3, 7};
-  filtro θ ∈ {ninguno, media > 3e-4 por evento} → 4 variantes. Por par: largo spot +
+  filtro θ ∈ {ninguno, media > 3e-4 por evento} → 4 variantes. [Corrección 2026-10-12,
+  antes de ejecutar G2: "por evento" = equivalente a 8 h (suma de la ventana / (3·D)),
+  porque desde 2023 muchos pares liquidan cada 4 h o 1 h.] Por par: largo spot +
   corto perp, 0,1 de capital por pata (1x). Costes por lado: spot 0,10 % + 0,10 %
   slippage; perp 0,05 % + 0,10 %. Funding real. Liquidación del corto si high perp ≥ 2×
   entrada: pata perp −100 %, la pata spot conserva su retorno real. Train 2020–2022.

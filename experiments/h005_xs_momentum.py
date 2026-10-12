@@ -30,6 +30,10 @@ def panel():
     o, c, h, qv, fd = {}, {}, {}, {}, {}
     for s in syms:
         k = load_klines("um", s, "1d")
+        # barras con volumen 0 = par suspendido/deslistado que sigue publicando precio
+        # plano: no son operables → NaN (activa la salida al último close con volumen)
+        dead = k["quote_volume"] <= 0
+        k.loc[dead, ["open", "close", "high"]] = np.nan
         o[s], c[s], h[s], qv[s] = k["open"], k["close"], k["high"], k["quote_volume"]
         try:
             f = load_funding(s)

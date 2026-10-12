@@ -40,7 +40,9 @@ def make_score(ev, d):
                 continue
             w = f[(f.index >= mon - pd.Timedelta(days=d)) & (f.index < mon)]
             if len(w):
-                out[s] = -w.mean()          # funding bajo → largo
+                # equivalente a 8 h: suma de la ventana / nº de periodos de 8 h. Así un
+                # par con funding cada 4 h o 1 h no queda infravalorado (revisión paso 5)
+                out[s] = -w.sum() / (d * 3)   # funding bajo → largo
         return pd.Series(out, dtype=float)
     return score
 

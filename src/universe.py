@@ -98,3 +98,25 @@ def download_spot_daily(symbols: list[str]) -> None:
         paths = sorted(p for lst in ex.map(files, todo) for p in lst)
     print(f"{len(todo)} pares con spot, {len(paths)} ficheros", flush=True)
     download(paths, workers=24)
+
+
+def fill_daily_gaps(market: str = "um", interval: str = "1d") -> int:
+    """Descarga ficheros diarios para los días que faltan dentro del rango de cada
+    símbolo en los mensuales (p. ej. 2022-02-26/28 y 2022-04-01/02 en perps)."""
+    import pandas as pd
+
+    from .data import load_klines
+    sub = "futures/um" if market == "um" else "spot"
+    base = DATA / sub / "monthly/klines"
+    paths = []
+    for d in sorted(base.iterdir()):
+        if not (d / interval).exists():
+            continue
+        k = load_klines(market, d.name, interval)
+        full = pd.date_range(k.index.min(), k.index.max(), freq="1D", tz="UTC")
+        for day in full.difference(k.index):
+            ds = day.strftime("%Y-%m-%d")
+            paths.append(f"{sub}/daily/klines/{d.name}/{interval}/{d.name}-{interval}-{ds}.zip")
+    print(f"{len(paths)} días a rellenar", flush=True)
+    download(paths, workers=24)
+    return len(paths)
