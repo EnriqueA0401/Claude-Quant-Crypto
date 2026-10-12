@@ -51,6 +51,12 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Predicción falsable: largo top-quintil / corto bottom-quintil por retorno de 1–4
   semanas, universo con pares deslistados; spread neto OOS > 0.
 - Riesgo: con <1.000 USD el número de posiciones está limitado por el nocional mínimo.
+- Variantes fijadas (2026-10-12, antes de ver resultados): universo semanal = perps
+  USDT-M (incluidos deslistados) con ≥ 90 días de historia y en el top 50 por volumen
+  en USDT de los 30 días previos (solo pasado). Rebalanceo los lunes 00:00 UTC.
+  Ordenar por retorno de las últimas L semanas, L ∈ {1, 2, 4}; dirección ∈ {momentum,
+  reversión} → 6 variantes. 5 largos + 5 cortos, igual peso, 0,5 de capital por lado.
+  Costes 0,05 % comisión + 0,10 % slippage por lado; funding real. Train 2020–2022.
 
 ### H006 — Deriva negativa tras listado de perps
 - Quién pierde: compradores minoristas atraídos por el hype del listado.
