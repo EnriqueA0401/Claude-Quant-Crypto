@@ -1,0 +1,132 @@
+{
+  "END": "2023-01-01 00:00:00+00:00",
+  "W": 0.5,
+  "results": {
+    "BTCUSDT": {
+      "bars": 26304,
+      "first_bar": "2020-01-01 00:00:00+00:00",
+      "last_bar": "2022-12-31 23:00:00+00:00",
+      "contracts": [
+        "BTCUSDT_210326",
+        "BTCUSDT_210625",
+        "BTCUSDT_210924",
+        "BTCUSDT_211231",
+        "BTCUSDT_220325",
+        "BTCUSDT_220624",
+        "BTCUSDT_220930",
+        "BTCUSDT_221230"
+      ],
+      "theta0.05_expiry": {
+        "entries": 8,
+        "liquidations": 0,
+        "rebalances": 11,
+        "early_exits": 0,
+        "expiry_exits": 8,
+        "nan_fopen_fallbacks": 0,
+        "skipped_entry_nan_fopen": 0,
+        "net_pnl_sum": 0.08420051302965087,
+        "costs_plus_rebalance": 0.02363505286097693,
+        "gross_pnl_sum": 0.1078355658906278
+      },
+      "theta0.05_early": {
+        "entries": 17,
+        "liquidations": 0,
+        "rebalances": 11,
+        "early_exits": 17,
+        "expiry_exits": 0,
+        "nan_fopen_fallbacks": 0,
+        "skipped_entry_nan_fopen": 0,
+        "net_pnl_sum": 0.11952722822585933,
+        "costs_plus_rebalance": 0.04608175019530374,
+        "gross_pnl_sum": 0.16560897842116395
+      },
+      "theta0.10_expiry": {
+        "entries": 5,
+        "liquidations": 0,
+        "rebalances": 8,
+        "early_exits": 0,
+        "expiry_exits": 5,
+        "nan_fopen_fallbacks": 0,
+        "skipped_entry_nan_fopen": 0,
+        "net_pnl_sum": 0.0850962744212945,
+        "costs_plus_rebalance": 0.015166899280279518,
+        "gross_pnl_sum": 0.10026317370157402
+      },
+      "theta0.10_early": {
+        "entries": 11,
+        "liquidations": 0,
+        "rebalances": 9,
+        "early_exits": 11,
+        "expiry_exits": 0,
+        "nan_fopen_fallbacks": 0,
+        "skipped_entry_nan_fopen": 0,
+        "net_pnl_sum": 0.12213941800563284,
+        "costs_plus_rebalance": 0.03044169062881252,
+        "gross_pnl_sum": 0.1525811086344458
+      }
+    },
+    "ETHUSDT": {
+      "bars": 26304,
+      "first_bar": "2020-01-01 00:00:00+00:00",
+      "last_bar": "2022-12-31 23:00:00+00:00",
+      "contracts": [
+        "ETHUSDT_210326",
+        "ETHUSDT_210625",
+        "ETHUSDT_210924",
+        "ETHUSDT_211231",
+        "ETHUSDT_220325",
+        "ETHUSDT_220624",
+        "ETHUSDT_220930",
+        "ETHUSDT_221230"
+      ],
+      "theta0.05_expiry": {
+        "entries": 6,
+        "liquidations": 0,
+        "rebalances": 23,
+        "early_exits": 0,
+        "expiry_exits": 6,
+        "nan_fopen_fallbacks": 0,
+        "skipped_entry_nan_fopen": 0,
+        "net_pnl_sum": 0.029626675568493323,
+        "costs_plus_rebalance": 0.02258217864952326,
+        "gross_pnl_sum": 0.0522088542180162
+      },
+      "theta0.05_early": {
+        "entries": 19,
+        "liquidations": 0,
+        "rebalances": 16,
+        "early_exits": 19,
+        "expiry_exits": 0,
+        "nan_fopen_fallbacks": 0,
+        "skipped_entry_nan_fopen": 0,
+        "net_pnl_sum": 0.06591895862253024,
+        "costs_plus_rebalance": 0.052767938195637076,
+        "gross_pnl_sum": 0.11868689681816735
+      },
+      "theta0.10_expiry": {
+        "entries": 6,
+        "liquidations": 0,
+        "rebalances": 19,
+        "early_exits": 0,
+        "expiry_exits": 6,
+        "nan_fopen_fallbacks": 0,
+        "skipped_entry_nan_fopen": 0,
+        "net_pnl_sum": 0.029831329954354172,
+        "costs_plus_rebalance": 0.021326451211672138,
+        "gross_pnl_sum": 0.05115778116602619
+      },
+      "theta0.10_early": {
+        "entries": 8,
+        "liquidations": 0,
+        "rebalances": 15,
+        "early_exits": 8,
+        "expiry_exits": 0,
+        "nan_fopen_fallbacks": 0,
+        "skipped_entry_nan_fopen": 0,
+        "net_pnl_sum": 0.08456346479793357,
+        "costs_plus_rebalance": 0.024953165764963075,
+        "gross_pnl_sum": 0.10951663056289622
+      }
+    }
+  }
+}
