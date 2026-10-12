@@ -59,7 +59,9 @@ def event_return(k, f, start, n, stop=None):
             "liquidated": False, "days": len(seg), "t0": t0, "t1": t1}
 
 
-def main():
+def collect_events(start, end, data_end=None):
+    """Eventos de listados en [start, end). data_end: se descartan los eventos cuya
+    ventana llegue a data_end (purga frente al holdout)."""
     btc = load_klines("um", "BTCUSDT", "1d")
     events = []
     for sym in symbols():
@@ -67,15 +69,18 @@ def main():
             continue
         k = load_klines("um", sym, "1d")
         first = k.index[0]
-        if not (TRAIN[0] <= first < TRAIN[1]):
+        if not (start <= first < end):
             continue      # 2020-01-01 = inicio de los datos, no un listado
         try:
             f = load_funding(sym)
         except FileNotFoundError:
             f = None
         for e, n, x in VARIANTS:
-            r = event_return(k, f, e, n, x)
+            kk = k if data_end is None else k[k.index < data_end]
+            r = event_return(kk, f, e, n, x)
             if r is None:
+                continue
+            if data_end is not None and r.get("t1", first) >= data_end - pd.Timedelta("1D"):
                 continue
             bt = None
             if not r["liquidated"]:
@@ -86,7 +91,11 @@ def main():
                            "stop": x if x is not None else 0.0,
                            "net": r["net"], "liquidated": r["liquidated"],
                            "btc_short": bt, "days": r["days"]})
-    df = pd.DataFrame(events)
+    return pd.DataFrame(events)
+
+
+def main():
+    df = collect_events(*TRAIN)
     df.to_csv(ROOT / "reports/h006_events.csv", index=False)
     rng = np.random.default_rng(0)
     res = {}

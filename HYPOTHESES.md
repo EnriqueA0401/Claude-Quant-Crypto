@@ -9,8 +9,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H002 | Liu & Tsyvinski (2021) | momentum de series temporales en BTC/ETH | rechazada | G4 | G5: DSR 0,92, PBO 0,54, IC95 incluye 0; alfa vs B&H no significativo | 8 | A |
 | H003 | propia / crowding | funding extremo predice retorno negativo del perp | rechazada | G1 | G2: ninguna variante bate al nulo (t<0,6), ETH negativa | 4 | A |
 | H004 | microestructura | reversión tras cascadas de liquidación (caída + OI cae) | pendiente | - | - | 0 | B |
-| H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | pendiente | - | - | 0 | B |
-| H006 | eventos de listado | nuevos perps caen tras su listado | pendiente | - | - | 0 | B |
+| H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | en curso | G1 | - | 6 | B |
+| H006 | eventos de listado | nuevos perps caen tras su listado | en curso | G2 | IC95 in-sample incluye 0; se prueba OOS | 12 | B |
 | H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | rechazada | G1 | G2: ningún bloque significativo; todos netos < 0 | 6 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
