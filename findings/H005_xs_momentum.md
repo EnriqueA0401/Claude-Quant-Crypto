@@ -28,3 +28,9 @@ drawdown del 57 % que no es tolerable con 1.000 USD.
 
 ## Reproducibilidad
 `python3 experiments/h005_xs_momentum.py && python3 experiments/h005_g3_walkforward.py`.
+
+## Re-ejecución con el motor corregido (2026-10-13)
+Tras los arreglos del revisor de H008 (desempate determinista, barras con volumen 0,
+huecos rellenados): G2 momentum 38–48 %/año, Sharpe 0,8–1,1. **G3 OOS: 23,7 %/año,
+Sharpe 0,38, MDD −57 %, IC95 incluye 0; 2023 +0,2 %, 2024 −7,2 %, 2025 +72 %.**
+Veredicto sin cambios.
