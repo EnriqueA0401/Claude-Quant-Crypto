@@ -1,0 +1,70 @@
+{
+ "commit": "a062ce154257e22313061fa630191d75b24da369",
+ "variants": 4,
+ "results": {
+  "BTCUSDT|p=0.99|H=8": {
+   "entries": 201,
+   "ann": -0.13270497097919678,
+   "net_per_entry": -0.001982404672792324,
+   "basis_per_entry": 0.00035011813815294943,
+   "cost_per_entry": 0.0025000000000000005,
+   "hours_held": 1387
+  },
+  "BTCUSDT|p=0.99|H=24": {
+   "entries": 148,
+   "ann": -0.08383302988607705,
+   "net_per_entry": -0.0017008054000782773,
+   "basis_per_entry": 0.0004572948364082092,
+   "cost_per_entry": 0.0025,
+   "hours_held": 2174
+  },
+  "BTCUSDT|p=0.995|H=8": {
+   "entries": 122,
+   "ann": -0.0780978313856621,
+   "net_per_entry": -0.0019221192257439467,
+   "basis_per_entry": 0.0004116027414691679,
+   "cost_per_entry": 0.0025000000000000005,
+   "hours_held": 830
+  },
+  "BTCUSDT|p=0.995|H=24": {
+   "entries": 100,
+   "ann": -0.05381992331629664,
+   "net_per_entry": -0.001616010779667295,
+   "basis_per_entry": 0.0005495574203327047,
+   "cost_per_entry": 0.0025,
+   "hours_held": 1456
+  },
+  "ETHUSDT|p=0.99|H=8": {
+   "entries": 219,
+   "ann": -0.12926563029545757,
+   "net_per_entry": -0.0017723118125463507,
+   "basis_per_entry": 0.0005194805618828731,
+   "cost_per_entry": 0.0025000000000000005,
+   "hours_held": 1422
+  },
+  "ETHUSDT|p=0.99|H=24": {
+   "entries": 168,
+   "ann": -0.08233258374283318,
+   "net_per_entry": -0.0014715114360375498,
+   "basis_per_entry": 0.0006536757961053074,
+   "cost_per_entry": 0.0025,
+   "hours_held": 2248
+  },
+  "ETHUSDT|p=0.995|H=8": {
+   "entries": 127,
+   "ann": -0.07142012075269025,
+   "net_per_entry": -0.0016885659908657928,
+   "basis_per_entry": 0.0005855021587405065,
+   "cost_per_entry": 0.0025,
+   "hours_held": 854
+  },
+  "ETHUSDT|p=0.995|H=24": {
+   "entries": 103,
+   "ann": -0.045312750434796364,
+   "net_per_entry": -0.0013209439139584703,
+   "basis_per_entry": 0.0007366646297308501,
+   "cost_per_entry": 0.0025,
+   "hours_held": 1521
+  }
+ }
+}

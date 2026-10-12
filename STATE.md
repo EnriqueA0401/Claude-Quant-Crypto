@@ -1,7 +1,7 @@
 # STATE
 
 ## Contador global de pruebas
-61  (… H010 2 · H011 4 · H012 4 · H013 2; detalle en HYPOTHESES.md)
+65  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
 Cerradas (10, todas rechazadas). Meta-review 1 escrita (reports/meta_review.md): cambio
@@ -15,7 +15,7 @@ ejecutar; tests 1–3 por experimento; liquidaciones pesimistas.
    capital, Sharpe 1,73, MDD 2,2 %, IC95 > 0, positiva 2023/24/25) pero solo 24 ops.
    G4: aplicar la variante elegida (θ=5 %, salida anticipada) SIN rediseñar a los
    trimestrales COIN-M de 12 monedas no usadas (data/cm.log) + costes ×2 + vecinos.
-2. H013 rechazada en G3 (findings/H013_composite_ranking.md).
+2. H013 rechazada en G3; H009 rechazada en G2 (findings/).
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).

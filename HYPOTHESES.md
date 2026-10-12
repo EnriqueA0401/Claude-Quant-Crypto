@@ -13,7 +13,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H006 | eventos de listado | nuevos perps caen tras su listado | rechazada | G2 | G3: OOS +0,5 %/evento, t=0,25; negativa 2 de 3 años | 12 | B |
 | H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | rechazada | G1 | G2: ningún bloque significativo; todos netos < 0 | 6 | C |
 | H008 | carry cross-sectional (Koijen et al. 2018, adaptado) | largo perps con funding más negativo, corto los más positivos | rechazada | G2 | G3 (re-ejecutado): OOS +15,6 %/año, Sharpe 0,33, IC95 incluye 0, MDD 44 % | 3 | A |
-| H009 | microestructura / basis | reversión del basis spot-perp extremo (delta-neutral) | en curso | G0 | - | 0 | B |
+| H009 | microestructura / basis | reversión del basis spot-perp extremo (delta-neutral) | rechazada | G1 | G2: basis capturado 0,04–0,07 % < coste 0,25 % | 4 | B |
 | H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | rechazada | G1 | G2: Sharpe 0,34–0,46, IC95 incluye 0, 2022 negativo | 2 | B |
 | H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | rechazada | G2 | G3: OOS −2,6 %/año, 51 entradas, basis > funding | 4 | A |
 | H012 | meta-review 1 | basis de futuros trimestrales fijado a la entrada (spot largo + trimestral corto) | en curso | G3 | G3 OK (3,6 %/año, Sharpe 1,7, IC95 > 0); G4: 24 ops OOS < 100 | 4 | A |
