@@ -12,6 +12,10 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | rechazada | G2 | G3: OOS Sharpe 0,36, IC95 incluye 0, solo gana 2025, MDD 57 % | 6 | B |
 | H006 | eventos de listado | nuevos perps caen tras su listado | rechazada | G2 | G3: OOS +0,5 %/evento, t=0,25; negativa 2 de 3 años | 12 | B |
 | H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | rechazada | G1 | G2: ningún bloque significativo; todos netos < 0 | 6 | C |
+| H008 | carry cross-sectional (Koijen et al. 2018, adaptado) | largo perps con funding más negativo, corto los más positivos | pendiente | - | - | 0 | A |
+| H009 | microestructura / basis | reversión del basis spot-perp extremo (delta-neutral) | pendiente | - | - | 0 | B |
+| H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | pendiente | - | - | 0 | B |
+| H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | pendiente | - | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -93,3 +97,26 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   (BTC+ETH, train 2020–2022), t con errores por bloques de días. Operación: entrar al
   inicio del bloque en la dirección del signo y salir al final; coste de ida y vuelta
   0,20 % + funding. Éxito in-sample: neto > 0 con p < 0,05/6 (Bonferroni).
+
+### H008 — Carry cross-sectional de funding
+- Quién pierde: especuladores apalancados que pagan funding alto por estar largos (y
+  cortos que pagan funding negativo) en los pares más concurridos.
+- Predicción falsable: cartera semanal larga en los 5 perps (top 50 por volumen) con
+  funding medio de 7 días más negativo y corta en los 5 más positivos cobra funding
+  neto > costes y su retorno de precio no lo anula; Sharpe OOS > 0, IC95 > 0.
+
+### H009 — Reversión del basis spot-perp
+- Quién pierde: traders impacientes que empujan el perp lejos del spot.
+- Predicción falsable: cuando |perp/spot − 1| supera su percentil 99 de 30 días, una
+  posición delta-neutral contra el basis gana al converger en < 24 h, neta de 4 lados.
+
+### H010 — Prima de alto volumen
+- Quién pierde: vendedores que no anticipan la mayor visibilidad del activo.
+- Predicción falsable: altcoins (top 50 por volumen) con volumen diario > 3× su media de
+  30 días y retorno no extremo rinden más que el resto en los 5–10 días siguientes.
+
+### H011 — Carry en altcoins
+- Quién pierde: largos apalancados en altcoins que pagan funding alto durante semanas.
+- Predicción falsable: cash-and-carry (largo spot + corto perp) en altcoins con spot en
+  Binance y funding medio de 7 días > umbral supera el rendimiento de stablecoins
+  (≥ 5 %/año sobre capital) neto de 4 lados de costes, con ≥ 100 entradas OOS.
