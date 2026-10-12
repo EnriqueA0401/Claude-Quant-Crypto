@@ -17,7 +17,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | rechazada | G1 | G2: Sharpe 0,34–0,46, IC95 incluye 0, 2022 negativo | 2 | B |
 | H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | rechazada | G2 | G3: OOS −2,6 %/año, 51 entradas, basis > funding | 4 | A |
 | H012 | meta-review 1 | basis de futuros trimestrales fijado a la entrada (spot largo + trimestral corto) | en curso | G0 | - | 0 | A |
-| H013 | meta-review 1 | ranking semanal compuesto de señales débiles (ML, walk-forward) | pendiente | - | - | 0 | B |
+| H013 | meta-review 1 | ranking semanal compuesto de señales débiles (ML, walk-forward) | en curso | G0 | - | 0 | B |
 | H014 | meta-review 1 | ejecución maker con modelo de cola (aggTrades) | pendiente | - | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
@@ -170,6 +170,15 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Quién pierde: la suma de los perdedores de cada señal (momentum, funding, volumen, OI).
 - Predicción falsable: un modelo lineal o de árboles reentrenado en walk-forward sobre
   señales semanales ya calculadas genera un long/short con IC95 > 0 OOS neto de costes.
+- Variantes fijadas (2026-10-13, antes de ver resultados): mismo universo/motor que
+  H005 (top 50, ≥ 90 días, lunes, 5+5, costes 0,15 %, funding). Características por
+  lunes, en percentil cross-sectional: retorno 1 sem, retorno 4 sem, funding equiv. 8 h
+  de 7 días, ratio de volumen 1/4 sem, volatilidad diaria 30 días. Objetivo: percentil
+  del retorno de la semana siguiente (open→open, menos funding). Modelos (2 variantes):
+  (a) ridge (λ = 1) sobre percentiles; (b) suma de percentiles con el signo de la IC
+  media de cada característica en train. Reentreno al inicio de cada fold de 6 meses
+  con todo el pasado (embargo 1 semana). G2 = folds dentro de 2021–2022 (train desde
+  2020-04); G3 = folds 2023-01 → 2025-09.
 
 ### H014 — Ejecución maker
 - Quién pierde: los takers impacientes que pagan el spread.
