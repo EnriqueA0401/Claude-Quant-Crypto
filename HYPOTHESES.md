@@ -12,7 +12,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | rechazada | G2 | G3: OOS Sharpe 0,36, IC95 incluye 0, solo gana 2025, MDD 57 % | 6 | B |
 | H006 | eventos de listado | nuevos perps caen tras su listado | rechazada | G2 | G3: OOS +0,5 %/evento, t=0,25; negativa 2 de 3 años | 12 | B |
 | H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | rechazada | G1 | G2: ningún bloque significativo; todos netos < 0 | 6 | C |
-| H008 | carry cross-sectional (Koijen et al. 2018, adaptado) | largo perps con funding más negativo, corto los más positivos | pendiente | - | - | 0 | A |
+| H008 | carry cross-sectional (Koijen et al. 2018, adaptado) | largo perps con funding más negativo, corto los más positivos | en curso | G2 | G2: 76–80 %/año, Sharpe 1,9, IC95 > 0 (D=3,7) | 3 | A |
 | H009 | microestructura / basis | reversión del basis spot-perp extremo (delta-neutral) | pendiente | - | - | 0 | B |
 | H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | pendiente | - | - | 0 | B |
 | H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | pendiente | - | - | 0 | B |

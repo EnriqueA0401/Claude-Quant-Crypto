@@ -71,7 +71,7 @@ def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None):
         w = pd.Series(0.0, index=o.columns)
         w[longs], w[shorts] = W, -W
         week = o.loc[mon:nxt].index[:-1]
-        ret = {}
+        ret, fpnl = {}, 0.0
         for s in list(longs) + list(shorts):
             seg_o = o.loc[week, s].dropna()
             p0 = seg_o.iloc[0]
@@ -83,9 +83,10 @@ def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None):
                 r = 1.0                             # corto 1x liquidado: pierde todo
             fsum = fd.loc[week, s].sum() if s in fd.columns else 0.0
             ret[s] = w[s] * r - w[s] * fsum         # largo paga funding positivo
+            fpnl -= w[s] * fsum
         turnover = (w - prev_w).abs().sum()
         prev_w = w
-        rows.append({"week": mon, "gross": sum(ret.values()),
+        rows.append({"week": mon, "gross": sum(ret.values()), "funding": fpnl,
                      "cost": turnover * PER_SIDE, "n_universe": len(past)})
     df = pd.DataFrame(rows).set_index("week")
     df["net"] = df["gross"] - df["cost"]
