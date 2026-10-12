@@ -106,3 +106,21 @@ def test_h005_rank_ties_deterministic():
     s = pd.Series({"B": 1e-4, "A": 1.0000000000000002e-4, "C": 9.999999999999999e-5, "D": 0.0})
     assert list(h5._rank(s).index) == ["D", "A", "B", "C"]
     assert list(h5._rank(s.iloc[::-1]).index) == ["D", "A", "B", "C"]
+
+
+def test_h010_volume_score_no_lookahead():
+    import h010_volume as h10
+    o, c, h, qv, fd = _panel(n_days=300, seed=4)
+    rng = np.random.default_rng(0)
+    qv = qv * rng.lognormal(0, 0.5, qv.shape)
+    sun = qv.index[200]
+    base = h10.make_score(qv, 4)(sun, sun + pd.Timedelta("1D"), qv.columns)
+    alt = qv.copy()
+    alt.loc[sun + pd.Timedelta("1D"):] *= 50
+    got = h10.make_score(alt, 4)(sun, sun + pd.Timedelta("1D"), qv.columns)
+    pd.testing.assert_series_equal(base, got)
+    # valor a mano para una columna
+    col = qv.columns[0]
+    last = qv.loc[sun - pd.Timedelta("6D"):sun, col].sum()
+    prev = qv.loc[sun - pd.Timedelta("34D"):sun - pd.Timedelta("7D"), col].sum() / 4
+    assert base[col] == pytest.approx(last / prev)

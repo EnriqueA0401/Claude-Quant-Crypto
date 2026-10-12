@@ -14,7 +14,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | rechazada | G1 | G2: ningún bloque significativo; todos netos < 0 | 6 | C |
 | H008 | carry cross-sectional (Koijen et al. 2018, adaptado) | largo perps con funding más negativo, corto los más positivos | rechazada | G2 | G3 (re-ejecutado): OOS +15,6 %/año, Sharpe 0,33, IC95 incluye 0, MDD 44 % | 3 | A |
 | H009 | microestructura / basis | reversión del basis spot-perp extremo (delta-neutral) | pendiente | - | - | 0 | B |
-| H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | pendiente | - | - | 0 | B |
+| H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | en curso | G0 | - | 0 | B |
 | H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | rechazada | G2 | G3: OOS −2,6 %/año, 51 entradas, basis > funding | 4 | A |
 
 ## Detalle G0 (escrito ANTES de ver datos)
@@ -119,6 +119,11 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Quién pierde: vendedores que no anticipan la mayor visibilidad del activo.
 - Predicción falsable: altcoins (top 50 por volumen) con volumen diario > 3× su media de
   30 días y retorno no extremo rinden más que el resto en los 5–10 días siguientes.
+- Variantes fijadas (2026-10-13, antes de ver resultados): versión cross-sectional
+  semanal con el motor de H005 (top 50 por volumen 30 d, ≥ 90 días, deslistados,
+  lunes 00:00 UTC, 5 largos + 5 cortos, 0,5 por lado, costes 0,15 % por lado, funding).
+  Puntuación = volumen en USDT de la última semana (lun–dom) / volumen semanal medio de
+  las B semanas anteriores; largo los 5 mayores, corto los 5 menores. B ∈ {4, 12} → 2.
 
 ### H011 — Carry en altcoins
 - Quién pierde: largos apalancados en altcoins que pagan funding alto durante semanas.
