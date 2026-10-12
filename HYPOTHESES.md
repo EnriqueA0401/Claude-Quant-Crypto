@@ -22,7 +22,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H015 | Bali, Cakici & Whitelaw (2011); crypto: lottery demand | efecto MAX: los pares con mayor subida diaria máxima del mes rinden menos | rechazada | G2 | G3: 1,5 %/año, Sharpe 0,04, MDD 59 % | 2 | A |
 | H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | rechazada | G2 | G3: −33 %/año (beta in-sample 1,23 se invierte) | 2 | A |
 | H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | pendiente | - | - | 0 | B |
-| H018 | práctica (K33): purgas de apalancamiento diarias | largo BTC/ETH 1–4 semanas tras caída diaria de OI > 10 % | pendiente | - | - | 0 | C |
+| H018 | práctica (K33): purgas de apalancamiento diarias | largo BTC/ETH 1–4 semanas tras caída diaria de OI > 10 % | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -228,3 +228,10 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Predicción falsable: tras un día con caída de OI > 10 % (y precio a la baja), un
   largo de 1–4 semanas en BTC/ETH (y en el universo con métricas para llegar a ≥ 100
   eventos) bate a largos en fechas aleatorias neto de costes y funding.
+- Variantes fijadas (2026-10-13, antes de ver resultados): universo diario = perps
+  USDT-M en el top 30 por volumen de 30 días (incluidos deslistados; solo pasado).
+  OI diario = último dato 5 min del día UTC. Evento el día d si OI_d/OI_{d−1} − 1 ≤ −θ y
+  el retorno del día < 0. Largo 1x desde el open de d+1 durante N días; costes 0,15 %
+  por lado; funding real. θ ∈ {10 %, 15 %} × N ∈ {7, 28} = 4. Nulo: mismos símbolos,
+  fechas aleatorias, misma duración (1.000 sims). Train = eventos antes de 2023; OOS =
+  2023-01 → 2025-09 con la variante de mayor t en train.
