@@ -21,7 +21,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H014 | meta-review 1 | ejecución maker con modelo de cola (aggTrades) | pendiente | - | - | 0 | C |
 | H015 | Bali, Cakici & Whitelaw (2011); crypto: lottery demand | efecto MAX: los pares con mayor subida diaria máxima del mes rinden menos | rechazada | G2 | G3: 1,5 %/año, Sharpe 0,04, MDD 59 % | 2 | A |
 | H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | rechazada | G2 | G3: −33 %/año (beta in-sample 1,23 se invierte) | 2 | A |
-| H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | pendiente | - | - | 0 | B |
+| H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | en curso | G0 | - | 0 | B |
 | H018 | práctica (K33): purgas de apalancamiento diarias | largo BTC/ETH 1–4 semanas tras caída diaria de OI > 10 % | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
@@ -222,6 +222,15 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   a la volatilidad; alfa frente a buy & hold de BTC > 0 en 2023–2025 (juzgar solo OOS).
 - Nota previa: TS momentum en BTC/ETH (H002) ya falló; el alfa publicado puede venir de
   2017 y 2021.
+- Variantes fijadas (2026-10-13, antes de ver resultados): universo diario = top 20
+  perps USDT-M por volumen de 30 días (con deslistados). Por moneda y lookback
+  L ∈ {10, 20, 40, 80, 160} días: estado 1 si el close supera el máximo de los L
+  closes previos, 0 si cae bajo el mínimo de los L/2 previos (Donchian con histéresis).
+  Señal = media de los 5 estados. Peso = señal · min(1, 0,8 %/σ60 diaria) / 20 (gross ≤ 1,
+  solo largos, perps 1x). Decisión al close, ejecución en el open siguiente; costes
+  0,15 % por lado sobre |Δpeso|; funding real. Rebalanceo diario o semanal (lunes) → 2
+  variantes. Se elige en train (2020–2022) y se juzga en 2023-01 → 2025-09 contra
+  buy & hold de BTC (alfa).
 
 ### H018 — Purga de apalancamiento diaria
 - Quién pierde: vendedores forzosos en una purga de apalancamiento de todo un día.

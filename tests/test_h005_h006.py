@@ -162,3 +162,19 @@ def test_h018_trade_and_event_timing():
     c2.loc[d, s] = c2[s].iloc[59] * 0.9                  # día rojo
     ev = h18.events(o, c2, qv, oi, 0.10, 7, o.index[-1])
     assert list(ev["i"]) == [61]                         # entrada en el open siguiente
+
+
+def test_h017_donchian_state_and_no_lookahead():
+    import h017_trend_ensemble as h17
+    idx = pd.date_range("2021-01-01", periods=40, freq="1D", tz="UTC")
+    x = pd.Series(np.r_[np.full(20, 100.0), np.full(10, 110.0), np.full(10, 90.0)], index=idx)
+    st = h17.donchian_state(x, 10)
+    assert st.iloc[19] == 0 and st.iloc[20] == 1 and st.iloc[29] == 1 and st.iloc[30] == 0
+    rng = np.random.default_rng(0)
+    y = pd.Series(100 * np.exp(np.cumsum(rng.normal(0, 0.03, 300))), index=pd.date_range(
+        "2021-01-01", periods=300, freq="1D", tz="UTC"))
+    a = h17.donchian_state(y, 40)
+    y2 = y.copy()
+    y2.iloc[201:] *= 3
+    b = h17.donchian_state(y2, 40)
+    pd.testing.assert_series_equal(a.iloc[:201], b.iloc[:201])
