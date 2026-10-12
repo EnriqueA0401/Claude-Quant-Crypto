@@ -72,3 +72,21 @@ def test_rebound_no_lookahead():
         alt.iloc[t + 1:] *= np.random.default_rng(t).lognormal(0, 0.2, (len(df) - t - 1, 2))
         got = liquidation_rebound_long(alt, 3, 24)
         pd.testing.assert_series_equal(base.iloc[:t + 1], got.iloc[:t + 1])
+
+
+def test_h009_basis_signal_timing_and_lookahead():
+    import sys as _s
+    from pathlib import Path as _P
+    _s.path.insert(0, str(_P(__file__).resolve().parents[1] / "experiments"))
+    import h009_basis as h9
+    rng = np.random.default_rng(0)
+    idx = pd.date_range("2022-01-01", periods=2000, freq="1h", tz="UTC")
+    b = pd.Series(rng.normal(0, 1e-4, 2000), index=idx)
+    b.iloc[1500] = 0.01                                  # pico extremo
+    s = h9.basis_signal(b, 0.99, 8)
+    assert s.iloc[1500] == 1 and s.iloc[1499] == 0       # decide al close del pico
+    assert s.iloc[1500:1520].sum() <= 9                  # sale por H o mediana
+    alt = b.copy()
+    alt.iloc[1501:] = 0.05
+    s2 = h9.basis_signal(alt, 0.99, 8)
+    pd.testing.assert_series_equal(s.iloc[:1501], s2.iloc[:1501])
