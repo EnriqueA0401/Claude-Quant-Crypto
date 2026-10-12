@@ -7,6 +7,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 import requests
@@ -25,8 +26,15 @@ def s3_list(prefix: str, delimiter: str | None = "/") -> tuple[list[str], list[s
         params = {"prefix": prefix, "marker": marker}
         if delimiter:
             params["delimiter"] = delimiter
-        r = s.get(S3, params=params, timeout=60)
-        r.raise_for_status()
+        for attempt in range(5):
+            try:
+                r = s.get(S3, params=params, timeout=60)
+                r.raise_for_status()
+                break
+            except requests.RequestException:
+                if attempt == 4:
+                    raise
+                time.sleep(2 ** attempt)
         x = r.text
         prefixes += re.findall(r"<CommonPrefixes><Prefix>([^<]+)</Prefix>", x)
         keys += re.findall(r"<Key>([^<]+)</Key>", x)
