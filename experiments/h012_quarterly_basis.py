@@ -42,7 +42,11 @@ def run(spot, futs, theta, exit_rule, end=None):
     idx = spot.index if end is None else spot.index[spot.index < end]
     so, sc = spot["open"].reindex(idx).ffill().to_numpy(), spot["close"].reindex(idx).ffill().to_numpy()
     last = {c: f.index[-1] for c, f in futs.items()}
-    al = {c: f.reindex(idx) for c, f in futs.items()}
+    al = {c: {k: f[k].reindex(idx).to_numpy() for k in ("open", "high", "close")}
+          for c, f in futs.items()}
+    days_left = {c: ((last[c] - idx) / pd.Timedelta("1D")).to_numpy() for c in futs}
+    is_last_bar = {c: (idx == last[c]) for c in futs}
+    order = sorted(futs)
     n = len(idx)
     rows = np.zeros((n, 6))   # pos, basis_pnl, cost, rebalance, liquidated, entry
     cur, ref, s_ref, pos = None, np.nan, np.nan, 0.0
@@ -52,7 +56,7 @@ def run(spot, futs, theta, exit_rule, end=None):
         cost = reb = liq = ent = 0.0
         if pending is not None:                       # entrada en open[t]
             cur, pos, ent = pending, 1.0, 1.0
-            ref = al[cur]["open"].iloc[t]
+            ref = al[cur]["open"][t]
             s_ref = so[t]                           # unidades fijas desde la entrada
             cost += W * (CS + CF)
             pending = None
@@ -62,9 +66,9 @@ def run(spot, futs, theta, exit_rule, end=None):
         pnl = 0.0
         if pos:
             f = al[cur]
-            fo, fh = f["open"].iloc[t], f["high"].iloc[t]
-            is_last = idx[t] == last[cur]
-            f1 = f["close"].iloc[t] if is_last else f["open"].iloc[t + 1]
+            fo, fh = f["open"][t], f["high"][t]
+            is_last = is_last_bar[cur][t]
+            f1 = f["close"][t] if is_last else f["open"][t + 1]
             if np.isnan(f1):                         # hueco en el futuro: sin cambio
                 f1 = fo
             if fh >= ref * (2 - MMR):
@@ -86,19 +90,19 @@ def run(spot, futs, theta, exit_rule, end=None):
         # decisiones al close de t (para el open de t+1)
         if pos and exit_rule == "early":
             f = al[cur]
-            days = (last[cur] - idx[t]) / pd.Timedelta("1D")
-            if days > 0 and (f["close"].iloc[t] / sc[t] - 1) * 365 / days < theta / 4:
+            days = days_left[cur][t]
+            if days > 0 and (f["close"][t] / sc[t] - 1) * 365 / days < theta / 4:
                 exit_next = True
         if not pos and pending is None:
             best = None
-            for c in sorted(futs):
-                days = (last[c] - idx[t]) / pd.Timedelta("1D")
-                if days >= MIN_DAYS and not np.isnan(al[c]["close"].iloc[t]):
+            for c in order:
+                days = days_left[c][t]
+                if days >= MIN_DAYS and not np.isnan(al[c]["close"][t]):
                     best = (c, days)
                     break
             if best:
                 c, days = best
-                if (al[c]["close"].iloc[t] / sc[t] - 1) * 365 / days > theta:
+                if (al[c]["close"][t] / sc[t] - 1) * 365 / days > theta:
                     pending = c
     out = pd.DataFrame(rows[:-1], index=idx[:-1],
                        columns=["pos", "basis", "cost", "rebalance", "liquidated", "entry"])
