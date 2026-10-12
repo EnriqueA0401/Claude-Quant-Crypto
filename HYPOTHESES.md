@@ -16,7 +16,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H009 | microestructura / basis | reversión del basis spot-perp extremo (delta-neutral) | pendiente | - | - | 0 | B |
 | H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | rechazada | G1 | G2: Sharpe 0,34–0,46, IC95 incluye 0, 2022 negativo | 2 | B |
 | H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | rechazada | G2 | G3: OOS −2,6 %/año, 51 entradas, basis > funding | 4 | A |
-| H012 | meta-review 1 | basis de futuros trimestrales fijado a la entrada (spot largo + trimestral corto) | pendiente | - | - | 0 | A |
+| H012 | meta-review 1 | basis de futuros trimestrales fijado a la entrada (spot largo + trimestral corto) | en curso | G0 | - | 0 | A |
 | H013 | meta-review 1 | ranking semanal compuesto de señales débiles (ML, walk-forward) | pendiente | - | - | 0 | B |
 | H014 | meta-review 1 | ejecución maker con modelo de cola (aggTrades) | pendiente | - | - | 0 | C |
 
@@ -154,6 +154,17 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   más que las stablecoins (≥ 5 %/año sobre el capital desplegado) con riesgo casi nulo.
 - Riesgos: liquidación del corto si el precio se dispara (margen), capital dividido,
   nocional mínimo de los trimestrales, pocas operaciones (4 vencimientos/año).
+- Variantes fijadas (2026-10-13, antes de ver resultados): barras 1h. En cada hora sin
+  posición, contrato = el trimestral más cercano con ≥ 14 días hasta su última barra.
+  Basis anualizado = (F_close/S_close − 1)·365/días restantes. Entrada en el open
+  siguiente si basis anualizado > θ. Salida: (a) en la última barra del contrato
+  (vencimiento) o (b) antes si el basis anualizado < θ/4. θ ∈ {5 %, 10 %} × {a, b} = 4.
+  Largo spot + corto trimestral, 0,5 de capital por pata (1x). Costes por lado: spot
+  0,10 % + 0,05 %, futuro 0,05 % + 0,05 % (también en la salida a vencimiento).
+  Rebalanceo de margen si el futuro sube > 25 % desde la referencia (coste
+  w·|mov|·(cs+cp)); liquidación si el high ≥ ref·(2 − 0,005): pata futuro −100 %, spot
+  limitado a +100 %. Capital ocioso al 0 %. Train: contratos que vencen ≤ 2022-12;
+  BTC y ETH (ambos de diseño: no hay otros trimestrales).
 
 ### H013 — Ranking compuesto de señales débiles
 - Quién pierde: la suma de los perdedores de cada señal (momentum, funding, volumen, OI).

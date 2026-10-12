@@ -120,3 +120,18 @@ def fill_daily_gaps(market: str = "um", interval: str = "1d") -> int:
     print(f"{len(paths)} días a rellenar", flush=True)
     download(paths, workers=24)
     return len(paths)
+
+
+def download_quarterly(bases=("BTCUSDT", "ETHUSDT"), interval: str = "1h") -> list[str]:
+    """Klines de futuros trimestrales USDT-M (p. ej. BTCUSDT_230331), mensuales y diarios."""
+    pre, _ = s3_list("data/futures/um/monthly/klines/")
+    syms = sorted(p.rstrip("/").split("/")[-1] for p in pre
+                  if p.rstrip("/").split("/")[-1].split("_")[0] in bases
+                  and "_" in p.rstrip("/").split("/")[-1])
+    paths = []
+    for s in syms:
+        for kind in ("monthly", "daily"):
+            _, keys = s3_list(f"data/futures/um/{kind}/klines/{s}/{interval}/", delimiter=None)
+            paths += [k[len("data/"):] for k in keys if k.endswith(".zip")]
+    download(sorted(paths), workers=24)
+    return syms
