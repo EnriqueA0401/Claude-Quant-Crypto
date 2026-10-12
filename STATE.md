@@ -12,14 +12,13 @@ validation.py (holdout 12 meses, walk-forward con purga/embargo).
 Cola H001–H007 con G0 escrito en HYPOTHESES.md.
 
 ## Siguiente paso exacto
-1. Comprobar acceso a data.binance.vision (curl a un zip de klines).
-2. Si hay acceso: descargar BTCUSDT/ETHUSDT spot+perp klines 1h y funding desde 2020,
-   pasar G1 (validate_bars) y empezar H001.
-3. Si no: implementar src/margin.py (margen aislado, precio de liquidación USDT-M) con tests.
+Descargar BTCUSDT/ETHUSDT spot + perp USDT-M klines 1h y fundingRate desde 2020 de
+data.binance.vision (src/data.fetch), pasar G1 (validate_bars) y empezar H001.
 
 ## Bloqueos
-- Red: data.binance.vision, api.binance.com y fapi.binance.com bloqueados por la
-  política de red del entorno (403 en CONNECT). Sin datos no se puede pasar de G0.
+- data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
+- api.binance.com y fapi.binance.com: HTTP 451 (restricción geográfica). Afecta a
+  verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
 
 ## Hipótesis activa
 Ninguna.
