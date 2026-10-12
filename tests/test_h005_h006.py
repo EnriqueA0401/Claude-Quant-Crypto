@@ -147,3 +147,18 @@ def test_h005_every_keeps_holdings_between_rebalances():
     mons = o.index[o.index.dayofweek == 0]
     pos = [list(mons).index(m) for m in df.index]
     assert all(df["cost"].iloc[k] == 0 for k in wk[1:] if pos[k] % 4 != 0)  # 1.ª = entrada
+
+
+def test_h018_trade_and_event_timing():
+    import h018_oi_flush as h18
+    o, c, h, qv, fd = _panel(n_days=120, seed=9)
+    s = o.columns[0]
+    r = h18.trade(o, c, fd, s, 10, 5)
+    assert r == pytest.approx(o[s].iloc[15] / o[s].iloc[10] - 1 - h18.COST)
+    oi = {s: pd.Series(1000.0, index=o.index)}
+    d = o.index[60]
+    oi[s].loc[d:] = 800.0                                # OI cae 20 % el día d
+    c2 = c.copy()
+    c2.loc[d, s] = c2[s].iloc[59] * 0.9                  # día rojo
+    ev = h18.events(o, c2, qv, oi, 0.10, 7, o.index[-1])
+    assert list(ev["i"]) == [61]                         # entrada en el open siguiente
