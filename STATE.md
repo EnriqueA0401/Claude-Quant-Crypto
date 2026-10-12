@@ -10,9 +10,9 @@ data.py (parser/validador binance.vision, manifest de hashes), checks.py, signal
 18 tests OK (`python3 -m pytest -q`): pasos 1–3 del protocolo cubiertos.
 
 ## Siguiente paso exacto
-Rellenar la cola de HYPOTHESES.md con hipótesis priorizadas (G0 escrito antes de ver
-datos). Después: walk-forward con embargo (src/validation.py) y modelo de
-margen/liquidación para perps.
+Implementar src/validation.py (splits walk-forward con purga/embargo + holdout final
+de 12 meses) con tests. Después: modelo de margen/liquidación para perps. Primera
+hipótesis a probar en cuanto haya datos: H001 (G0 ya escrito).
 
 ## Bloqueos
 - Red: data.binance.vision, api.binance.com y fapi.binance.com bloqueados por la
