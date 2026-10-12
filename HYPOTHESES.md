@@ -14,8 +14,11 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | rechazada | G1 | G2: ningún bloque significativo; todos netos < 0 | 6 | C |
 | H008 | carry cross-sectional (Koijen et al. 2018, adaptado) | largo perps con funding más negativo, corto los más positivos | rechazada | G2 | G3 (re-ejecutado): OOS +15,6 %/año, Sharpe 0,33, IC95 incluye 0, MDD 44 % | 3 | A |
 | H009 | microestructura / basis | reversión del basis spot-perp extremo (delta-neutral) | pendiente | - | - | 0 | B |
-| H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | en curso | G0 | - | 0 | B |
+| H010 | Gervais, Kaniel & Mingelgrin (2001) | prima de alto volumen: shocks de volumen anuncian subidas | rechazada | G1 | G2: Sharpe 0,34–0,46, IC95 incluye 0, 2022 negativo | 2 | B |
 | H011 | lección de H001 | cash-and-carry en altcoins con funding persistente alto | rechazada | G2 | G3: OOS −2,6 %/año, 51 entradas, basis > funding | 4 | A |
+| H012 | meta-review 1 | basis de futuros trimestrales fijado a la entrada (spot largo + trimestral corto) | pendiente | - | - | 0 | A |
+| H013 | meta-review 1 | ranking semanal compuesto de señales débiles (ML, walk-forward) | pendiente | - | - | 0 | B |
+| H014 | meta-review 1 | ejecución maker con modelo de cola (aggTrades) | pendiente | - | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -142,3 +145,22 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   corto perp, 0,1 de capital por pata (1x). Costes por lado: spot 0,10 % + 0,10 %
   slippage; perp 0,05 % + 0,10 %. Funding real. Liquidación del corto si high perp ≥ 2×
   entrada: pata perp −100 %, la pata spot conserva su retorno real. Train 2020–2022.
+
+### H012 — Basis de futuros trimestrales fijado a la entrada
+- Quién pierde: largos apalancados que pagan prima por exposición con vencimiento
+  (demanda de apalancamiento sin funding variable).
+- Predicción falsable: comprar spot y vender el trimestral de BTC/ETH cuando el basis
+  anualizado > umbral y mantener hasta vencimiento rinde, neto de 4 lados y de margen,
+  más que las stablecoins (≥ 5 %/año sobre el capital desplegado) con riesgo casi nulo.
+- Riesgos: liquidación del corto si el precio se dispara (margen), capital dividido,
+  nocional mínimo de los trimestrales, pocas operaciones (4 vencimientos/año).
+
+### H013 — Ranking compuesto de señales débiles
+- Quién pierde: la suma de los perdedores de cada señal (momentum, funding, volumen, OI).
+- Predicción falsable: un modelo lineal o de árboles reentrenado en walk-forward sobre
+  señales semanales ya calculadas genera un long/short con IC95 > 0 OOS neto de costes.
+
+### H014 — Ejecución maker
+- Quién pierde: los takers impacientes que pagan el spread.
+- Predicción falsable: con órdenes limit modeladas con la cola (aggTrades, fill solo si
+  el precio cruza), alguna de las señales intradía rechazadas pasa a neto > 0.

@@ -1,22 +1,19 @@
 # STATE
 
 ## Contador global de pruebas
-53  (H001 6 · H002 8 · H003 4 · H004 4 · H005 6 · H006 12 · H007 6 · H008 3 · H011 4)
+55  (H001 6 · H002 8 · H003 4 · H004 4 · H005 6 · H006 12 · H007 6 · H008 3 · H010 2 · H011 4)
 
 ## Qué se está haciendo
-Cerradas (9, todas rechazadas): H001 G4, H002 G5, H003 G2, H004 G2, H005 G3, H006 G3,
-H007 G2, H008 G3, H011 G3. Pendientes: H009 (basis), H010 (volumen).
-Motor semanal (experiments/h005_xs_momentum) corregido tras pasos 4–5: desempate
-determinista, funding equivalente a 8 h, barras con volumen 0 no operables.
+Cerradas (10, todas rechazadas). Meta-review 1 escrita (reports/meta_review.md): cambio
+de enfoque hacia carry fijado (H012), combinación de señales (H013) y ejecución maker
+(H014). Motor semanal corregido tras pasos 4–5.
 Reglas: Sharpe mensual; alfa vs B&H y nulo aleatorio; variantes registradas antes de
 ejecutar; tests 1–3 por experimento; liquidaciones pesimistas.
 
 ## Siguiente paso exacto
-1. H010 (prima de alto volumen, datos 1d ya descargados): fijar variantes en
-   HYPOTHESES.md, escribir experimento + tests 1–3 y ejecutar G2.
-2. Al cerrarla (10.ª hipótesis): reports/meta_review.md (familias agotadas, patrón
-   "2020–2022 in-sample engaña", ¿cambiar de enfoque?).
-3. Después H009 (basis spot-perp 1h, 5 pares ya descargados).
+H012: descargar klines 1h de futuros trimestrales BTC/ETH (futures/um, símbolos
+BTCUSDT_YYMMDD) + spot 1h ya disponible; fijar variantes en HYPOTHESES.md antes de
+ejecutar; motor con tests 1–3; G2 en vencimientos 2021–2022.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
@@ -24,4 +21,4 @@ ejecutar; tests 1–3 por experimento; liquidaciones pesimistas.
   verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
 
 ## Hipótesis activa
-Ninguna (siguiente: H010).
+H012 (G0 escrito).
