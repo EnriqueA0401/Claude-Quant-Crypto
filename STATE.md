@@ -1,19 +1,20 @@
 # STATE
 
 ## Contador global de pruebas
-0
+6  (H001: 6 variantes G2)
 
 ## Qué se está haciendo
-H001 (cash-and-carry). Datos descargados (5 pares, 2020-01→2026-09, 1h + funding) y
-G1 superado: reports/h001_g1_summary.md. Librería base y 23 tests OK.
+H001 (cash-and-carry). G1 OK. G2 hecho (reports/h001_g2.json, train 2020–2022):
+Sharpe anual 3,6–3,9 con θ≤2e-4 en BTC y ETH, ~7–9%/año, MDD ~1–2%, solo 6–11
+entradas. SOSPECHA DE BUG (Sharpe > 3) hasta pasar los pasos 4–5 del protocolo.
+Corregido: la liquidación usa mark price (mecha falsa ETH 2020-03-13 a 323).
+ALERTA G4: con 6–11 entradas en 3 años no se llegará a 100 operaciones OOS.
 
 ## Siguiente paso exacto
-H001 · G2: experiments/h001_carry.py. Diseño fijado antes de ver resultados:
-- Largo spot + corto perp, apalancamiento 1x (N = capital/2), costes 4 lados.
-- Entrada si media de las últimas k liquidaciones de funding > θ; salida si < θ/2.
-- Variantes: θ ∈ {0.0001, 0.0002, 0.0003}, k ∈ {1, 3} → 6 (sumar al contador).
-- Train G2: 2020-01→2022-12 solo BTC/ETH. Holdout: 2025-10→2026-09 (no tocar).
-- Rebalanceo con coste de ida y vuelta si el perp se mueve ±25% desde la entrada.
+1. Pasos 4–5 del protocolo para src/carry.py (subagentes: reimplementación
+   independiente + revisión por checklist). Resolver cualquier diferencia > 1%.
+2. H001 · G3: walk-forward con purga/embargo en 2020-01→2025-09 eligiendo la variante
+   solo con el train de cada fold. Holdout 2025-10→2026-09 intacto.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).

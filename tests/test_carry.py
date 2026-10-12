@@ -104,3 +104,16 @@ def test_null_random_signal_zero_funding_loses_costs(seed):
     assert out["net"].mean() < 0
     assert out["net"].sum() == pytest.approx(out["basis"].sum() - out["cost"].sum()
                                              - out["rebalance"].sum())
+
+
+def test_liquidation_uses_mark_price_when_given():
+    perp = _perp([100] * 6, highs=[100, 100, 300, 100, 100, 100])   # mecha de último precio
+    spot = pd.Series(100.0, index=IDX)
+    sig = pd.Series(1.0, index=IDX)
+    mark = pd.Series([100, 100, 120, np.nan, 100, 100], index=IDX, dtype=float)
+    empty = pd.Series(dtype=float, index=pd.DatetimeIndex([], tz="UTC"))
+    out = run_carry(spot, perp, empty, sig, Costs(0, 0), Costs(0, 0), liq_high=mark)
+    assert out["liquidated"].sum() == 0
+    perp2 = _perp([100] * 6, highs=[100, 100, 100, 300, 100, 100])  # NaN en mark → usa last
+    out2 = run_carry(spot, perp2, empty, sig, Costs(0, 0), Costs(0, 0), liq_high=mark)
+    assert out2["liquidated"].iloc[3] == 1

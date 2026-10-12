@@ -55,8 +55,11 @@ def funding_per_bar(funding: pd.Series, index: pd.DatetimeIndex) -> np.ndarray:
 def run_carry(spot_open: pd.Series, perp: pd.DataFrame, funding: pd.Series,
               signal: pd.Series, spot_costs: Costs, perp_costs: Costs, *,
               w: float = 0.5, band: float = 0.25, mmr: float = 0.005,
-              tradable: pd.Series | None = None) -> pd.DataFrame:
+              tradable: pd.Series | None = None,
+              liq_high: pd.Series | None = None) -> pd.DataFrame:
     """perp: DataFrame con 'open' y 'high'. spot_open alineado al mismo índice.
+    liq_high: high del mark price (Binance liquida por mark price). Donde falte se usa
+    el high del último precio (más pesimista).
 
     - tradable[t] = False congela la posición en el bar t (huecos de spot).
     - Rebalanceo: si el perp se aleja más de `band` del precio de referencia, se
@@ -69,7 +72,9 @@ def run_carry(spot_open: pd.Series, perp: pd.DataFrame, funding: pd.Series,
     if not (spot_open.index.equals(idx) and signal.index.equals(idx)):
         raise ValueError("índices desalineados")
     n = len(idx)
-    po, ph, so = perp["open"].to_numpy(), perp["high"].to_numpy(), spot_open.to_numpy()
+    po, so = perp["open"].to_numpy(), spot_open.to_numpy()
+    ph = perp["high"] if liq_high is None else liq_high.reindex(idx).fillna(perp["high"])
+    ph = ph.to_numpy()
     fund = funding_per_bar(funding, idx)
     sig = signal.to_numpy()
     trad = np.ones(n, bool) if tradable is None else tradable.to_numpy()

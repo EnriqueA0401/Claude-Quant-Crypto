@@ -98,12 +98,14 @@ def _read_zip(path: Path) -> bytes:
         return z.read(z.namelist()[0])
 
 
-def load_klines(market: str, symbol: str, interval: str = "1h") -> pd.DataFrame:
-    """market: 'spot' o 'um'. Concatena los zips mensuales ya descargados."""
+def load_klines(market: str, symbol: str, interval: str = "1h",
+                kind: str = "klines") -> pd.DataFrame:
+    """market: 'spot' o 'um'; kind: 'klines' o 'markPriceKlines' (solo um).
+    Concatena los zips mensuales ya descargados."""
     sub = "spot" if market == "spot" else "futures/um"
     # mensuales primero; los diarios rellenan huecos de los mensuales
-    files = (sorted((DATA / sub / "monthly/klines" / symbol / interval).glob("*.zip"))
-             + sorted((DATA / sub / "daily/klines" / symbol / interval).glob("*.zip")))
+    files = (sorted((DATA / sub / "monthly" / kind / symbol / interval).glob("*.zip"))
+             + sorted((DATA / sub / "daily" / kind / symbol / interval).glob("*.zip")))
     if not files:
         raise FileNotFoundError(f"sin datos {market} {symbol} {interval}")
     df = pd.concat([parse_klines(_read_zip(f)) for f in files])
