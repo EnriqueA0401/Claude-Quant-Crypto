@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-71  (detalle por hipótesis en HYPOTHESES.md)
+73  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (16, todas rechazadas): H001–H013, H015, H016. La mejor: H012 (basis
+Cerradas (17, todas rechazadas): H001–H013, H015–H017. La mejor: H012 (basis
 trimestral BTC/ETH, OOS 3,3 %/año tras corrección) no supera al efectivo ni generaliza.
 Patrón dominante: señales cross-sectional "significativas" en 2020–2022 se invierten en
 2023–2025 (H002, H005, H008, H013, H016).
@@ -13,7 +13,6 @@ Pendientes: H014 (maker), H017 (tendencia multi-moneda), H018 (purga de OI diari
 ## Siguiente paso exacto
 1. H018: fijar variantes; calcular caídas diarias de OI con las métricas de los 5 pares
    (descargar metrics para el top 30 del universo si hacen falta ≥ 100 eventos); G2.
-2. H017: fijar variantes y juzgar solo en 2023–2025.
 3. Meta-review 2 al cerrar la 20.ª hipótesis.
 
 ## Bloqueos

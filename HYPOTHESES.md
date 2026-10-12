@@ -21,7 +21,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H014 | meta-review 1 | ejecución maker con modelo de cola (aggTrades) | pendiente | - | - | 0 | C |
 | H015 | Bali, Cakici & Whitelaw (2011); crypto: lottery demand | efecto MAX: los pares con mayor subida diaria máxima del mes rinden menos | rechazada | G2 | G3: 1,5 %/año, Sharpe 0,04, MDD 59 % | 2 | A |
 | H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | rechazada | G2 | G3: −33 %/año (beta in-sample 1,23 se invierte) | 2 | A |
-| H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | en curso | G0 | - | 0 | B |
+| H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | rechazada | G2 | G3: 4,5 %/año, alfa vs BTC −1,7 % (no significativo) | 2 | B |
 | H018 | práctica (K33): purgas de apalancamiento diarias | largo BTC/ETH 1–4 semanas tras caída diaria de OI > 10 % | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
