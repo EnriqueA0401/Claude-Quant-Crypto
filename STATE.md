@@ -1,20 +1,20 @@
 # STATE
 
 ## Contador global de pruebas
-67  (detalle por hipótesis en HYPOTHESES.md)
+71  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (14, todas rechazadas): H001–H013. La mejor: H012 (basis trimestral BTC/ETH:
-OOS 3,6 %/año, Sharpe 1,7) rechazada en G4 (no generaliza a altcoins; 24 ops).
-Pendiente: H014 (ejecución maker). Meta-review 1 en reports/meta_review.md.
-Reglas: comparar con el rendimiento de caja (≈ 4–5 %/año en 2023–25); Sharpe mensual; alfa vs B&H y nulo aleatorio; variantes registradas antes de
-ejecutar; tests 1–3 por experimento; liquidaciones pesimistas; desempates deterministas.
+Cerradas (16, todas rechazadas): H001–H013, H015, H016. La mejor: H012 (basis
+trimestral BTC/ETH, OOS 3,3 %/año tras corrección) no supera al efectivo ni generaliza.
+Patrón dominante: señales cross-sectional "significativas" en 2020–2022 se invierten en
+2023–2025 (H002, H005, H008, H013, H016).
+Pendientes: H014 (maker), H017 (tendencia multi-moneda), H018 (purga de OI diaria).
 
 ## Siguiente paso exacto
-1. Generar nuevas hipótesis (≥ 4) con G0 escrito, priorizando lo que la meta-review
-   marca como no agotado: ejecución maker (H014), efectos de baja rotación, mercados/
-   periodos con menos eficiencia (listados spot nuevos, pares pequeños), eventos.
-2. H014: descargar aggTrades de 1–2 meses de BTCUSDT perp para modelar fills maker.
+1. H018: fijar variantes; calcular caídas diarias de OI con las métricas de los 5 pares
+   (descargar metrics para el top 30 del universo si hacen falta ≥ 100 eventos); G2.
+2. H017: fijar variantes y juzgar solo en 2023–2025.
+3. Meta-review 2 al cerrar la 20.ª hipótesis.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).

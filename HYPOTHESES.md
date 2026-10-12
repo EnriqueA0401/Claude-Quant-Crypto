@@ -19,8 +19,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H012 | meta-review 1 | basis de futuros trimestrales fijado a la entrada (spot largo + trimestral corto) | rechazada | G3 | G4: −1,0 %/año en 12 altcoins COIN-M, costes ×2 −7 %; 24 ops en BTC/ETH | 6 | A |
 | H013 | meta-review 1 | ranking semanal compuesto de señales débiles (ML, walk-forward) | rechazada | G2 | G3: ridge 17,7 %/año, Sharpe 0,43, IC95 incluye 0; ICsign −53 % | 2 | B |
 | H014 | meta-review 1 | ejecución maker con modelo de cola (aggTrades) | pendiente | - | - | 0 | C |
-| H015 | Bali, Cakici & Whitelaw (2011); crypto: lottery demand | efecto MAX: los pares con mayor subida diaria máxima del mes rinden menos | pendiente | - | - | 0 | A |
-| H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | pendiente | - | - | 0 | A |
+| H015 | Bali, Cakici & Whitelaw (2011); crypto: lottery demand | efecto MAX: los pares con mayor subida diaria máxima del mes rinden menos | rechazada | G2 | G3: 1,5 %/año, Sharpe 0,04, MDD 59 % | 2 | A |
+| H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | rechazada | G2 | G3: −33 %/año (beta in-sample 1,23 se invierte) | 2 | A |
 | H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | pendiente | - | - | 0 | B |
 | H018 | práctica (K33): purgas de apalancamiento diarias | largo BTC/ETH 1–4 semanas tras caída diaria de OI > 10 % | pendiente | - | - | 0 | C |
 
