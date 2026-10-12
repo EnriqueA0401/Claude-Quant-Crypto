@@ -64,3 +64,6 @@ abierta (tests en tests/test_h012.py).
   un 20 % de error de cobertura con 250 USD por pata; no modelado.
 Veredicto sin cambios: rechazada. Lección para G1: validar siempre la última barra de
 un futuro contra su fecha de vencimiento y el número de operaciones por barra.
+- **G4 re-ejecutado con datos limpios (12 altcoins COIN-M): base -1.4 %/año,
+  Sharpe -0.58, MDD -14.7 %, 2023–2025 -5.4 %/año;
+  costes ×2 −5,9 %/año.** Sigue sin generalizar.
