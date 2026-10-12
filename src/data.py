@@ -126,3 +126,17 @@ def load_funding(symbol: str) -> pd.Series:
     ts = pd.to_datetime(df["calc_time"].astype("int64"), unit="ms", utc=True).dt.round("1min")
     s = pd.Series(df["last_funding_rate"].astype(float).values, index=ts, name="funding")
     return s[~s.index.duplicated(keep="first")].sort_index()
+
+
+def load_oi_hourly(symbol: str) -> pd.Series:
+    """Open interest (contratos) al final de cada hora: último snapshot 5 min con
+    create_time en [h, h+1h), es decir, conocido antes del close del bar h."""
+    files = sorted((DATA / "futures/um/daily/metrics" / symbol).glob("*.zip"))
+    if not files:
+        raise FileNotFoundError(f"sin metrics {symbol}")
+    df = pd.concat([pd.read_csv(io.BytesIO(_read_zip(f)),
+                                usecols=["create_time", "sum_open_interest"]) for f in files])
+    ts = pd.to_datetime(df["create_time"], utc=True)
+    s = pd.Series(df["sum_open_interest"].astype(float).values, index=ts).sort_index()
+    s = s[~s.index.duplicated(keep="first")]
+    return s.resample("1h").last()
