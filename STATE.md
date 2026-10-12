@@ -1,17 +1,20 @@
 # STATE
 
 ## Contador global de pruebas
-14  (H001: 6 · H002: 8)
+18  (H001: 6 · H002: 8 · H003: 4)
 
 ## Qué se está haciendo
-Cerradas: H001 rechazada (G4), H002 rechazada (G5). Ver findings/.
-Activa: H003 (funding extremo → retorno negativo del perp), solo G0 escrito.
-Reglas aprendidas: Sharpe con metrics.sharpe_resampled; medir alfa frente a buy & hold.
+Cerradas (3): H001 rechazada G4, H002 rechazada G5, H003 rechazada G2. Ver findings/.
+Reglas aprendidas: Sharpe con metrics.sharpe_resampled; medir alfa frente a buy & hold
+y frente a un nulo de entradas aleatorias; rangos de percentil estrictos (empates).
 
 ## Siguiente paso exacto
-H003 · G2: fijar variantes en HYPOTHESES.md ANTES de ejecutar (umbral = percentil
-del funding calculado solo con datos pasados; horizonte de tenencia 24/72 h), escribir
-experiments/h003_funding_extreme.py y correr train 2020–2022 en BTC/ETH.
+Elegir la siguiente hipótesis. Candidatas por coste/prior:
+- H007 (estacionalidad intradía): datos ya descargados, coste bajo, prior bajo.
+- H005 / H006: requieren universo de perps con deslistados (descargar lista de
+  símbolos de data.binance.vision, incluidos los deslistados).
+Plan: fijar variantes de H007 en HYPOTHESES.md y ejecutar G2; en paralelo, descargar
+el universo completo de perps USDT-M (klines 1d + funding) para H005/H006.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
@@ -19,4 +22,4 @@ experiments/h003_funding_extreme.py y correr train 2020–2022 en BTC/ETH.
   verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
 
 ## Hipótesis activa
-Ninguna.
+Ninguna (siguiente: H007).

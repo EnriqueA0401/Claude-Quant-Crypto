@@ -7,7 +7,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 |----|--------|--------------------|--------|------|--------|-----------|------|
 | H001 | anomalía conocida (carry) | cash-and-carry: largo spot + corto perp cobra funding | rechazada | G3 | G4: 13 entradas OOS (<100), 1,4 %/año, solo un régimen, falla en BNB | 6 | A |
 | H002 | Liu & Tsyvinski (2021) | momentum de series temporales en BTC/ETH | rechazada | G4 | G5: DSR 0,92, PBO 0,54, IC95 incluye 0; alfa vs B&H no significativo | 8 | A |
-| H003 | propia / crowding | funding extremo predice retorno negativo del perp | en curso | G0 | - | 0 | A |
+| H003 | propia / crowding | funding extremo predice retorno negativo del perp | rechazada | G1 | G2: ninguna variante bate al nulo (t<0,6), ETH negativa | 4 | A |
 | H004 | microestructura | reversión tras cascadas de liquidación (caída + OI cae) | pendiente | - | - | 0 | B |
 | H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | pendiente | - | - | 0 | B |
 | H006 | eventos de listado | nuevos perps caen tras su listado | pendiente | - | - | 0 | B |
@@ -35,6 +35,11 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Predicción falsable: cuando el funding está en el decil superior (calculado solo con
   datos pasados), el retorno del perp en las siguientes 24–72 h es negativo y un corto
   neto de costes y funding cobrado tiene media > 0.
+- Variantes fijadas (2026-10-12, antes de ver resultados): en cada liquidación de
+  funding, percentil de la tasa frente a los últimos 1095 eventos (mín. 270, solo
+  pasado e incluido el actual). Si percentil ≥ p y tasa > 0 → corto 1x en el open
+  siguiente durante H horas; sin solapamiento. p ∈ {0,90; 0,95} × H ∈ {24, 72} = 4.
+  Referencia nula: cortos en momentos aleatorios con la misma duración.
 
 ### H004 — Reversión tras liquidaciones
 - Quién pierde: liquidados forzosos que venden sin importar el precio.
