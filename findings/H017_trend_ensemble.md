@@ -13,8 +13,9 @@ tendencia diversificada (Zarattini, Pagani y Barbon 2025). Top 20 perps por volu
 | diaria (elegida en train) | 2020–2022 | 4,8 % | 0,95 | −7 % | +2,3 % | 0,04 |
 | diaria | **2023–2025** | **4,5 %** | **0,76** | **−5 %** | **−1,7 %** | 0,08 |
 | semanal | 2023–2025 | 3,8 % | 0,71 | −5 % | −2,8 % | 0,08 |
-IC95 del alfa diario OOS incluye 0. Exposición media muy baja (el tamaño por volatilidad
-deja la cartera casi siempre muy por debajo de 1x).
+IC95 del alfa diario OOS incluye 0. Exposición media 5,8 % del capital: el tamaño por
+volatilidad pre-registrado deja la cartera muy por debajo de 1x. El alfa y su t no
+dependen de la escala, así que apalancar la misma señal no cambia el veredicto.
 
 ## Por qué se rechaza
 Fuera de muestra no hay alfa: todo el retorno se explica por una pequeña exposición a
