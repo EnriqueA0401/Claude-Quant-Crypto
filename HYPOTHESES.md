@@ -11,7 +11,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H004 | microestructura | reversión tras cascadas de liquidación (caída + OI cae) | pendiente | - | - | 0 | B |
 | H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | pendiente | - | - | 0 | B |
 | H006 | eventos de listado | nuevos perps caen tras su listado | pendiente | - | - | 0 | B |
-| H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | pendiente | - | - | 0 | C |
+| H007 | estacionalidad intradía | retornos por hora del día / alrededor del funding | rechazada | G1 | G2: ningún bloque significativo; todos netos < 0 | 6 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -62,3 +62,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Predicción falsable: ciertas horas tienen retorno medio distinto de 0 con corrección
   por múltiples comparaciones (24 pruebas) y superan costes de ida y vuelta.
 - Prior bajo: el efecto típico es menor que 0,30% de coste de ida y vuelta.
+- Variantes fijadas (2026-10-12, antes de ver resultados): 6 bloques de 4 h UTC
+  (00–04, …, 20–24). Para cada bloque: retorno medio open-to-open del perp en el bloque
+  (BTC+ETH, train 2020–2022), t con errores por bloques de días. Operación: entrar al
+  inicio del bloque en la dirección del signo y salir al final; coste de ida y vuelta
+  0,20 % + funding. Éxito in-sample: neto > 0 con p < 0,05/6 (Bonferroni).
