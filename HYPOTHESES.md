@@ -56,6 +56,13 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Quién pierde: compradores minoristas atraídos por el hype del listado.
 - Predicción falsable: corto en perps nuevos durante sus primeros N días tiene retorno
   medio neto de costes y funding > 0, con ≥100 eventos.
+- Variantes fijadas (2026-10-12, antes de ver resultados): evento = primer día de
+  klines 1d del perp USDT-M (universo completo con deslistados, listados ≥ 2020-01).
+  Corto 1x desde el open del día E después del listado (E ∈ {1, 2}) durante N días
+  (N ∈ {7, 14, 30}) → 6 variantes. Costes: comisión 0,05 % + slippage 0,15 % por lado
+  (poca liquidez inicial). Funding real. Liquidación si el high diario alcanza 2× la
+  entrada (pierde el 100 %). Train = listados 2020-01 → 2022-12. Métrica: media neta
+  por evento con bootstrap por mes de listado; control: mismo corto menos el de BTC.
 
 ### H007 — Estacionalidad intradía
 - Quién pierde: flujos predecibles (rebalanceos, funding, apertura de sesiones).
