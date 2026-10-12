@@ -81,7 +81,9 @@ def run(po, pc, ph, qv, so, sc, ev, D, theta, end=None):
             w = f[(f.index >= mon - pd.Timedelta(days=D)) & (f.index < mon)]
             if len(w):
                 score[s] = w.sum() / (D * 3)   # equivalente 8 h (pares con funding 4 h/1 h)
-        sc_ = pd.Series(score, dtype=float).sort_values(ascending=False)
+        sc_ = pd.Series(score, dtype=float)
+        key = pd.DataFrame({"v": -sc_.round(10).to_numpy(), "n": sc_.index}, index=sc_.index)
+        sc_ = sc_.loc[key.sort_values(["v", "n"], kind="mergesort").index]  # empates por nombre
         if theta is not None:
             sc_ = sc_[sc_ > theta]
         new = set(sc_.index[:N])

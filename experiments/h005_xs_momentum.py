@@ -45,6 +45,13 @@ def panel():
     return P(o), P(c), P(h), P(qv), P(fd).fillna(0.0)
 
 
+def _rank(score: pd.Series) -> pd.Series:
+    """Orden ascendente determinista: redondeo a 1e-10 (ruido de coma flotante) y
+    desempate por nombre. Muchos pares empatan en el funding por defecto (0,01 %)."""
+    df = pd.DataFrame({"v": score.round(10).to_numpy(), "name": score.index}, index=score.index)
+    return score.loc[df.sort_values(["v", "name"], kind="mergesort").index]
+
+
 def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None):
     """score_fn(sun, mon, names) -> Series (mayor = largo). Por defecto, retorno de L
     semanas hasta el close del domingo (momentum)."""
@@ -69,7 +76,7 @@ def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None):
         past = past.dropna()
         if len(past) < 2 * N_SIDE:
             continue
-        ranked = past.sort_values()
+        ranked = _rank(past)
         top, bot = ranked.index[-N_SIDE:], ranked.index[:N_SIDE]
         longs, shorts = (top, bot) if direction == "mom" else (bot, top)
         w = pd.Series(0.0, index=o.columns)

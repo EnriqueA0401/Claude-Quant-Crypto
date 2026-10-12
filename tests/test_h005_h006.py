@@ -100,3 +100,9 @@ def test_h006_stop_fill_gap_and_level():
     assert r["gross"] == pytest.approx(-(15 * (1 + h6.SLIP) / 10 - 1))
     r2 = h6.event_return(k, None, 1, 4, stop=0.15)  # nivel 11.5: día 1 (high 12, open 10)
     assert r2["gross"] == pytest.approx(-(11.5 * (1 + h6.SLIP) / 10 - 1))
+
+
+def test_h005_rank_ties_deterministic():
+    s = pd.Series({"B": 1e-4, "A": 1.0000000000000002e-4, "C": 9.999999999999999e-5, "D": 0.0})
+    assert list(h5._rank(s).index) == ["D", "A", "B", "C"]
+    assert list(h5._rank(s.iloc[::-1]).index) == ["D", "A", "B", "C"]
