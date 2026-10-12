@@ -15,7 +15,7 @@ ejecutar; tests 1–3 por experimento; liquidaciones pesimistas.
    capital, Sharpe 1,73, MDD 2,2 %, IC95 > 0, positiva 2023/24/25) pero solo 24 ops.
    G4: aplicar la variante elegida (θ=5 %, salida anticipada) SIN rediseñar a los
    trimestrales COIN-M de 12 monedas no usadas (data/cm.log) + costes ×2 + vecinos.
-2. H013: leer reports/h013_g3.json (G3 walk-forward 2023–2025) y decidir.
+2. H013 rechazada en G3 (findings/H013_composite_ranking.md).
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
@@ -23,4 +23,4 @@ ejecutar; tests 1–3 por experimento; liquidaciones pesimistas.
   verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
 
 ## Hipótesis activa
-H012 (G4) y H013 (G3).
+H012 (G4 ejecutándose: experiments/h012_g4_robustness.py).
