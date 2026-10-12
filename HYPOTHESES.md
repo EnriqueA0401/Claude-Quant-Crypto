@@ -45,6 +45,13 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Quién pierde: liquidados forzosos que venden sin importar el precio.
 - Predicción falsable: tras caídas de ≥k desviaciones típicas en 1 h con caída de OI,
   el retorno de las siguientes 4–24 h es positivo neto de costes.
+- Variantes fijadas (2026-10-12, antes de ver resultados): barras 1h del perp. Evento si
+  el retorno close-to-close de la hora ≤ −k·σ (σ = desv. típica de retornos 1h de los 30
+  días previos, solo pasado) Y el cambio de OI de esa hora (último dato 5 min de la hora
+  frente al de la hora anterior) ≤ su percentil 5 de los 30 días previos. Largo 1x en el
+  open siguiente durante H horas, sin solapamiento. k ∈ {3, 4} × H ∈ {4, 24} = 4.
+  Costes perp 0,10 % por lado + funding. Nulo: largos aleatorios de igual duración.
+  Diseño BTC/ETH, train 2020-09 → 2022-12; SOL/BNB/XRP solo para G4.
 
 ### H005 — Momentum cross-sectional
 - Quién pierde: igual que H002, entre activos.

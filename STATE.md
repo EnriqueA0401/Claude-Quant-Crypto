@@ -22,4 +22,4 @@ variantes en HYPOTHESES.md ANTES de ejecutar; tests 1–3 para cada experimento 
   verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
 
 ## Hipótesis activa
-Ninguna (siguiente: H004).
+H004 (variantes fijadas; descargando metrics de OI).

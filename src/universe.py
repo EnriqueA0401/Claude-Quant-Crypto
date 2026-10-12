@@ -73,3 +73,12 @@ def main() -> None:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def download_metrics(symbols: list[str]) -> None:
+    """Métricas diarias de futuros (open interest 5 min, ratios long/short)."""
+    paths = []
+    for s in symbols:
+        _, keys = s3_list(f"data/futures/um/daily/metrics/{s}/", delimiter=None)
+        paths += [k[len("data/"):] for k in keys if k.endswith(".zip")]
+    download(sorted(paths), workers=24)
