@@ -97,14 +97,17 @@ def run(po, pc, ph, qv, so, sc, ev, D, theta, end=None):
             p1 = _exit_price(po, pc, week, nxt, s)
             s1 = _exit_price(so, sc, week, nxt, s)
             rs = s1 / s0 - 1 if not np.isnan(s1) else 0.0
-            if ph.loc[week, s].max() >= 2 * p0:
-                rp_short, liq = -1.0, liq + 1
-            else:
-                rp_short = -(p1 / p0 - 1)
             f = ev.get(s)
             fs = 0.0
             if f is not None:
                 fs = f[(f.index > mon) & (f.index <= week[-1] + pd.Timedelta("1D"))].sum()
+            if ph.loc[week, s].max() >= 2 * p0:
+                # corto liquidado: se vende el spot al mismo nivel (+100 % como mucho) y
+                # no se cuenta el funding de la semana (supuesto pesimista)
+                rp_short, liq = -1.0, liq + 1
+                rs, fs = min(rs, 1.0), 0.0
+            else:
+                rp_short = -(p1 / p0 - 1)
             pnl_basis += W * (rs + rp_short)
             pnl_fund += W * fs
         rows.append({"week": mon, "n": len(new), "basis": pnl_basis, "funding": pnl_fund,

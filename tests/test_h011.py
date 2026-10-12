@@ -81,3 +81,14 @@ def test_score_is_8h_equivalent_for_4h_funding():
     p = _flat()
     df = h11.run(p, p, p, _flat(1e6), p, p, ev, 7, 1.1e-3)
     assert set(df["n"].unique()) == {0, 1}               # solo S0 supera θ = 0,0011
+
+
+def test_liquidation_caps_spot_gain_and_drops_funding():
+    rates = [0.0001] * 7 + [0.001]
+    px = _flat()
+    px.loc[IDX[120]:, "S7"] = 300.0                      # el precio se triplica
+    df = h11.run(px, px, px, _flat(1e6), px, px, _ev(rates), 7, 3e-4)
+    liq = df[df["liquidations"] > 0]
+    assert len(liq) == 1
+    assert liq["basis"].iloc[0] == pytest.approx(0.0)     # +100 % spot − 100 % perp
+    assert liq["funding"].iloc[0] == 0.0
