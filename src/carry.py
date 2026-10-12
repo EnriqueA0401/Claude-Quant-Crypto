@@ -16,9 +16,11 @@ import pandas as pd
 from .costs import Costs
 
 
+BAR = pd.Timedelta("1h")
+
+
 def _bar_close(index: pd.DatetimeIndex) -> np.ndarray:
-    step = index[1] - index[0]
-    return pd.DatetimeIndex(index + step).as_unit("ns").asi8
+    return pd.DatetimeIndex(index + BAR).as_unit("ns").asi8
 
 
 def carry_signal(funding: pd.Series, index: pd.DatetimeIndex, k: int,
@@ -46,7 +48,7 @@ def funding_per_bar(funding: pd.Series, index: pd.DatetimeIndex) -> np.ndarray:
     edges = pd.DatetimeIndex(index).as_unit("ns").asi8
     ts = pd.DatetimeIndex(funding.index).as_unit("ns").asi8
     idx = np.searchsorted(edges, ts, side="left") - 1
-    ok = (idx >= 0) & (idx < len(edges))
+    ok = (idx >= 0) & (idx < len(edges) - 1)  # eventos tras el último open se ignoran
     out = np.zeros(len(edges))
     np.add.at(out, idx[ok], funding.to_numpy()[ok])
     return out
@@ -62,9 +64,10 @@ def run_carry(spot_open: pd.Series, perp: pd.DataFrame, funding: pd.Series,
     el high del último precio (más pesimista).
 
     - tradable[t] = False congela la posición en el bar t (huecos de spot).
-    - Rebalanceo: si el perp se aleja más de `band` del precio de referencia, se
-      mueve band/2 del nocional en cada pata (coste w·band·(cs+cp)) y se resetea la
-      referencia.
+    - Rebalanceo: si el perp se aleja más de `band` del precio de referencia, se cobra
+      w·|movimiento|·(cs+cp) (cota pesimista del nocional a mover en ambas patas) y se
+      resetea la referencia.
+    - Una posición abierta al final de la serie paga su coste de salida en el último bar.
     - Liquidación: el corto 1x se liquida si el high del bar alcanza
       ref·(1 + 1/1 - mmr); se pierde todo el margen (w) y la posición se cierra.
     """
@@ -99,9 +102,12 @@ def run_carry(spot_open: pd.Series, perp: pd.DataFrame, funding: pd.Series,
                 rp = po[t + 1] / po[t] - 1.0
                 basis = w * (rs - rp)
                 fund_pnl = w * fund[t]
-                if abs(po[t + 1] / ref - 1.0) > band:
-                    reb = w * band * (cs + cp)
+                move = abs(po[t + 1] / ref - 1.0)
+                if move > band:
+                    reb = w * move * (cs + cp)
                     ref = po[t + 1]
+        if t == n - 2 and pos > 0:
+            cost += pos * w * (cs + cp)   # cierre forzoso al final de la serie
         rows[t] = (pos, basis, fund_pnl, cost, reb, liq)
     out = pd.DataFrame(rows, index=idx[:-1],
                        columns=["pos", "basis", "funding", "cost", "rebalance", "liquidated"])

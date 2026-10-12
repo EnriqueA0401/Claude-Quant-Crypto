@@ -43,3 +43,15 @@ def test_pbo_noise_vs_edge():
     edge = noise.copy()
     edge[:, 0] += 0.003
     assert metrics.pbo_cscv(edge, n_splits=10) < 0.05
+
+
+def test_sharpe_resampled_penalizes_autocorrelation():
+    import pandas as pd
+    # regímenes de 30 días con media aleatoria + ruido horario pequeño
+    idx = pd.date_range("2020-01-01", periods=24 * 365 * 3, freq="1h", tz="UTC")
+    rng = np.random.default_rng(0)
+    reg = np.repeat(0.5e-5 + rng.normal(0, 1e-5, len(idx) // 720 + 1), 720)[:len(idx)]
+    r = pd.Series(reg + rng.normal(0, 1e-6, len(idx)), index=idx)
+    hourly = metrics.sharpe(r.to_numpy(), 24 * 365)
+    monthly = metrics.sharpe_resampled(r)
+    assert hourly > 40 and monthly < 3     # anualizar por hora infla ~20x

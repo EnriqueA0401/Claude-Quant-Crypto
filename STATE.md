@@ -1,20 +1,17 @@
 # STATE
 
 ## Contador global de pruebas
-6  (H001: 6 variantes G2)
+14  (H001: 6 · H002: 8)
 
 ## Qué se está haciendo
-H001 (cash-and-carry). G1 OK. G2 hecho (reports/h001_g2.json, train 2020–2022):
-Sharpe anual 3,6–3,9 con θ≤2e-4 en BTC y ETH, ~7–9%/año, MDD ~1–2%, solo 6–11
-entradas. SOSPECHA DE BUG (Sharpe > 3) hasta pasar los pasos 4–5 del protocolo.
-Corregido: la liquidación usa mark price (mecha falsa ETH 2020-03-13 a 323).
-ALERTA G4: con 6–11 entradas en 3 años no se llegará a 100 operaciones OOS.
+H001 RECHAZADA en G4 (findings/H001_cash_and_carry.md): 1,4 %/año OOS, 13 entradas.
+H002 (momentum series temporales BTC/ETH) en G2: experiments/h002_tsmom.py, 8 variantes.
+Regla aprendida: Sharpe siempre con metrics.sharpe_resampled (mensual), nunca horario.
 
 ## Siguiente paso exacto
-1. Pasos 4–5 del protocolo para src/carry.py (subagentes: reimplementación
-   independiente + revisión por checklist). Resolver cualquier diferencia > 1%.
-2. H001 · G3: walk-forward con purga/embargo en 2020-01→2025-09 eligiendo la variante
-   solo con el train de cada fold. Holdout 2025-10→2026-09 intacto.
+1. Ejecutar experiments/h002_tsmom.py (train 2020–2022) y anotar resultados.
+2. Si alguna variante es prometedora: pasos 4–5 del protocolo y G3 walk-forward
+   (mismo esquema que experiments/h001_g3_walkforward.py). Si no: rechazar en G2.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).

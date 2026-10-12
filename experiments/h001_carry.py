@@ -36,8 +36,8 @@ def load(sym):
 def summarize(out):
     r = out["net"].to_numpy()
     entries = int(((out["pos"].diff().fillna(out["pos"].iloc[0])) > 0).sum())
-    lo, hi = metrics.block_bootstrap_mean_ci(r, block=24 * 7, n_boot=2000)
-    return {"ann_return": float(r.mean() * HPY), "sharpe_ann": metrics.sharpe(r, HPY),
+    lo, hi = metrics.block_bootstrap_mean_ci(r, block=24 * 60, n_boot=2000)
+    return {"ann_return": float(r.mean() * HPY), "sharpe_ann": metrics.sharpe_resampled(out["net"]),
             "max_dd": metrics.max_drawdown(r), "entries": entries,
             "time_in_mkt": float(out["pos"].mean()),
             "funding_ann": float(out["funding"].mean() * HPY),

@@ -117,3 +117,21 @@ def test_liquidation_uses_mark_price_when_given():
     perp2 = _perp([100] * 6, highs=[100, 100, 100, 300, 100, 100])  # NaN en mark → usa last
     out2 = run_carry(spot, perp2, empty, sig, Costs(0, 0), Costs(0, 0), liq_high=mark)
     assert out2["liquidated"].iloc[3] == 1
+
+
+def test_open_position_pays_exit_at_end():
+    perp = _perp([100] * 6)
+    spot = pd.Series(100.0, index=IDX)
+    sig = pd.Series(1.0, index=IDX)
+    empty = pd.Series(dtype=float, index=pd.DatetimeIndex([], tz="UTC"))
+    out = run_carry(spot, perp, empty, sig, CS, CP)
+    assert out["cost"].sum() == pytest.approx(2 * 0.5 * 0.0025)
+
+
+def test_rebalance_cost_scales_with_overshoot():
+    perp = _perp([100, 100, 140, 140, 140, 140])
+    spot = pd.Series([100, 100, 140, 140, 140, 140], index=IDX, dtype=float)
+    sig = pd.Series(1.0, index=IDX)
+    empty = pd.Series(dtype=float, index=pd.DatetimeIndex([], tz="UTC"))
+    out = run_carry(spot, perp, empty, sig, CS, CP)
+    assert out["rebalance"].iloc[1] == pytest.approx(0.5 * 0.4 * 0.0025)

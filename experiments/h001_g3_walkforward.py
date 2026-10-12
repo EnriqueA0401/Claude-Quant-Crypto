@@ -63,7 +63,7 @@ def main():
         oos.append(r)
         oos2x.append(r2)
         rec = {"test": f"{t0.date()}..{t1.date()}", "chosen": f"theta={best[0]},k={best[1]}",
-               "ann_ret": float(r.mean() * HPY), "sharpe": metrics.sharpe(r.to_numpy(), HPY)}
+               "ann_ret": float(r.mean() * HPY), "sharpe": metrics.sharpe_resampled(r)}
         for s in OTHERS:
             ro = others[s][best].loc[t0:t1]
             oos_oth[s].append(ro)
@@ -71,16 +71,16 @@ def main():
         fold_rep.append(rec)
     r = pd.concat(oos).to_numpy()
     r2 = pd.concat(oos2x).to_numpy()
-    lo, hi = metrics.block_bootstrap_mean_ci(r, block=24 * 7, n_boot=5000)
+    lo, hi = metrics.block_bootstrap_mean_ci(r, block=24 * 60, n_boot=5000)
     yearly = pd.concat(oos).groupby(lambda t: t.year).sum()
     summary = {
         "portfolio": "media BTC/ETH, cada pata 50% del capital de su par",
-        "oos_ann_return": float(r.mean() * HPY), "oos_sharpe": metrics.sharpe(r, HPY),
+        "oos_ann_return": float(r.mean() * HPY), "oos_sharpe": metrics.sharpe_resampled(pd.concat(oos)),
         "oos_max_dd": metrics.max_drawdown(r), "oos_ann_return_cost2x": float(r2.mean() * HPY),
-        "oos_sharpe_cost2x": metrics.sharpe(r2, HPY),
+        "oos_sharpe_cost2x": metrics.sharpe_resampled(pd.concat(oos2x)),
         "ci95_mean_hourly": [lo, hi], "yearly_sum": {int(k): float(v) for k, v in yearly.items()},
         "others_oos_ann": {s: float(pd.concat(v).mean() * HPY) for s, v in oos_oth.items()},
-        "others_oos_sharpe": {s: metrics.sharpe(pd.concat(v).to_numpy(), HPY)
+        "others_oos_sharpe": {s: metrics.sharpe_resampled(pd.concat(v))
                               for s, v in oos_oth.items()},
     }
     commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True,

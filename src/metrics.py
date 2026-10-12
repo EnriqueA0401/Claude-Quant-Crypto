@@ -18,6 +18,17 @@ def sharpe(r: np.ndarray, periods_per_year: float | None = None) -> float:
     return sr * np.sqrt(periods_per_year) if periods_per_year else sr
 
 
+def sharpe_resampled(r, rule: str = "ME", periods_per_year: float = 12) -> float:
+    """Sharpe anualizado a partir de sumas por periodo (p. ej. mensuales).
+
+    Usar en vez de anualizar barras horarias/diarias cuando los retornos están
+    autocorrelacionados (regímenes de funding, carry): sqrt(N) sobrestima el Sharpe.
+    r: pd.Series con DatetimeIndex.
+    """
+    agg = r.resample(rule).sum()
+    return sharpe(agg.to_numpy(), periods_per_year)
+
+
 def max_drawdown(r: np.ndarray) -> float:
     """Drawdown máximo de la curva compuesta (valor negativo)."""
     eq = np.cumprod(1.0 + np.asarray(r, float))

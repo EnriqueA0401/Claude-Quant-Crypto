@@ -5,8 +5,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 
 | id | fuente | racional (resumen) | estado | gate | motivo | variantes | prio |
 |----|--------|--------------------|--------|------|--------|-----------|------|
-| H001 | anomalía conocida (carry) | cash-and-carry: largo spot + corto perp cobra funding | en curso | G2 | sospecha de bug (Sharpe>3); pocas entradas para G4 | 6 | A |
-| H002 | Liu & Tsyvinski (2021) | momentum de series temporales en BTC/ETH | pendiente | - | - | 0 | A |
+| H001 | anomalía conocida (carry) | cash-and-carry: largo spot + corto perp cobra funding | rechazada | G3 | G4: 13 entradas OOS (<100), 1,4 %/año, solo un régimen, falla en BNB | 6 | A |
+| H002 | Liu & Tsyvinski (2021) | momentum de series temporales en BTC/ETH | en curso | G0 | - | 0 | A |
 | H003 | propia / crowding | funding extremo predice retorno negativo del perp | pendiente | - | - | 0 | A |
 | H004 | microestructura | reversión tras cascadas de liquidación (caída + OI cae) | pendiente | - | - | 0 | B |
 | H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | pendiente | - | - | 0 | B |
@@ -27,6 +27,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Quién pierde: inversores que infrarreaccionan y compradores tardíos por herding.
 - Predicción falsable: posición = signo del retorno de L días (L∈{7..56}) en perps, con
   rebalanceo diario; Sharpe neto OOS > 0 y DSR > 0,95 con el contador global.
+- Variantes fijadas (2026-10-12, antes de ver resultados): L ∈ {7, 14, 28, 56} ×
+  {largo/corto, largo/plano} = 8. Perps 1x, barras diarias UTC, funding real.
 
 ### H003 — Funding extremo → retorno negativo
 - Quién pierde: largos sobre-apalancados que pagan funding alto y son liquidados.
