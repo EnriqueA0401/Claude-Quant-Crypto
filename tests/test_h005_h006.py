@@ -124,3 +124,16 @@ def test_h010_volume_score_no_lookahead():
     last = qv.loc[sun - pd.Timedelta("6D"):sun, col].sum()
     prev = qv.loc[sun - pd.Timedelta("34D"):sun - pd.Timedelta("7D"), col].sum() / 4
     assert base[col] == pytest.approx(last / prev)
+
+
+def test_h013_fit_predict_ridge_and_sign():
+    import h013_composite as h13
+    rng = np.random.default_rng(0)
+    n = 400
+    df = pd.DataFrame({f + "_p": rng.uniform(-0.5, 0.5, n) for f in h13.FEATS})
+    df["mon"] = np.repeat(pd.date_range("2021-01-04", periods=8, freq="7D", tz="UTC"), n // 8)
+    df["y_p"] = 0.8 * df["r1_p"] - 0.5 * df["fund7_p"] + rng.normal(0, 0.05, n)
+    p, beta = h13.fit_predict(df, df, "ridge")
+    assert beta[0] > 0.6 and beta[2] < -0.3
+    p2, s = h13.fit_predict(df, df, "icsign")
+    assert s[0] == 1 and s[2] == -1
