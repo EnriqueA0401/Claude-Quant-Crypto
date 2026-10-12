@@ -61,6 +61,9 @@ lo dejó la anterior.
    haz commit.
 5. Cada 10 hipótesis cerradas: escribe reports/meta_review.md. Responde qué familias
    están agotadas, qué patrones aparecen y si conviene cambiar de enfoque.
+6. Nunca aplaces trabajo a una sesión futura si puedes hacerlo ahora. Si un paso se
+   puede ejecutar en el momento (descargas, experimentos, tests), hazlo en esta misma
+   sesión; si es largo, lánzalo en segundo plano y sigue con otra cosa mientras tanto.
 
 # GATES DE VALIDACIÓN (en orden; si falla uno, se rechaza y se documenta el motivo)
 G0 Racional: explicación económica plausible y predicción falsable escrita ANTES de
