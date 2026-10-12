@@ -4,16 +4,17 @@
 42  (H001: 6 · H002: 8 · H003: 4 · H007: 6 · H006: 12 · H005: 6)
 
 ## Qué se está haciendo
-Cerradas (4): H001 rech. G4, H002 rech. G5, H003 rech. G2, H007 rech. G2. Ver findings/.
-Universo USDT-M completo descargado (900 símbolos con deslistados, klines 1d + funding).
-H006 (corto tras listado) G2 hecho (reports/h006_g2.json): media +2–7 %/evento en las 12
-variantes, mediana +8–20 %, pero IC95 por meses incluye 0 en todas. Pasa a G3.
-H005 (momentum cross-sectional) G2 ejecutándose (reports/h005_g2.json al terminar).
+Cerradas (6, todas rechazadas): H001 G4, H002 G5, H003 G2, H005 G3, H006 G3, H007 G2.
+Pendiente: H004 (reversión tras liquidaciones). Universo USDT-M completo descargado.
+Reglas: Sharpe mensual (sharpe_resampled); alfa vs B&H y vs nulo aleatorio; registrar
+variantes en HYPOTHESES.md ANTES de ejecutar; tests 1–3 para cada experimento nuevo.
 
 ## Siguiente paso exacto
-1. Ejecutar experiments/h006_g3_walkforward.py (selección por t en train, folds de
-   6 meses desde 2023, purga 31 días, holdout desde 2025-10 excluido) y decidir.
-2. Leer reports/h005_g2.json y decidir si H005 pasa a G3 o se rechaza.
+1. H004: descargar futures/um/daily/metrics (open interest 5 min) de BTC/ETH y fijar
+   variantes en HYPOTHESES.md antes de ejecutar G2.
+2. Añadir a la cola 4+ hipótesis nuevas (p. ej. basis spot-perp extremo, volumen
+   anómalo, carry en altcoins con funding persistente, órdenes maker). Al cerrar la
+   10.ª hipótesis: reports/meta_review.md.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
@@ -21,4 +22,4 @@ H005 (momentum cross-sectional) G2 ejecutándose (reports/h005_g2.json al termin
   verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
 
 ## Hipótesis activa
-H006 (G3) y H005 (G2).
+Ninguna (siguiente: H004).
