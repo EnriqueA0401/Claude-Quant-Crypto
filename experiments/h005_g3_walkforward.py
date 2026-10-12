@@ -27,7 +27,7 @@ def main():
     last_mon = o.index[(o.index.dayofweek == 0) & (o.index <= HOLDOUT)][-1]
     runs = {f"L={L}|{d}": run(o, c, h, qv, fd, L, d, end=last_mon + pd.Timedelta("1D"))
             for L, d in VARIANTS}
-    edges = sorted(set(list(pd.date_range("2023-01-01", HOLDOUT, freq="6MS", tz="UTC"))
+    edges = sorted(set(list(pd.date_range(pd.Timestamp("2023-01-01", tz="UTC"), HOLDOUT, freq="6MS"))
                        + [HOLDOUT]))
     oos, folds = [], []
     for a, b in zip(edges[:-1], edges[1:]):

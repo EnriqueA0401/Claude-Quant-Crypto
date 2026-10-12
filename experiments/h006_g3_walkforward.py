@@ -36,7 +36,7 @@ def main():
     ev["var"] = ev["E"].astype(str) + "|" + ev["N"].astype(str) + "|" + ev["stop"].astype(str)
     ev.to_csv(ROOT / "reports/h006_events_dev.csv", index=False)
     rng = np.random.default_rng(0)
-    edges = list(pd.date_range("2023-01-01", HOLDOUT, freq="6MS", tz="UTC")) + [HOLDOUT]
+    edges = list(pd.date_range(pd.Timestamp("2023-01-01", tz="UTC"), HOLDOUT, freq="6MS")) + [HOLDOUT]
     edges = sorted(set(edges))
     oos, folds = [], []
     for a, b in zip(edges[:-1], edges[1:]):
