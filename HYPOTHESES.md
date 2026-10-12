@@ -19,6 +19,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H012 | meta-review 1 | basis de futuros trimestrales fijado a la entrada (spot largo + trimestral corto) | rechazada | G3 | G4: −1,0 %/año en 12 altcoins COIN-M, costes ×2 −7 %; 24 ops en BTC/ETH | 6 | A |
 | H013 | meta-review 1 | ranking semanal compuesto de señales débiles (ML, walk-forward) | rechazada | G2 | G3: ridge 17,7 %/año, Sharpe 0,43, IC95 incluye 0; ICsign −53 % | 2 | B |
 | H014 | meta-review 1 | ejecución maker con modelo de cola (aggTrades) | pendiente | - | - | 0 | C |
+| H015 | Bali, Cakici & Whitelaw (2011); crypto: lottery demand | efecto MAX: los pares con mayor subida diaria máxima del mes rinden menos | pendiente | - | - | 0 | A |
+| H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | pendiente | - | - | 0 | A |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -190,3 +192,23 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Quién pierde: los takers impacientes que pagan el spread.
 - Predicción falsable: con órdenes limit modeladas con la cola (aggTrades, fill solo si
   el precio cruza), alguna de las señales intradía rechazadas pasa a neto > 0.
+
+### H015 — Efecto MAX (demanda de lotería)
+- Quién pierde: minoristas que compran monedas con subidas diarias extremas recientes
+  esperando repetir el pump (preferencia por asimetría positiva) y pagan de más.
+- Predicción falsable: cartera mensual larga en los 5 perps (top 50) con menor retorno
+  diario máximo de los últimos 30 días y corta en los 5 con mayor; neta de costes y
+  funding, Sharpe OOS > 0 e IC95 > 0.
+- Variantes fijadas (2026-10-13, antes de ver resultados): motor de H005 con rebalanceo
+  cada 4 semanas (primer lunes de cada bloque de 4). MAX = máximo retorno close-to-close
+  diario en los N días previos al domingo, N ∈ {30}; y MAX5 = media de los 5 mayores →
+  2 variantes. Train 2020–2022, G3 2023-01 → 2025-09.
+
+### H016 — Baja volatilidad / betting-against-beta
+- Quién pierde: inversores con restricciones de apalancamiento que compran activos de
+  alta beta/volatilidad y les exigen menos retorno del que les corresponde.
+- Predicción falsable: cartera mensual larga en los 5 perps de menor volatilidad diaria
+  de 30 días y corta en los 5 de mayor; neta de costes, Sharpe OOS > 0 e IC95 > 0.
+- Variantes fijadas (2026-10-13, antes de ver resultados): mismo motor y rebalanceo
+  cada 4 semanas. Riesgo = volatilidad diaria de 30 días o beta frente a BTC de 60 días
+  → 2 variantes. Igual peso (sin escalar por volatilidad).

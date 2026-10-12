@@ -137,3 +137,13 @@ def test_h013_fit_predict_ridge_and_sign():
     assert beta[0] > 0.6 and beta[2] < -0.3
     p2, s = h13.fit_predict(df, df, "icsign")
     assert s[0] == 1 and s[2] == -1
+
+
+def test_h005_every_keeps_holdings_between_rebalances():
+    o, c, h, qv, fd = _panel(n_days=400, seed=7)
+    df = h5.run(o, c, h, qv, fd, 1, "mom", every=4)
+    wk = np.arange(len(df))
+    # sin deslistados, solo hay coste en semanas de rebalanceo
+    mons = o.index[o.index.dayofweek == 0]
+    pos = [list(mons).index(m) for m in df.index]
+    assert all(df["cost"].iloc[k] == 0 for k in wk if pos[k] % 4 != 0)

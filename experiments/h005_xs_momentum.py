@@ -52,9 +52,10 @@ def _rank(score: pd.Series) -> pd.Series:
     return score.loc[df.sort_values(["v", "name"], kind="mergesort").index]
 
 
-def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None):
+def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None, every=1):
     """score_fn(sun, mon, names) -> Series (mayor = largo). Por defecto, retorno de L
-    semanas hasta el close del domingo (momentum)."""
+    semanas hasta el close del domingo (momentum). every: rebalanceo cada `every`
+    semanas (entre medias se mantienen los mismos pares; los deslistados salen)."""
     mondays = o.index[o.index.dayofweek == 0]
     if end is not None:
         mondays = mondays[mondays < end]
@@ -62,6 +63,7 @@ def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None):
     vol30 = qv.rolling(30, min_periods=20).sum()
     prev_w = pd.Series(0.0, index=o.columns)
     rows = []
+    hold = None
     for i, mon in enumerate(mondays[:-1]):
         sun = mon - pd.Timedelta("1D")
         nxt = mondays[i + 1]
@@ -79,6 +81,13 @@ def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None):
         ranked = _rank(past)
         top, bot = ranked.index[-N_SIDE:], ranked.index[:N_SIDE]
         longs, shorts = (top, bot) if direction == "mom" else (bot, top)
+        if every > 1:
+            if hold is not None and i % every != 0:
+                alive_now = o.loc[mon].notna()
+                longs = [s for s in hold[0] if alive_now.get(s, False)]
+                shorts = [s for s in hold[1] if alive_now.get(s, False)]
+            else:
+                hold = (list(longs), list(shorts))
         w = pd.Series(0.0, index=o.columns)
         w[longs], w[shorts] = W, -W
         week = o.loc[mon:nxt].index[:-1]
