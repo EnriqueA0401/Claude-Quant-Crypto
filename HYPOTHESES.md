@@ -6,8 +6,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | id | fuente | racional (resumen) | estado | gate | motivo | variantes | prio |
 |----|--------|--------------------|--------|------|--------|-----------|------|
 | H001 | anomalía conocida (carry) | cash-and-carry: largo spot + corto perp cobra funding | rechazada | G3 | G4: 13 entradas OOS (<100), 1,4 %/año, solo un régimen, falla en BNB | 6 | A |
-| H002 | Liu & Tsyvinski (2021) | momentum de series temporales en BTC/ETH | en curso | G0 | - | 0 | A |
-| H003 | propia / crowding | funding extremo predice retorno negativo del perp | pendiente | - | - | 0 | A |
+| H002 | Liu & Tsyvinski (2021) | momentum de series temporales en BTC/ETH | rechazada | G4 | G5: DSR 0,92, PBO 0,54, IC95 incluye 0; alfa vs B&H no significativo | 8 | A |
+| H003 | propia / crowding | funding extremo predice retorno negativo del perp | en curso | G0 | - | 0 | A |
 | H004 | microestructura | reversión tras cascadas de liquidación (caída + OI cae) | pendiente | - | - | 0 | B |
 | H005 | Liu, Tsyvinski & Wu (2022) | momentum cross-sectional semanal entre perps líquidos | pendiente | - | - | 0 | B |
 | H006 | eventos de listado | nuevos perps caen tras su listado | pendiente | - | - | 0 | B |

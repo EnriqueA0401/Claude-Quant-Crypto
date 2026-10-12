@@ -4,14 +4,14 @@
 14  (H001: 6 · H002: 8)
 
 ## Qué se está haciendo
-H001 RECHAZADA en G4 (findings/H001_cash_and_carry.md): 1,4 %/año OOS, 13 entradas.
-H002 (momentum series temporales BTC/ETH) en G2: experiments/h002_tsmom.py, 8 variantes.
-Regla aprendida: Sharpe siempre con metrics.sharpe_resampled (mensual), nunca horario.
+Cerradas: H001 rechazada (G4), H002 rechazada (G5). Ver findings/.
+Activa: H003 (funding extremo → retorno negativo del perp), solo G0 escrito.
+Reglas aprendidas: Sharpe con metrics.sharpe_resampled; medir alfa frente a buy & hold.
 
 ## Siguiente paso exacto
-1. Ejecutar experiments/h002_tsmom.py (train 2020–2022) y anotar resultados.
-2. Si alguna variante es prometedora: pasos 4–5 del protocolo y G3 walk-forward
-   (mismo esquema que experiments/h001_g3_walkforward.py). Si no: rechazar en G2.
+H003 · G2: fijar variantes en HYPOTHESES.md ANTES de ejecutar (umbral = percentil
+del funding calculado solo con datos pasados; horizonte de tenencia 24/72 h), escribir
+experiments/h003_funding_extreme.py y correr train 2020–2022 en BTC/ETH.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
