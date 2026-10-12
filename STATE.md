@@ -11,8 +11,9 @@ Patrón dominante: señales cross-sectional "significativas" en 2020–2022 se i
 Pendientes: H014 (maker), H017 (tendencia multi-moneda), H018 (purga de OI diaria).
 
 ## Siguiente paso exacto
-1. H018: fijar variantes; calcular caídas diarias de OI con las métricas de los 5 pares
-   (descargar metrics para el top 30 del universo si hacen falta ≥ 100 eventos); G2.
+1. H018 (variantes fijadas, experiments/h018_oi_flush.py + test listos): esperar a que
+   termine la descarga de metrics de 380 símbolos (data/h018_metrics.log; si se cortó,
+   relanzar python3 experiments/h018_universe.py: retoma lo descargado) y ejecutar.
 3. Meta-review 2 al cerrar la 20.ª hipótesis.
 
 ## Bloqueos
