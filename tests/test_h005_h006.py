@@ -90,3 +90,13 @@ def test_h006_liquidation_and_delisting():
     k2 = k.assign(high=k[["open", "close"]].max(axis=1))
     r = h6.event_return(k2, None, 2, 30)          # se deslista: sale al último close
     assert r["gross"] == pytest.approx(-(13 / 12 - 1))
+
+
+def test_h006_stop_fill_gap_and_level():
+    idx = pd.date_range("2021-03-01", periods=5, freq="1D", tz="UTC")
+    k = pd.DataFrame({"open": [10, 10, 11, 15, 15.0], "close": [10, 11, 15, 15, 15.0],
+                      "high": [10, 12, 12, 16, 15.0]}, index=idx)
+    r = h6.event_return(k, None, 1, 4, stop=0.3)   # nivel 13: se toca el día 3 con gap (open 15)
+    assert r["gross"] == pytest.approx(-(15 * (1 + h6.SLIP) / 10 - 1))
+    r2 = h6.event_return(k, None, 1, 4, stop=0.15)  # nivel 11.5: día 1 (high 12, open 10)
+    assert r2["gross"] == pytest.approx(-(11.5 * (1 + h6.SLIP) / 10 - 1))

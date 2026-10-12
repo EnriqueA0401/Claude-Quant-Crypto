@@ -69,6 +69,12 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   (poca liquidez inicial). Funding real. Liquidación si el high diario alcanza 2× la
   entrada (pierde el 100 %). Train = listados 2020-01 → 2022-12. Métrica: media neta
   por evento con bootstrap por mes de listado; control: mismo corto menos el de BTC.
+- Resultado de las 6 primeras (G2): mediana +8–20 %/evento, media +2–6 %, IC95 por
+  meses incluye 0; las liquidaciones (high ≥ 2× entrada) dominan la cola.
+- Variantes añadidas (2026-10-12, ANTES de ver su resultado; total 12): E = 2,
+  N ∈ {7, 14, 30}, stop-loss del corto si el high diario ≥ entrada·(1+X), X ∈ {0,3; 0,6}.
+  Fill del stop: max(nivel, open del día) + slippage 0,15 %. Racional: cortar la cola de
+  pumps que liquidan el corto.
 
 ### H007 — Estacionalidad intradía
 - Quién pierde: flujos predecibles (rebalanceos, funding, apertura de sesiones).

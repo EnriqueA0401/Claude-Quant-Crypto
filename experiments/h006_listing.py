@@ -17,7 +17,8 @@ from src.data import DATA, load_funding, load_klines  # noqa: E402
 
 FEE, SLIP = 0.0005, 0.0015
 TRAIN = (pd.Timestamp("2020-01-02", tz="UTC"), pd.Timestamp("2023-01-01", tz="UTC"))
-VARIANTS = [(e, n) for e in (1, 2) for n in (7, 14, 30)]
+VARIANTS = [(e, n, None) for e in (1, 2) for n in (7, 14, 30)] + \
+    [(2, n, x) for n in (7, 14, 30) for x in (0.3, 0.6)]
 
 
 def symbols():
@@ -25,12 +26,27 @@ def symbols():
     return sorted(p.name for p in d.iterdir() if (p / "1d").exists())
 
 
-def event_return(k, f, start, n):
-    """Corto 1x desde open[start] durante n días (o hasta el último dato)."""
+def event_return(k, f, start, n, stop=None):
+    """Corto 1x desde open[start] durante n días (o hasta el último dato).
+
+    stop: si el high diario alcanza p0·(1+stop) se cierra en max(nivel, open del día)
+    más slippage; se comprueba antes que la liquidación (el stop está por debajo).
+    """
     seg = k.iloc[start:start + n]
     if len(seg) == 0:
         return None
     p0 = seg["open"].iloc[0]
+    if stop is not None:
+        hit = np.flatnonzero(seg["high"].to_numpy() >= p0 * (1 + stop))
+        if len(hit):
+            j = hit[0]
+            fill = max(p0 * (1 + stop), seg["open"].iloc[j]) * (1 + SLIP)
+            t0, t1 = seg.index[0], seg.index[j] + pd.Timedelta("12h")
+            fund = f[(f.index > t0) & (f.index <= t1)].sum() if f is not None else 0.0
+            gross = -(fill / p0 - 1)
+            return {"net": gross + fund - 2 * FEE - SLIP, "gross": gross,
+                    "funding": float(fund), "liquidated": False, "stopped": True,
+                    "days": j + 1, "t0": t0, "t1": t1}
     if (seg["high"] >= 2 * p0).any():
         return {"net": -1.0, "liquidated": True, "days": len(seg)}
     end = start + n
@@ -57,8 +73,8 @@ def main():
             f = load_funding(sym)
         except FileNotFoundError:
             f = None
-        for e, n in VARIANTS:
-            r = event_return(k, f, e, n)
+        for e, n, x in VARIANTS:
+            r = event_return(k, f, e, n, x)
             if r is None:
                 continue
             bt = None
@@ -67,13 +83,14 @@ def main():
                 b1 = btc["open"].asof(r["t1"])
                 bt = -(b1 / b0 - 1)
             events.append({"sym": sym, "listed": str(first.date()), "E": e, "N": n,
+                           "stop": x if x is not None else 0.0,
                            "net": r["net"], "liquidated": r["liquidated"],
                            "btc_short": bt, "days": r["days"]})
     df = pd.DataFrame(events)
     df.to_csv(ROOT / "reports/h006_events.csv", index=False)
     rng = np.random.default_rng(0)
     res = {}
-    for (e, n), g in df.groupby(["E", "N"]):
+    for (e, n, x), g in df.groupby(["E", "N", "stop"]):
         month = pd.to_datetime(g["listed"]).dt.to_period("M")
         by_m = g.groupby(month)["net"].apply(list)
         boots = []
@@ -81,7 +98,7 @@ def main():
             pick = rng.integers(0, len(by_m), len(by_m))
             boots.append(np.mean(np.concatenate([by_m.iloc[i] for i in pick])))
         excess = (g["net"] - g["btc_short"]).dropna()
-        res[f"E={e}|N={n}"] = {
+        res[f"E={e}|N={n}|stop={x}"] = {
             "events": int(len(g)), "mean_net": float(g["net"].mean()),
             "median_net": float(g["net"].median()), "hit": float((g["net"] > 0).mean()),
             "liquidations": int(g["liquidated"].sum()),
