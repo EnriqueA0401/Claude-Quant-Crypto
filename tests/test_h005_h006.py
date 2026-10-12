@@ -146,4 +146,4 @@ def test_h005_every_keeps_holdings_between_rebalances():
     # sin deslistados, solo hay coste en semanas de rebalanceo
     mons = o.index[o.index.dayofweek == 0]
     pos = [list(mons).index(m) for m in df.index]
-    assert all(df["cost"].iloc[k] == 0 for k in wk if pos[k] % 4 != 0)
+    assert all(df["cost"].iloc[k] == 0 for k in wk[1:] if pos[k] % 4 != 0)  # 1.ª = entrada
