@@ -1,9 +1,17 @@
 {
- "total_files": 488979,
+ "total_files": 488981,
  "groups": {
+  "coinmetrics/btc_CapMVRVCur.json": {
+   "files": 1,
+   "digest": "ca1fc9f5111325abc96fd8a73733e81b3a1e6ee322dd1db34709313fa9d3182b"
+  },
   "coinmetrics/btc_FlowInExNtv_FlowOutExNtv_SplyExNtv.json": {
    "files": 1,
    "digest": "752f061b357516ceeba06999fc1f89df14eac857c3442c7c4af41997206d8380"
+  },
+  "coinmetrics/eth_CapMVRVCur.json": {
+   "files": 1,
+   "digest": "b0939bb470357d46c563e41f287828eca8d009224ed146a9f35f6615c95bfe86"
   },
   "coinmetrics/eth_FlowInExNtv_FlowOutExNtv_SplyExNtv.json": {
    "files": 1,
