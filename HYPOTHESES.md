@@ -44,6 +44,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H037 | revisión literatura 2026 (funding entre exchanges) | divergencia de funding Hyperliquid − Binance como señal contraria | rechazada | G1 | G2: ~0 in-sample; OOS −18 a −20 %/año | 2 | C |
 | H038 | práctica (prima de Coinbase) | prima de Coinbase sobre Binance alta anuncia demanda de EE. UU.: largo BTC | rechazada | G1 | Sharpe ≤ B&H (0,54 vs 0,55; OOS 1,08 vs 1,57) | 2 | C |
 | H039 | Gatev et al. (2006); Fil & Kristoufek (2020) | arbitraje estadístico por pares cointegrados entre perps | rechazada | G1 | G2: −10 a −14 %/año in-sample; OOS −8 %/año | 2 | B |
+| H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -517,3 +518,12 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   salida al cruzar 0 o al final del periodo. e ∈ {2; 2,5} → 2. Costes 0,15 % por
   lado y pata; funding real; decisión al close, ejecución en el open siguiente.
   Train 2020-04 → 2022-12; OOS 2023-01 → 2025-09.
+
+### H040 — Deriva antes de la liquidación del funding (cota bruta)
+- Quién pierde: el lado que paga funding alto y cierra justo antes de la liquidación.
+- Predicción falsable: el retorno de la hora previa a cada liquidación de 8 h (07–08,
+  15–16, 23–00 UTC), con signo contrario al funding vigente (último liquidado), supera en
+  bruto el coste maker de ida y vuelta (0,04 %) con t > 3.
+- Variantes fijadas (2026-10-13, antes de ver resultados): BTC, ETH, SOL, BNB, XRP
+  perps 1h, 2020–2022; condición |funding| ≥ umbral u ∈ {0; 0,0003} → 2. Cota: si no
+  supera 0,04 % con t > 3, se rechaza (como H014/H030).
