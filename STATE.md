@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-132  (detalle por hipótesis en HYPOTHESES.md)
+134  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (37, todas rechazadas; H035 bloqueada por datos). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
+Cerradas (38, todas rechazadas; H035 bloqueada por datos). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
 Datos externos: Deribit DVOL y Coin Metrics (src/external.py; Coin Metrics NO es point-in-time). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
