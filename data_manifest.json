@@ -1,5 +1,5 @@
 {
- "total_files": 489006,
+ "total_files": 489007,
  "groups": {
   "binance/announcements_161.json": {
    "files": 1,
@@ -20,6 +20,10 @@
   "coinmetrics/eth_FlowInExNtv_FlowOutExNtv_SplyExNtv.json": {
    "files": 1,
    "digest": "2606e60678ef488e8e4f899a8499777ad6d97b251eca5c1810192009db3d3e07"
+  },
+  "defillama/stablecoins_all.json": {
+   "files": 1,
+   "digest": "71f7d90045a41b1e4493d5ff02106758c578c6bbf7a1259edcb3eb487c7cf6b1"
   },
   "deribit/dvol_BTC.json": {
    "files": 1,

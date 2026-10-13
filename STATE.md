@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-126  (detalle por hipótesis en HYPOTHESES.md)
+128  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (34, todas rechazadas). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
+Cerradas (35, todas rechazadas; H035 bloqueada por datos). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
 Datos externos: Deribit DVOL y Coin Metrics (src/external.py; Coin Metrics NO es point-in-time). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
@@ -17,16 +17,16 @@ variantes registradas antes de ejecutar; tests 1–3; liquidaciones pesimistas;
 desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 
 ## Siguiente paso exacto
-1. H033 en pausa: 7,6 %/año en 2023–25 (contaminado), exceso sobre caja +3,1 % con IC95
-   [−0,2 %, +7,2 %]. Su única prueba limpia es el holdout 2025-10 → 2026-09
-   (`python3 experiments/h033_always_hedged.py holdout`, UNA vez). No cumple
-   estrictamente la regla fijada para gastarlo: decisión de la persona responsable.
-2. Revisión de literatura 2024–2026 hecha (sin edge académico post-2022). H034
-   (deslistados) rechazada por pocos eventos. Siguiente: H035 (corto pre-desbloqueo de
-   tokens, prior medio): necesita calendarios point-in-time (repo abierto
-   DefiLlama/emissions-adapters, historial git) → pedir acceso con add_repo (lectura).
+1. DECISIÓN DE LA PERSONA: ¿gastar el holdout 2025-10 → 2026-09 en H033 (mejor
+   candidata)? Comando: `python3 experiments/h033_always_hedged.py holdout` (UNA vez).
+2. Cola casi agotada. Ideas restantes de prior bajo con datos accesibles: funding de
+   Hyperliquid como señal para perps de Binance (API POST api.hyperliquid.xyz/info);
+   prima de Coinbase (Coinbase public candles). H035 (desbloqueos) bloqueada por datos.
+3. Meta-review 4 al cerrar la 40.ª.
 
 ## Bloqueos
+- H035: calendarios de desbloqueo point-in-time no accesibles (DefiLlama de pago; repo
+  DefiLlama/emissions-adapters sin acceso desde esta sesión).
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
 - api.binance.com y fapi.binance.com: HTTP 451 (restricción geográfica). Afecta a
   verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
