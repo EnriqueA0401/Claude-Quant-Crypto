@@ -33,6 +33,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H026 | on-chain (Coin Metrics): flujos a exchanges | entradas netas anómalas a exchanges anuncian ventas: fuera del mercado 7 días | rechazada | G1* | G2: Sharpe = B&H (0,93 vs 0,94; OOS 1,24 vs 1,26); *datos no point-in-time | 2 | C |
 | H027 | valoración on-chain (MVRV) | fuera del mercado cuando el MVRV está en su zona de euforia | rechazada | G1* | G2: alfa −41 %/año in-sample; OOS +7,8 % n.s. | 2 | C |
 | H028 | microestructura / segmentación de mercados | convergencia COIN-M vs USDT-M del mismo trimestral (neutral) | rechazada | G2 | G3: OOS ≈ 0 %/año (in-sample ~3 %, Sharpe 1,4): ineficiencia cerrada | 2 | B |
+| H029 | carry relativo BTC/ETH | cobrar el diferencial de funding BTC vs ETH (neutral) | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -383,3 +384,12 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   (s), cada una con las dos direcciones. W = 0,5 por pata, costes 0,10 % por lado en
   ambas patas, sin liquidación modelada en la pata larga. Train: vencimientos ≤ 2022;
   OOS: 2023-01 → 2025-09.
+
+### H029 — Diferencial de funding BTC vs ETH
+- Quién pierde: los largos apalancados del activo con funding más caro.
+- Predicción falsable: corto en el perp con mayor funding medio de 7 días y largo en el
+  otro (0,5 por pata) cuando la diferencia supera d gana neto de costes y del movimiento
+  relativo ETH/BTC, en 2023–2025.
+- Variantes fijadas (2026-10-13, antes de ver resultados): semanal (lunes 00:00 UTC),
+  funding equivalente 8 h de los 7 días previos; operar si |f_ETH − f_BTC| > d,
+  d ∈ {0,5e-4; 1e-4} → 2. Costes 0,10 % por lado; funding real. Elegir d en 2020–2022.
