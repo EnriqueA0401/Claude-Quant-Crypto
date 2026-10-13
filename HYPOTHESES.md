@@ -29,6 +29,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H022 | estructura clásica coin-margined | carry trimestral COIN-M BTC/ETH con la moneda como margen (capital completo) | rechazada | G3 | G4: 31 ops, altcoins −10,8 %, costes ×2 3,3 % < USDT (OOS base 6,4 %/año, Sharpe 1,35) | 5 | A |
 | H023 | Schmeling, Schrimpf & Todorov (BIS WP 1087) | basis trimestral alto predice caídas: largo spot BTC/ETH solo con basis bajo | rechazada | G1 | G2: peor que B&H in-sample; OOS Sharpe 1,28 < 1,41 B&H, alfa −2,4 % | 2 | B |
 | H024 | Moreira & Muir (2017), carteras gestionadas por volatilidad | exposición BTC/ETH ∝ 1/varianza (realizada o implícita DVOL) | rechazada | G1 | G2: alfa −22 %/año in-sample; OOS solo más apalancamiento | 2 | B |
+| H025 | Bollerslev, Tauchen & Zhou (2009), prima de varianza | VRP alta (DVOL² − RV²) → largo BTC/ETH la semana siguiente | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -322,3 +323,13 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   domingo → 2. Peso w = min(1,5; c/σ²), c calibrado para que la media de w sea 1 en
   2021-04 → 2022-12 (solo train). Rebalanceo los lunes, costes 0,10 % por lado sobre
   |Δw|, funding real. Cartera 50/50 BTC/ETH. Elegir variante por Sharpe en train.
+
+### H025 — Prima de riesgo de varianza como señal de timing
+- Quién pierde: compradores de protección que pagan de más en momentos de miedo; la
+  prima alta indica aversión al riesgo que se compensa con retornos futuros.
+- Predicción falsable: estar largo (perp 1x) en BTC/ETH solo las semanas en que
+  VRP = (DVOL/100)² − RV² anualizada supera su mediana de las 52 semanas previas da
+  mayor Sharpe y alfa > 0 frente a buy & hold en 2023–2025.
+- Variantes fijadas (2026-10-13, antes de ver resultados): RV de 7 o 30 días (retornos
+  diarios log, anualizada) → 2. Decisión al close del domingo, ejecución el lunes;
+  costes 0,10 % por lado; funding. 50/50 BTC/ETH. Elegir por Sharpe en 2021-04 → 2022.
