@@ -178,3 +178,15 @@ def test_h017_donchian_state_and_no_lookahead():
     y2.iloc[201:] *= 3
     b = h17.donchian_state(y2, 40)
     pd.testing.assert_series_equal(a.iloc[:201], b.iloc[:201])
+
+
+def test_h019_funding_3d_window():
+    import h019_negative_funding as h19
+    days = pd.date_range("2021-01-01", periods=10, freq="1D", tz="UTC")
+    ev = pd.date_range("2021-01-01 08:00", periods=27, freq="8h", tz="UTC")
+    f = pd.Series(-3e-4, index=ev)
+    m = h19.funding_3d(f, days)
+    # el día 2021-01-03 contiene eventos de los días 1, 2 y 3 (9 eventos, el de 00:00
+    # del día 4 incluido como cierre del día 3): media equivalente 8 h = −3e-4
+    assert m.iloc[2] == pytest.approx(-3e-4)
+    assert np.isnan(m.iloc[1])

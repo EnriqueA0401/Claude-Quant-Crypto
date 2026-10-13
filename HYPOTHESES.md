@@ -23,6 +23,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | rechazada | G2 | G3: −33 %/año (beta in-sample 1,23 se invierte) | 2 | A |
 | H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | rechazada | G2 | G3: 4,5 %/año, alfa vs BTC −1,7 % (no significativo) | 2 | B |
 | H018 | práctica (K33): purgas de apalancamiento diarias | largo tras caída diaria de OI ≥ θ (universo top 30) | rechazada | G1 | G2: media −1,2 % a −3,3 %, t −0,5 a −2,4, peor que el nulo | 4 | C |
+| H019 | propia / crowding de cortos | funding negativo sostenido anuncia squeeze: largo 1–2 semanas | en curso | G0 | - | 0 | B |
+| H020 | valor relativo / rotación | reversión del ratio ETH/BTC tras desviaciones extremas (neutral) | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -244,3 +246,25 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   por lado; funding real. θ ∈ {10 %, 15 %} × N ∈ {7, 28} = 4. Nulo: mismos símbolos,
   fechas aleatorias, misma duración (1.000 sims). Train = eventos antes de 2023; OOS =
   2023-01 → 2025-09 con la variante de mayor t en train.
+
+### H019 — Funding negativo sostenido (cortos concurridos)
+- Quién pierde: cortos apalancados que pagan funding y acaban cerrando en un squeeze.
+- Predicción falsable: tras 3 días con funding medio (equivalente 8 h) < umbral, un largo
+  de N días en el perp bate a largos en fechas aleatorias, neto de costes; el largo
+  además cobra el funding negativo.
+- Variantes fijadas (2026-10-13, antes de ver resultados): universo diario top 30 por
+  volumen (380 símbolos, deslistados incluidos). Evento el día d si la media de los
+  eventos de funding con ts en (d−3 días, d+1 00:00] (equivalente 8 h) < u y la media
+  de los 3 días anteriores ≥ u (inicio del episodio). u ∈ {0; −0,0001} × N ∈ {7, 14}
+  = 4. Largo 1x desde el open de d+1; sin solapamiento por símbolo; costes 0,15 % por
+  lado; funding real. Nulo: fechas aleatorias del mismo símbolo en el universo.
+  Train = eventos antes de 2023; OOS = 2023-01 → 2025-09 con la variante de mayor t.
+
+### H020 — Reversión ETH/BTC
+- Quién pierde: rotaciones tardías entre BTC y ETH que sobrerreaccionan.
+- Predicción falsable: cuando log(ETH/BTC) se aleja > k desviaciones típicas de su media
+  de 90 días, la posición neutral contraria (largo el barato, corto el caro, 0,5 por
+  pata, perps) gana hasta volver a la media (o 30 días), neta de 4 lados y funding.
+- Variantes fijadas (2026-10-13, antes de ver resultados): z con media y desviación de
+  los 90 días previos (closes diarios); k ∈ {2; 2,5}; salida en z cruza 0 o a los
+  30 días → 2 variantes. Train 2020–2022, OOS 2023-01 → 2025-09.
