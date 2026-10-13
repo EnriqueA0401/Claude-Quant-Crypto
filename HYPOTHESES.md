@@ -538,3 +538,9 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Variantes fijadas (2026-10-13, antes de ver resultados): BTC y ETH perps diarios;
   condición |retorno del fin de semana| > m, m ∈ {0; 5 %} → 2. Train 2020–2022,
   OOS 2023-01 → 2025-09.
+
+### H033 — Uso del holdout (registrado ANTES de ejecutarlo, 2026-10-13)
+Autorizado por la persona responsable. Se ejecuta UNA sola vez
+`python3 experiments/h033_always_hedged.py holdout` sobre 2025-10-01 → 2026-09-30, con el
+diseño ya fijado (sin cambios). Criterio: retorno anual > 4,5 % (caja). Se informará el
+resultado sea cual sea; el holdout queda consumido y no se podrá reutilizar.

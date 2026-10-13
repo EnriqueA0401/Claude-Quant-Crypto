@@ -16,6 +16,9 @@ Reglas: comparar con caja (≈ 4–5 %/año); Sharpe mensual; alfa vs B&H y nulo
 variantes registradas antes de ejecutar; tests 1–3; liquidaciones pesimistas;
 desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 
+## Holdout
+CONSUMIDO por H033 (2026-10-13, autorizado por la persona). No reutilizable.
+
 ## Siguiente paso exacto
 1. DECISIÓN DE LA PERSONA: ¿gastar el holdout 2025-10 → 2026-09 en H033?
    (`python3 experiments/h033_always_hedged.py holdout`, UNA vez).
