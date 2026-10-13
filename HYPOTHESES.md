@@ -47,7 +47,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | rechazada | G1 | cota: −0,01 a −0,03 % (t ≈ −1,1) | 2 | C |
 | H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | rechazada | G1 | G2: no revierte (continúa; t −2,0 OOS) | 2 | C |
 | H042 | contraste pedido por la persona | carry siempre cubierto con trimestrales de Deribit 2018–2026 (no operable; estimar el carry de largo plazo) | cerrada (contraste) | - | BTC +1,05 %/año, ETH +3,1 %/año 2017–26; supera a la caja solo en 3–4 de 9 años | 1 | - |
-| H043 | flujo de órdenes (Chordia & Subrahmanyam 2004, adaptado) | presión compradora agresiva (ratio taker-buy) semanal cross-sectional | en curso | G3 | G2 60 %/año Sharpe 1,79; G3 44,5 %/año, Sharpe 0,93, 3 años positivos | 2 | C |
+| H043 | flujo de órdenes (Chordia & Subrahmanyam 2004, adaptado) | presión compradora agresiva (ratio taker-buy) semanal cross-sectional | rechazada | G4 | G5: DSR ≈ 0–0,6, White p 0,096, IC95 incluye 0 (OOS 44,5 %/año, 3 años +) | 5 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 

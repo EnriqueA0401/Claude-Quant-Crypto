@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-140  (detalle por hipótesis en HYPOTHESES.md)
+146  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (41, todas rechazadas; H035 bloqueada por datos). Meta-review 4 escrita. H033 rechazada en el holdout (2,1 %/año < caja). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
+Cerradas (43, todas rechazadas; H035 bloqueada). Mejor XS: H043 (flujo taker), rechazada en G5. H033 rechazada en el holdout (2,1 %/año < caja). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
 Datos externos: Deribit DVOL y Coin Metrics (src/external.py; Coin Metrics NO es point-in-time). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
@@ -23,8 +23,10 @@ lleguen después de 2026-09) o paper trading en vivo (G7).
 
 ## Siguiente paso exacto
 1. Sin holdout disponible: toda hipótesis nueva solo puede validarse con datos
-   posteriores a 2026-09 o con paper trading (G7). Priorizar mecanismos realmente nuevos
-   o datos nuevos (de pago/privados), según la meta-review 4.
+   posteriores a 2026-09 o con paper trading (G7). H043 (flujo taker) es la mejor señal
+   XS (OOS 44,5 %/año, 3 años +) pero falla G5 por pruebas múltiples. Siguiente: variantes
+   del flujo de órdenes con mecanismo distinto (p. ej. flujo taker en spot vs perp,
+   imbalance horario) — cuidado: cada prueba suma al contador y endurece el DSR.
 2. Familia carry cerrada (H001, H012, H021, H022, H033; contraste H042 con Deribit
    2017–2026: BTC 1 %/año, ETH 3 %/año, supera a la caja solo en años alcistas).
 
