@@ -190,3 +190,18 @@ def test_h019_funding_3d_window():
     # del día 4 incluido como cierre del día 3): media equivalente 8 h = −3e-4
     assert m.iloc[2] == pytest.approx(-3e-4)
     assert np.isnan(m.iloc[1])
+
+
+def test_h020_hand_pnl_and_timing():
+    import h020_ethbtc as h20
+    n = 10
+    oe = np.array([100, 100, 100, 110, 110, 110, 110, 110, 110, 110.0])
+    ob = np.full(n, 100.0)
+    z = np.array([0, 3.0, 3.0, 3.0, -0.1, -0.1, 0, 0, 0, 0])  # ETH caro en d=1 → corto ETH
+    zero = np.zeros(n)
+    rows = h20.run(oe, ob, z, zero, zero, 2.0)
+    side = rows[:, 0]
+    assert list(side[:6]) == [0, 0, -1, -1, -1, 0]           # entra en open 2, sale en open 5
+    # bar 2: ETH 100→110 con corto → −W·10 %; costes entrada y salida
+    assert rows[:, 1].sum() == pytest.approx(-h20.W * 0.10)
+    assert rows[:, 2].sum() == pytest.approx(2 * (2 * h20.W * h20.SIDE))
