@@ -49,3 +49,10 @@ La persona responsable del marco autorizó, solo para H022, eximir el mínimo de
 operaciones OOS de G4 para poder seguir estudiándola. Los demás criterios se mantienen;
 "otros activos" sigue fallando y queda registrado. Estado: reabierta, siguiente paso
 red team (paso 6) y G5. Dossier: reports/dossiers/DOSSIER_H022_cm_carry.md.
+
+## Actualización final 2026-10-13: G5 y red team
+G5: frente a 0, DSR 0,992, White RC p = 0,002 y bootstrap > 0, pero PBO 0,51 (> 0,2);
+frente a caja (5 %), DSR 0,60 y IC95 del exceso incluye 0. El red team mostró que el
+resultado depende de 2024-T2 (sin él ≈ 4,2 %/año) y que el OOS coincide con el de H012
+(correlación 0,965). **Veredicto: rechazada en G5.** Detalle y respuesta a cada
+objeción: reports/dossiers/DOSSIER_H022_cm_carry.md (secciones 9–11).

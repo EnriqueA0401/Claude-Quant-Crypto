@@ -1,6 +1,6 @@
 # DOSSIER H022 — Carry trimestral COIN-M BTC/ETH con la moneda como margen
 
-Estado: **reabierta por excepción de la persona responsable (2026-10-13)**: se exime
+Estado: **RECHAZADA en G5 tras el red team (2026-10-13)**. Antes: reabierta por excepción de la persona responsable: se exime
 SOLO del mínimo de 100 operaciones OOS de G4, estructuralmente inalcanzable para un carry
 trimestral. El resto de criterios se mantiene; ver "Estado frente a los gates".
 
@@ -88,7 +88,7 @@ G3 walk-forward OOS: 3,30 %/año, Sharpe 1,56, MDD −1,1 %, 18 entradas (report
   idénticas; la octava explicada (horas de mantenimiento del spot).
 - Paso 5: revisión por checklist (findings/H012_quarterly_basis.md): contratos vencidos y
   barras muertas corregidos; resto OK.
-- Paso 6 (red team): **pendiente**. Paso 7: comandos abajo.
+- Paso 6 (red team): hecho, ver sección 10. Paso 7: comandos abajo.
 
 ## 6. Riesgos y aspectos no modelados
 - Contrato inverso modelado linealmente; USDT ≠ USD.
@@ -135,3 +135,27 @@ Lectura: el carry es un retorno positivo real y estadísticamente sólido frente
 su exceso sobre el rendimiento de la caja (≈ 1,3 %/año) no es distinguible de 0. El PBO
 de 0,51 refleja que las 6 variantes son casi idénticas (elegir la "mejor" en train no
 predice cuál será mejor fuera): con el criterio literal, G5 no se supera.
+
+## 10. Red team (paso 6) y respuesta por escrito a cada objeción
+Subagente con instrucción explícita de REFUTAR (scripts en el scratchpad de la sesión).
+
+| # | objeción (gravedad) | respuesta |
+|---|---|---|
+| 1 | Exceso sobre caja ≈ +1,5 %/año, Sharpe del exceso 0,33, DSR ≈ 0,04–0,6 (fatal) | **Aceptada.** Coincide con nuestro G5: DSR del exceso 0,60, IC95 del exceso incluye 0. |
+| 2 | Depende de 2024 y en gran parte de 2024-T2 (+6,97 %); sin ese trimestre ≈ 4,2 %/año < caja; IC95 trimestral [2,7 %, 12 %], P(< 5 %) ≈ 30 % (fatal) | **Aceptada.** 2023 (+2,3 %) y 2025 (+2,8 % en 9 meses) quedan por debajo de la caja; la ventaja es episódica (picos de basis en mercados alcistas apalancados). |
+| 3 | El OOS no es evidencia nueva: mismo periodo y subyacentes que H012-G3 (correlación mensual 0,965); θ y salida elegidos ahí (mayor) | **Aceptada.** H022 es H012 con doble tamaño; la única prueba limpia sería el holdout (~8 operaciones, sin potencia estadística). |
+| 4 | El listón real se mueve con el carry: en 2024 el USDT Earn de Binance pagó ≈ 6 % (mayor) | **Aceptada como agravante** (fuente no oficial); refuerza la objeción 2. |
+| 5 | G4 no se supera ni con la excepción: otros activos −10,8 %/año, costes ×2 < caja (mayor) | **Aceptada**; ya estaba registrado en la sección 4. |
+| 6 | La aproximación lineal es correcta (±0,03 %/año frente a contabilidad exacta coin-margined); el rebalanceo del motor resta ≈ 1,2 %/año, pero ese extra es beta, no alfa (menor) | **Aceptada.** Valida el motor; no cambia el veredicto. |
+| 7 | El precio de liquidación debería ser la media del índice de 30 min, no el último trade (sesgo ≈ −0,3 %/año en contra) (menor) | **Aceptada.** Pendiente para cualquier uso futuro: liquidar a la media del índice. |
+| 8 | Tamaño de contrato resoluble (comprar spot igual al nocional de contratos; ≈ 1 % de lastre) (menor) | **Aceptada.** |
+| 9 | Costes probablemente conservadores (rota spot en cada ciclo; una operativa real solo rotaría el corto) (menor) | **Aceptada.** Aun así, con costes ≈ 3,1 %/año la mejora posible (≈ 1–1,5 %/año) no cambia la conclusión frente a caja con la evidencia disponible. |
+| 10 | Riesgos operativos: concentración en Binance, USDT frente a USD (menor) | **Aceptada.** |
+
+## 11. Veredicto final
+**Rechazada en G5.** El basis carry existe y la contabilidad es correcta, pero su exceso
+sobre la caja (≈ 1,3–1,5 %/año) no es estadísticamente distinguible de 0, depende de un
+episodio (2024-T2), el OOS no es independiente de H012, y G4 falla en otros activos y con
+costes ×2. Con el criterio literal (frente a 0) también falla por PBO = 0,51.
+Recomendación: no gastar el holdout 2025-10 → 2026-09 en validarla (≈ 8 operaciones, sin
+potencia); si la persona lo desea, usarlo solo como comprobación descriptiva, una vez.
