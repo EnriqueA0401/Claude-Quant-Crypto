@@ -30,6 +30,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H023 | Schmeling, Schrimpf & Todorov (BIS WP 1087) | basis trimestral alto predice caídas: largo spot BTC/ETH solo con basis bajo | rechazada | G1 | G2: peor que B&H in-sample; OOS Sharpe 1,28 < 1,41 B&H, alfa −2,4 % | 2 | B |
 | H024 | Moreira & Muir (2017), carteras gestionadas por volatilidad | exposición BTC/ETH ∝ 1/varianza (realizada o implícita DVOL) | rechazada | G1 | G2: alfa −22 %/año in-sample; OOS solo más apalancamiento | 2 | B |
 | H025 | Bollerslev, Tauchen & Zhou (2009), prima de varianza | VRP alta (DVOL² − RV²) → largo BTC/ETH la semana siguiente | rechazada | G3 | G4: alfa negativo en SOL/BNB/XRP; en BTC/ETH +15,8 %/año no significativo | 4 | C |
+| H026 | on-chain (Coin Metrics): flujos a exchanges | entradas netas anómalas a exchanges anuncian ventas: fuera del mercado 7 días | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -337,3 +338,18 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   (VRP con RV 7 d, mediana 52 semanas) aplicada sin cambios a los perps SOL, BNB y XRP
   (cartera a partes iguales), costes 0,15 % por lado, 2023-01 → 2025-09; éxito si el
   alfa frente a su buy & hold es > 0.
+
+### H026 — Entradas netas anómalas a exchanges
+- Quién pierde: compradores que absorben la venta de grandes tenedores que mueven
+  monedas a exchanges para vender.
+- Predicción falsable: estar largo (perp 1x) en BTC/ETH salvo los 7 días siguientes a
+  un día con entrada neta a exchanges anómala da mayor Sharpe y alfa > 0 frente a buy &
+  hold en 2023-01 → 2025-09.
+- Variantes fijadas (2026-10-13, antes de ver resultados): netflow_d = (FlowInExNtv −
+  FlowOutExNtv) / SplyExNtv (Coin Metrics, día UTC d, conocido al cierre de d); z con
+  media y desviación de los 90 días previos; si z_d > k → plano del open de d+1 durante
+  7 días (se renueva si vuelve a dispararse). k ∈ {1,5; 2} → 2. Costes 0,10 % por lado,
+  funding real, 50/50 BTC/ETH. Elegir k en 2020–2022 (Sharpe mensual).
+- AVISO G1: los flujos de Coin Metrics no son point-in-time (revisados a posteriori);
+  cualquier resultado positivo debe considerarse optimista y no podría validarse sin
+  datos en tiempo real (G7).

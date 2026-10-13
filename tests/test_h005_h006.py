@@ -225,3 +225,16 @@ def test_h025_vrp_signal_weekly_timing_and_no_lookahead():
     c2.iloc[t + 1:] *= 2.0
     d2.iloc[t + 1:] = 200.0
     pd.testing.assert_series_equal(s.iloc[:t + 1], h25.vrp_signal(c2, d2, 7).iloc[:t + 1])
+
+
+def test_h026_flow_signal_timing_and_no_lookahead():
+    import h026_exchange_flows as h26
+    idx = pd.date_range("2021-01-01", periods=200, freq="1D", tz="UTC")
+    rng = np.random.default_rng(0)
+    net = pd.Series(rng.normal(0, 1, 200), index=idx)
+    net.iloc[150] = 50.0
+    s = h26.flow_signal(net, 2.0)
+    assert (s.iloc[150:157] == 0).all() and s.iloc[149] == 1
+    n2 = net.copy()
+    n2.iloc[151:] = 99.0
+    pd.testing.assert_series_equal(s.iloc[:151], h26.flow_signal(n2, 2.0).iloc[:151])

@@ -32,3 +32,34 @@ def fetch_dvol(currency: str, start: str = "2021-01-01", end: str = "2026-10-01"
     df = pd.DataFrame(json.loads(blob), columns=["ts", "open", "high", "low", "close"])
     s = pd.Series(df["close"].to_numpy(), index=pd.to_datetime(df["ts"], unit="ms", utc=True))
     return s[~s.index.duplicated()].sort_index()
+
+
+COINMETRICS = "https://community-api.coinmetrics.io/v4/timeseries/asset-metrics"
+
+
+def fetch_coinmetrics(asset: str, metrics: list[str], start: str = "2019-01-01",
+                      end: str = "2025-10-01") -> pd.DataFrame:
+    """Métricas diarias on-chain (Coin Metrics community). AVISO G1: no son datos
+    point-in-time (los flujos a exchanges se revisan a posteriori; 'status-time' de 2026
+    para valores de 2024), así que un backtest con ellos puede tener sesgo de anticipación.
+    """
+    name = f"coinmetrics/{asset}_{'_'.join(sorted(metrics))}.json"
+    dest = DATA / name
+    if not dest.exists():
+        rows, url = [], COINMETRICS
+        params = {"assets": asset, "metrics": ",".join(metrics), "frequency": "1d",
+                  "start_time": start, "end_time": end, "page_size": 10000}
+        while url:
+            r = requests.get(url, params=params, timeout=60)
+            r.raise_for_status()
+            j = r.json()
+            rows += j["data"]
+            url, params = j.get("next_page_url"), None
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps(rows))
+    blob = dest.read_bytes()
+    _record(name, sha256(blob))
+    df = pd.DataFrame(json.loads(blob))
+    df.index = pd.to_datetime(df.pop("time"), utc=True)
+    keep = [m for m in metrics if m in df]
+    return df[keep].astype(float)
