@@ -47,7 +47,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | rechazada | G1 | cota: −0,01 a −0,03 % (t ≈ −1,1) | 2 | C |
 | H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | rechazada | G1 | G2: no revierte (continúa; t −2,0 OOS) | 2 | C |
 | H042 | contraste pedido por la persona | carry siempre cubierto con trimestrales de Deribit 2018–2026 (no operable; estimar el carry de largo plazo) | cerrada (contraste) | - | BTC +1,05 %/año, ETH +3,1 %/año 2017–26; supera a la caja solo en 3–4 de 9 años | 1 | - |
-| H043 | flujo de órdenes (Chordia & Subrahmanyam 2004, adaptado) | presión compradora agresiva (ratio taker-buy) semanal cross-sectional | rechazada | G4 | G5: DSR ≈ 0–0,6, White p 0,096, IC95 incluye 0 (OOS 44,5 %/año, 3 años +) | 5 | C |
+| H043 | flujo de órdenes (Chordia & Subrahmanyam 2004, adaptado) | presión compradora agresiva (ratio taker-buy) semanal cross-sectional | rechazada (definitiva) | G5 + red team | G5 ✗; permutación y holdout (+101 %/año) pasaron, pero el red team mostró = momentum + colas (sin top-3 semanas −6 %) y holdout no ciego | 7 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -587,3 +587,5 @@ resultado sea cual sea; el holdout queda consumido y no se podrá reutilizar.
       > 4,5 % (caja) y > retorno medio de las permutaciones del mismo periodo.
   Decisión: si (a) y (b) pasan → H043 pasa a paper trading (G7) como candidata DÉBIL (el DSR
   sigue fallando y se declara). Si alguno falla → rechazo confirmado.
+- Resultado (2026-10-13): permutación p_fam 0,0045 ✓, holdout +101 %/año ✓ según criterio, pero
+  reimplementación + red team → rechazo definitivo (findings/H043_taker_flow.md, addendum).

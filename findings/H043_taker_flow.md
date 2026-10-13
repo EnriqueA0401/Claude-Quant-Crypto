@@ -42,3 +42,39 @@ mitad del retorno se explica por el factor momentum.
 ## Reproducibilidad
 `python3 experiments/h043_taker_flow.py && python3 experiments/h043_g4.py &&
 python3 experiments/h043_g5.py`. Test en tests/test_h005_h006.py.
+
+## Addendum 2026-10-13 — validación complementaria, revisión y cierre DEFINITIVO
+Autorizado por la persona responsable: holdout por hipótesis y validación sintética que
+conserve la estructura. Pre-registrado en HYPOTHESES.md antes de ejecutar (contador 148).
+- Permutación (señal barajada entre los mismos pares cada semana, retornos reales):
+  p cont_7d 0,0025; p familia 0,0045 ✓ (reports/h043_validation.json).
+- Holdout 2025-10 → 2026-09 (cont_7d, una vez): +101 %/año, Sharpe 1,32, MDD −50 %,
+  IC95 semanal [−0,99 %, +4,76 %] (incluye 0); funding +66 %/año del bruto 112 %.
+- Protocolo paso 4 (reimplementación por eventos, subagente que no vio el código): coincide
+  exactamente (1,0103 vs 1,0103; OOS 0,443). Datos sin saltos ni prints erróneos; funding
+  real en el tope −2 %/intervalo durante squeezes. reports/h043_reimpl_weekly.csv.
+- Protocolo paso 6 (red team; scripts en experiments/h043_review/redteam/, leen un panel
+  exportado a scratch → no reproducibles con un solo comando, solo archivados):
+  1. Momentum 1 semana (H005, rechazada) gana +99 %/año en el mismo holdout; nulo que
+     conserva el momentum (permutación dentro de deciles) → p holdout 0,074. Señal
+     residualizada sobre momentum: +5,6 %/año OOS.
+  2. Colas: OOS sin top-3 símbolos +4,6 %/año (≈ caja), sin top-10 semanas −6,4 %;
+     holdout sin top-3 semanas −6 %, sin top-3 símbolos −47 %. PIPPIN aporta 0,75 de 0,99.
+     Una operación OOS (ALPACA, squeeze de deslistado, +570 %) aporta ~21 de los 44 puntos.
+  3. El racional G0 (flujo nuevo de esta semana) queda falsado: el score menos su media
+     propia de 8 semanas da +0,3 %/año OOS; la media retrasada sola da +27 %/año. Es una
+     inclinación estática hacia monedas minoristas propensas a squeezes, no flujo.
+  4. Pruebas múltiples: Šidák sobre ~44 hipótesis → p ≈ 0,18; sobre 148 pruebas ≈ 0,49.
+  5. Holdout no ciego: el conocimiento del modelo llega a 2026-06 (sabía de los pumps).
+  6–7. Funding dependiente del régimen; MDD −50 % inviable para G6.
+  9–12 (menores): ejecución realista a este tamaño, sin lookahead ni supervivencia.
+### Respuesta a las objeciones
+Acepto 1–7. Las objeciones 1 y 3 son fatales para la tesis: lo que la permutación detecta
+es momentum más una inclinación estática a memecoins, ya probadas o sin racional de flujo.
+La 2 muestra que el resultado es una lotería de colas (mediana semanal −0,3 %). La 5 invalida
+el holdout como prueba ciega. No hay respuesta que las rebata.
+### Veredicto final
+**RECHAZADA definitivamente.** No pasa a G7. El "aprobado" pre-registrado de permutación y
+holdout no resiste la revisión: la señal no es distinguible del momentum y depende de 3–5
+eventos. Lección: un nulo de permutación debe conservar los factores conocidos (momentum),
+y un estadístico recortado debe acompañar a la media en distribuciones con colas.
