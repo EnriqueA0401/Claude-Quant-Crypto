@@ -27,6 +27,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H020 | valor relativo / rotación | reversión del ratio ETH/BTC tras desviaciones extremas (neutral) | rechazada | G1 | G2: −2,6 %/año, 8–11 entradas | 2 | C |
 | H021 | meta-review 2 | cartera carry BTC/ETH: trimestral (H012) y, si no, perp (H001) | rechazada | G3 | OOS 3,5 %/año < 5 % (USDT) | 1 | B |
 | H022 | estructura clásica coin-margined | carry trimestral COIN-M BTC/ETH con la moneda como margen (capital completo) | rechazada | G3 | G4: 31 ops, altcoins −10,8 %, costes ×2 3,3 % < USDT (OOS base 6,4 %/año, Sharpe 1,35) | 5 | A |
+| H023 | Schmeling, Schrimpf & Todorov (BIS WP 1087) | basis trimestral alto predice caídas: largo spot BTC/ETH solo con basis bajo | en curso | G0 | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -296,3 +297,15 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   W = 1 por pata (aproximación lineal en USD), sin liquidación (cobertura en moneda),
   costes spot 0,15 % y futuro 0,10 % por lado. Cartera 50/50 BTC/ETH.
 - Aviso de G4: tendrá < 100 operaciones OOS (≈ 4 vencimientos/año por activo).
+
+### H023 — Basis alto como filtro de riesgo
+- Quién pierde: largos apalancados que pagan un basis alto justo antes de las caídas
+  (el basis alto refleja apalancamiento minorista y escasez de capital de arbitraje).
+- Predicción falsable: estar largo en spot BTC/ETH solo cuando el basis trimestral
+  anualizado está por debajo de un umbral (y en efectivo al 0 % si no) tiene mayor
+  Sharpe y alfa > 0 frente a buy & hold en 2023-01 → 2025-09.
+- Variantes fijadas (2026-10-13, antes de ver resultados): basis diario = close del
+  trimestral USDT-M más cercano con ≥ 14 días / close spot − 1, anualizado (datos
+  limpios). Señal al close del día, ejecución en el open siguiente. Largo si basis
+  anualizado < b, b ∈ {10 %, 15 %} → 2. Costes spot 0,15 % por lado. Cartera 50/50
+  BTC/ETH. Elegir b en 2021–2022 (Sharpe mensual) y juzgar en 2023–2025.
