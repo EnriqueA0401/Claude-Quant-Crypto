@@ -1,5 +1,5 @@
 {
- "total_files": 489076,
+ "total_files": 489134,
  "groups": {
   "binance/announcements_161.json": {
    "files": 1,
@@ -690,8 +690,8 @@
    "digest": "febc79c09ce6c281f60135a0a4b0610f89f19733c4f2059dd01aff26a13946ce"
   },
   "spot/monthly/klines/BTCUSDT": {
-   "files": 191,
-   "digest": "279f412fe5f46b750c9593092f35f3f85331d7fcc991d3d54c1a6df483fd909e"
+   "files": 220,
+   "digest": "c466d54346de26683052d1600c7fcc44450721bbbbac861d303560a989e0ce0c"
   },
   "spot/monthly/klines/BTSUSDT": {
    "files": 47,
@@ -942,8 +942,8 @@
    "digest": "8fe904da0fb49903b9a18834fcda96be93d7427846e0b5e1bd36e8e337f3d813"
   },
   "spot/monthly/klines/ETHUSDT": {
-   "files": 191,
-   "digest": "db41a75999180a491f5a9d5c8aeb64c34c71e55ad103a5b40a7926aa27e355bb"
+   "files": 220,
+   "digest": "439b64ee6cb217906281b67f07b48f7cf016cf07103fdeba95d87eb488ed3029"
   },
   "spot/monthly/klines/EULUSDT": {
    "files": 12,

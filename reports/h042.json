@@ -1,0 +1,129 @@
+{
+ "commit": "7dd3ead41aa8e8d86aa5e8ce7dc8f6ae77d5b364",
+ "results": {
+  "BTC": {
+   "period": "2017-11-22..2026-09-29",
+   "ann": 0.0,
+   "sharpe_m": 0.0,
+   "max_dd": 0.0,
+   "yearly": {
+    "2017": {
+     "ret": 0.0,
+     "days": 40,
+     "cash_approx": null,
+     "beats_cash": false
+    },
+    "2018": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.019,
+     "beats_cash": false
+    },
+    "2019": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.021,
+     "beats_cash": false
+    },
+    "2020": {
+     "ret": 0.0,
+     "days": 366,
+     "cash_approx": 0.004,
+     "beats_cash": false
+    },
+    "2021": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.0005,
+     "beats_cash": false
+    },
+    "2022": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.02,
+     "beats_cash": false
+    },
+    "2023": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.05,
+     "beats_cash": false
+    },
+    "2024": {
+     "ret": 0.0,
+     "days": 366,
+     "cash_approx": 0.05,
+     "beats_cash": false
+    },
+    "2025": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.042,
+     "beats_cash": false
+    },
+    "2026": {
+     "ret": 0.0,
+     "days": 272,
+     "cash_approx": 0.038,
+     "beats_cash": false
+    }
+   }
+  },
+  "ETH": {
+   "period": "2019-03-19..2026-09-29",
+   "ann": 0.0,
+   "sharpe_m": 0.0,
+   "max_dd": 0.0,
+   "yearly": {
+    "2019": {
+     "ret": 0.0,
+     "days": 288,
+     "cash_approx": 0.021,
+     "beats_cash": false
+    },
+    "2020": {
+     "ret": 0.0,
+     "days": 366,
+     "cash_approx": 0.004,
+     "beats_cash": false
+    },
+    "2021": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.0005,
+     "beats_cash": false
+    },
+    "2022": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.02,
+     "beats_cash": false
+    },
+    "2023": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.05,
+     "beats_cash": false
+    },
+    "2024": {
+     "ret": 0.0,
+     "days": 366,
+     "cash_approx": 0.05,
+     "beats_cash": false
+    },
+    "2025": {
+     "ret": 0.0,
+     "days": 365,
+     "cash_approx": 0.042,
+     "beats_cash": false
+    },
+    "2026": {
+     "ret": 0.0,
+     "days": 272,
+     "cash_approx": 0.038,
+     "beats_cash": false
+    }
+   }
+  }
+ }
+}

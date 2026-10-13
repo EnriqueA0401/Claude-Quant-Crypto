@@ -33,7 +33,11 @@ def main():
             df = fetch_deribit_future_daily(n)
             if df is not None and len(df) > 20:
                 futs[f"{cur}_{df.index[-1].strftime('%y%m%d')}"] = df[["open", "high", "close"]]
-        spot = load_klines("spot", spot_sym, "1d")[["open", "close"]]
+        # spot diario alineado con Deribit (día de 08:00 a 08:00 UTC) desde velas de 1 h
+        h1 = load_klines("spot", spot_sym)["open"]
+        o8 = h1[h1.index.hour == 8]
+        o8.index = o8.index.floor("1D") + pd.Timedelta("8h")
+        spot = pd.DataFrame({"open": o8, "close": o8.shift(-1)}).dropna()
         o = h12.run(spot, futs, -1.0, "expiry", end=END)
         first = min(f.index[0] for f in futs.values())
         nets[cur] = o["net"][o.index >= first]
