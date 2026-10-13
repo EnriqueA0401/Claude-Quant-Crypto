@@ -28,6 +28,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H021 | meta-review 2 | cartera carry BTC/ETH: trimestral (H012) y, si no, perp (H001) | rechazada | G3 | OOS 3,5 %/año < 5 % (USDT) | 1 | B |
 | H022 | estructura clásica coin-margined | carry trimestral COIN-M BTC/ETH con la moneda como margen (capital completo) | rechazada | G3 | G4: 31 ops, altcoins −10,8 %, costes ×2 3,3 % < USDT (OOS base 6,4 %/año, Sharpe 1,35) | 5 | A |
 | H023 | Schmeling, Schrimpf & Todorov (BIS WP 1087) | basis trimestral alto predice caídas: largo spot BTC/ETH solo con basis bajo | rechazada | G1 | G2: peor que B&H in-sample; OOS Sharpe 1,28 < 1,41 B&H, alfa −2,4 % | 2 | B |
+| H024 | Moreira & Muir (2017), carteras gestionadas por volatilidad | exposición BTC/ETH ∝ 1/varianza (realizada o implícita DVOL) | en curso | G0 | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -309,3 +310,15 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   limpios). Señal al close del día, ejecución en el open siguiente. Largo si basis
   anualizado < b, b ∈ {10 %, 15 %} → 2. Costes spot 0,15 % por lado. Cartera 50/50
   BTC/ETH. Elegir b en 2021–2022 (Sharpe mensual) y juzgar en 2023–2025.
+
+### H024 — Carteras gestionadas por volatilidad
+- Quién pierde: inversores que mantienen exposición constante en periodos de varianza
+  alta, cuando el retorno esperado no compensa el riesgo (la varianza persiste más que
+  la prima de riesgo).
+- Predicción falsable: escalar la exposición semanal a BTC/ETH (perps) por c/σ² mejora
+  el Sharpe frente a buy & hold y da alfa > 0 en 2023-01 → 2025-09.
+- Variantes fijadas (2026-10-13, antes de ver resultados): σ² = (a) varianza realizada
+  de 30 días de retornos diarios log o (b) (DVOL/100)²/365 de Deribit al close del
+  domingo → 2. Peso w = min(1,5; c/σ²), c calibrado para que la media de w sea 1 en
+  2021-04 → 2022-12 (solo train). Rebalanceo los lunes, costes 0,10 % por lado sobre
+  |Δw|, funding real. Cartera 50/50 BTC/ETH. Elegir variante por Sharpe en train.

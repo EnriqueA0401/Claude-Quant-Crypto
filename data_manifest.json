@@ -1,6 +1,14 @@
 {
- "total_files": 488975,
+ "total_files": 488977,
  "groups": {
+  "deribit/dvol_BTC.json": {
+   "files": 1,
+   "digest": "e60d60b38d865d0cc35f16b4bd2fdaca3519c5f17cafc95614d9f189400b959b"
+  },
+  "deribit/dvol_ETH.json": {
+   "files": 1,
+   "digest": "43c510fd4a5f128633f28b1433c9bb6b68c50628b7252c865361b8a1943e43dc"
+  },
   "futures/cm/daily/klines": {
    "files": 37834,
    "digest": "3db3f1d209ee18c35eda28989d1843861201a03d8fea0a406302c64452cd25a2"
