@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-95  (detalle por hipótesis en HYPOTHESES.md)
+97  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (24, todas rechazadas). La más cercana a una ventaja: H022 (carry trimestral
+Cerradas (25, todas rechazadas). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
 DECISIÓN PENDIENTE DE LA PERSONA: el mínimo de 100 ops de G4 es inalcanzable para
@@ -15,12 +15,11 @@ variantes registradas antes de ejecutar; tests 1–3; liquidaciones pesimistas;
 desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 
 ## Siguiente paso exacto
-1. Nuevas fuentes de hipótesis fuera de lo agotado (meta-review 2): datos externos no
-   disponibles en data.binance.vision (opciones Deribit, on-chain) requieren acceso de
-   red; comprobar si los hosts responden (deribit.com, api.glassnode, etc.).
-2. H023 (basis como filtro de riesgo) rechazada. Siguiente idea interna pendiente:
-   probar H019-bis (funding negativo, N = 14) SOLO en el holdout 2025-10 → 2026-09 si
-   se decide gastar el holdout en ella (una única vez, contándola).
+1. Fuentes externas accesibles: Deribit (DVOL, opciones; src/external.py) y Coin Metrics
+   community (on-chain). Siguiente hipótesis: prima de riesgo de varianza (DVOL − vol
+   realizada) como señal de timing de BTC/ETH, o métricas on-chain de flujos a exchanges.
+   Fijar variantes antes de ejecutar.
+2. Decisión pendiente de la persona sobre el mínimo de operaciones de G4 (H022).
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
