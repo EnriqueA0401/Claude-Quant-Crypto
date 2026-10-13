@@ -139,3 +139,26 @@ def fetch_hyperliquid_funding(coin: str, start: str = "2023-01-01",
     s = pd.Series({pd.Timestamp(int(x["time"]), unit="ms", tz="UTC"): float(x["fundingRate"])
                    for x in rows})
     return s[~s.index.duplicated()].sort_index()
+
+
+def fetch_coinbase_daily(product: str = "BTC-USD", start: str = "2019-12-01",
+                         end: str = "2025-10-02") -> pd.Series:
+    """Close diario de Coinbase (API pública de candles), con hash en el manifest."""
+    name = f"coinbase/{product}_1d.json"
+    dest = DATA / name
+    if not dest.exists():
+        rows, t0, t_end = [], pd.Timestamp(start, tz="UTC"), pd.Timestamp(end, tz="UTC")
+        while t0 < t_end:
+            t1 = min(t0 + pd.Timedelta("299D"), t_end)
+            r = requests.get(f"https://api.exchange.coinbase.com/products/{product}/candles",
+                             params={"granularity": 86400, "start": t0.isoformat(),
+                                     "end": t1.isoformat()}, timeout=60)
+            r.raise_for_status()
+            rows += r.json()
+            t0 = t1
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps(rows))
+    blob = dest.read_bytes()
+    _record(name, sha256(blob))
+    s = pd.Series({pd.Timestamp(int(x[0]), unit="s", tz="UTC"): float(x[4]) for x in json.loads(blob)})
+    return s[~s.index.duplicated()].sort_index()

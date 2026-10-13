@@ -42,6 +42,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H035 | Keyrock 2024, Tokenomist, SSRN 6632838 | corto antes de desbloqueos de tokens (requiere calendarios point-in-time) | bloqueada | - | sin datos point-in-time accesibles (DefiLlama de pago; repo sin acceso) | 0 | B |
 | H036 | Ante et al. (2021); DefiLlama stablecoins | emisión neta de stablecoins (USD) anuncia subidas de BTC/ETH | rechazada | G2 | G3: OOS alfa −12 %/año, Sharpe 0,69 < 1,26 B&H | 2 | C |
 | H037 | revisión literatura 2026 (funding entre exchanges) | divergencia de funding Hyperliquid − Binance como señal contraria | rechazada | G1 | G2: ~0 in-sample; OOS −18 a −20 %/año | 2 | C |
+| H038 | práctica (prima de Coinbase) | prima de Coinbase sobre Binance alta anuncia demanda de EE. UU.: largo BTC | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -489,3 +490,13 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   día d; z con los 90 días previos; posición del día d+1 = −signo(z) si |z| > k, si no 0;
   k ∈ {1,5; 2} → 2. BTC y ETH 50/50, perps 1x, costes 0,10 % por lado, funding real.
   Train 2023-05 → 2024-06; OOS 2024-07 → 2025-09.
+
+### H038 — Prima de Coinbase
+- Quién pierde: vendedores en Binance que no ven la demanda de EE. UU. (ETF/instituciones)
+  reflejada antes en Coinbase.
+- Predicción falsable: largo en el perp BTCUSDT de Binance solo cuando la prima diaria
+  de Coinbase (close BTC-USD / close BTCUSDT − 1) supera su media de W días previos da
+  mayor Sharpe y alfa > 0 frente a buy & hold en 2023–2025.
+- Variantes fijadas (2026-10-13, antes de ver resultados): W ∈ {7, 30} → 2. Costes
+  0,10 % por lado; funding; elegir W en 2020–2022. Aviso: la prima mezcla demanda con el
+  diferencial USD/USDT.
