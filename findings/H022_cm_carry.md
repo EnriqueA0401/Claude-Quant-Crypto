@@ -43,3 +43,9 @@ contrato inverso (error de segundo orden); rebalanceo de cobertura cuando el pre
 
 ## Reproducibilidad
 `python3 experiments/h022_cm_carry.py && python3 experiments/h022_g4.py`.
+
+## Actualización 2026-10-13: excepción autorizada
+La persona responsable del marco autorizó, solo para H022, eximir el mínimo de 100
+operaciones OOS de G4 para poder seguir estudiándola. Los demás criterios se mantienen;
+"otros activos" sigue fallando y queda registrado. Estado: reabierta, siguiente paso
+red team (paso 6) y G5. Dossier: reports/dossiers/DOSSIER_H022_cm_carry.md.

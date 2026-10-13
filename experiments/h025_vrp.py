@@ -18,18 +18,27 @@ from src.data import load_funding, load_klines  # noqa: E402
 from src.external import fetch_dvol  # noqa: E402
 
 
+def vrp_signal(close: pd.Series, dvol: pd.Series, rvwin: int) -> pd.Series:
+    """Señal diaria (1 = largo) decidida al close de cada domingo y mantenida la semana.
+
+    close: closes diarios (índice = open time del día, UTC). dvol: DVOL diario de Deribit
+    (close del día, mismo índice). VRP = (DVOL/100)² − varianza realizada anualizada de
+    `rvwin` días; largo si VRP del domingo > mediana de los 52 domingos anteriores
+    (mín. 26; sin historia → largo). La posición del día t es signal[t−1]."""
+    lr = np.log(close).diff()
+    rv2 = lr.rolling(rvwin, min_periods=rvwin - 1).var() * 365
+    iv2 = (dvol.reindex(close.index).ffill() / 100) ** 2
+    vrp = iv2 - rv2
+    wk = vrp[pd.Series(close.index.dayofweek == 6, index=close.index)]
+    med = wk.shift(1).rolling(52, min_periods=26).median()
+    sig_w = (wk > med).astype(float).where(med.notna(), 1.0)
+    return sig_w.reindex(close.index).ffill().fillna(1.0)
+
+
 def asset(sym, cur, rvwin):
     k = load_klines("um", sym, "1d")
     k = k[(k.index >= pd.Timestamp("2021-03-24", tz="UTC")) & (k.index < HOLDOUT)]
-    lr = np.log(k["close"]).diff()
-    rv2 = lr.rolling(rvwin, min_periods=rvwin - 1).var() * 365
-    iv2 = (fetch_dvol(cur).reindex(k.index).ffill() / 100) ** 2
-    vrp = iv2 - rv2
-    sunday = pd.Series(k.index.dayofweek == 6, index=k.index)
-    wk = vrp[sunday]
-    med = wk.shift(1).rolling(52, min_periods=26).median()
-    sig_w = (wk > med).astype(float).where(med.notna(), 1.0)   # sin historia: invertido
-    sig = sig_w.reindex(k.index).ffill().fillna(1.0)
+    sig = vrp_signal(k["close"], fetch_dvol(cur), rvwin)
     pos = sig.shift(1).fillna(0.0)
     ret = k["open"].shift(-1) / k["open"] - 1
     f = load_funding(sym)

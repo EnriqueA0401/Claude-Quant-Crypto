@@ -205,3 +205,23 @@ def test_h020_hand_pnl_and_timing():
     # bar 2: ETH 100→110 con corto → −W·10 %; costes entrada y salida
     assert rows[:, 1].sum() == pytest.approx(-h20.W * 0.10)
     assert rows[:, 2].sum() == pytest.approx(2 * (2 * h20.W * h20.SIDE))
+
+
+def test_h025_vrp_signal_weekly_timing_and_no_lookahead():
+    import h025_vrp as h25
+    rng = np.random.default_rng(3)
+    idx = pd.date_range("2021-01-03", periods=600, freq="1D", tz="UTC")   # 2021-01-03 = domingo
+    close = pd.Series(100 * np.exp(np.cumsum(rng.normal(0, 0.03, 600))), index=idx)
+    dvol = pd.Series(rng.uniform(40, 90, 600), index=idx)
+    s = h25.vrp_signal(close, dvol, 7)
+    # la señal solo cambia en domingos
+    chg = s.diff().fillna(0) != 0
+    assert (s.index[chg].dayofweek == 6).all()
+    # alterar datos posteriores a un domingo no cambia la señal hasta ese domingo
+    t = 400
+    while idx[t].dayofweek != 6:
+        t += 1
+    c2, d2 = close.copy(), dvol.copy()
+    c2.iloc[t + 1:] *= 2.0
+    d2.iloc[t + 1:] = 200.0
+    pd.testing.assert_series_equal(s.iloc[:t + 1], h25.vrp_signal(c2, d2, 7).iloc[:t + 1])
