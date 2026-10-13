@@ -18,7 +18,37 @@ import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
-MANIFEST = ROOT / "data_manifest.json"
+MANIFEST = ROOT / "data_manifest.json"            # resumen por directorio (legible)
+MANIFEST_FILES = ROOT / "data_manifest_files.json.gz"   # ruta → sha256[:16] por fichero
+HASH_LEN = 16
+
+
+def manifest_load() -> dict:
+    """Hashes por fichero (truncados a 16 hex). Lee el formato antiguo si existe."""
+    import gzip
+    if MANIFEST_FILES.exists():
+        return json.loads(gzip.decompress(MANIFEST_FILES.read_bytes()))
+    if MANIFEST.exists():
+        old = json.loads(MANIFEST.read_text())
+        if old and all(isinstance(v, str) for v in old.values()):
+            return {k: v[:HASH_LEN] for k, v in old.items()}
+    return {}
+
+
+def manifest_save(man: dict) -> None:
+    """Guarda el detalle comprimido y un resumen por directorio con hash combinado."""
+    import gzip
+    man = {k: v[:HASH_LEN] for k, v in sorted(man.items())}
+    MANIFEST_FILES.write_bytes(gzip.compress(
+        json.dumps(man, separators=(",", ":")).encode(), mtime=0))
+    groups: dict = {}
+    for k, v in man.items():
+        g = "/".join(k.split("/")[:4])
+        groups.setdefault(g, []).append(f"{k}:{v}")
+    summary = {g: {"files": len(x), "digest": hashlib.sha256("\n".join(x).encode()).hexdigest()}
+               for g, x in sorted(groups.items())}
+    MANIFEST.write_text(json.dumps({"total_files": len(man), "groups": summary},
+                                   indent=1) + "\n")
 BASE_URL = "https://data.binance.vision/data"
 
 KLINE_COLS = ["open_time", "open", "high", "low", "close", "volume", "close_time",
@@ -85,12 +115,13 @@ def fetch(rel_path: str) -> bytes:
 
 
 def _record(rel_path: str, digest: str) -> None:
-    man = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
+    man = manifest_load()
+    digest = digest[:HASH_LEN]
     if man.get(rel_path) not in (None, digest):
         raise RuntimeError(f"hash distinto para {rel_path}: datos cambiaron")
     if man.get(rel_path) != digest:
         man[rel_path] = digest
-        MANIFEST.write_text(json.dumps(man, indent=1, sort_keys=True) + "\n")
+        manifest_save(man)
 
 
 def _read_zip(path: Path) -> bytes:

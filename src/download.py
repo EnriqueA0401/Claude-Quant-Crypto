@@ -15,7 +15,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import pandas as pd
 import requests
 
-from .data import BASE_URL, DATA, MANIFEST, sha256
+from .data import BASE_URL, DATA, HASH_LEN, manifest_load, manifest_save, sha256
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT"]
 
@@ -57,7 +57,7 @@ def _get(rel: str, session: requests.Session) -> tuple[str, str | None]:
 
 
 def download(paths: list[str], workers: int = 16) -> None:
-    man = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
+    man = manifest_load()
     missing = []
     s = requests.Session()
     ad = requests.adapters.HTTPAdapter(pool_connections=workers, pool_maxsize=workers)
@@ -70,12 +70,13 @@ def download(paths: list[str], workers: int = 16) -> None:
             if digest is None:
                 missing.append(rel)
             else:
+                digest = digest[:HASH_LEN]
                 if man.get(rel) not in (None, digest):
                     raise RuntimeError(f"hash distinto para {rel}")
                 man[rel] = digest
             if done % 100 == 0 or done == len(paths):
                 print(f"{done}/{len(paths)} ({len(missing)} inexistentes)", flush=True)
-    MANIFEST.write_text(json.dumps(man, indent=1, sort_keys=True) + "\n")
+    manifest_save(man)
     mpath = DATA / "missing.json"
     prev = set(json.loads(mpath.read_text())) if mpath.exists() else set()
     prev -= set(man)  # ficheros que ahora sí existen
