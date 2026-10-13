@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-111  (detalle por hipótesis en HYPOTHESES.md)
+113  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (28, todas rechazadas). H022 rechazada en G5 tras la excepción y el red team.
+Cerradas (29, todas rechazadas). H022 rechazada en G5 tras la excepción y el red team.
 Datos externos: Deribit DVOL y Coin Metrics (src/external.py; Coin Metrics NO es point-in-time). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
