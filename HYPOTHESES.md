@@ -37,6 +37,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H030 | microestructura (reversión de corto plazo) | reversión tras minutos extremos en BTC/ETH perp (cota bruta) | rechazada | G1 | cota: rebote bruto 0,01–0,05 %, t < 1,9 (≤ coste maker) | 4 | C |
 | H031 | propia: cambio de intervalo de funding de Binance | tras acortarse el intervalo de funding, el lado apalancado pierde | rechazada | G1 | train t≈0,5; OOS por outliers (ALPACA +1.805 %); sin top-3 t=0,65 | 2 | B |
 | H032 | flujos de cobertura de dealers de opciones | retorno anómalo en las 48 h antes/después del vencimiento mensual de Deribit | rechazada | G1 | G2: t ≤ 1,9; post-vencimiento ≈ deriva de mercado | 2 | C |
+| H033 | red team de H022 | carry COIN-M siempre cubierto: se mantiene la moneda y solo se rota el futuro | en curso | G0 | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -431,3 +432,16 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Variantes fijadas (2026-10-13, antes de ver resultados): ventana ∈ {48 h antes,
   48 h después} → 2; dirección = signo de la media en train (2020–2022); perps 1x,
   0,10 % por lado, funding; OOS 2023-01 → 2025-09.
+
+### H033 — Carry COIN-M siempre cubierto (solo se rota el futuro)
+- Quién pierde: igual que H022. Diferencia: estructura de costes. La moneda se compra
+  una vez y se mantiene; solo se rota el corto en el trimestral (2 lados de futuro por
+  vencimiento), en vez de comprar y vender el spot en cada ciclo.
+- Predicción falsable: rendimiento sobre capital > rendimiento de caja (≈ 4,5 %/año).
+- Diseño fijado (2026-10-13, antes de ver resultados; 1 variante): BTC y ETH 50/50,
+  W = 1, siempre corto en el trimestral COIN-M más cercano con ≥ 14 días; se mantiene
+  hasta el vencimiento y se abre el siguiente; costes de futuro 0,10 % por lado en cada
+  rotación y rebalanceo; spot 0,15 % por lado solo al inicio y al final; sin liquidación.
+- Evaluación: 2023-01 → 2025-09 es informativo pero CONTAMINADO (ya visto por H012/H022).
+  El holdout 2025-10 → 2026-09 solo se usará si el resultado informativo supera la caja
+  con claridad, y una única vez.
