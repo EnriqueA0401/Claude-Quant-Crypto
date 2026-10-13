@@ -63,3 +63,32 @@ def fetch_coinmetrics(asset: str, metrics: list[str], start: str = "2019-01-01",
     df.index = pd.to_datetime(df.pop("time"), utc=True)
     keep = [m for m in metrics if m in df]
     return df[keep].astype(float)
+
+
+BINANCE_CMS = "https://www.binance.com/bapi/composite/v1/public/cms/article/list/query"
+
+
+def fetch_binance_announcements(catalog_id: int) -> pd.DataFrame:
+    """Anuncios públicos de Binance (catalogId 161 = deslistados, 48 = listados).
+    releaseDate en ms UTC. Se guardan con hash en el manifest."""
+    name = f"binance/announcements_{catalog_id}.json"
+    dest = DATA / name
+    if not dest.exists():
+        rows, page = [], 1
+        while True:
+            r = requests.get(BINANCE_CMS, params={"type": 1, "catalogId": catalog_id,
+                                                  "pageNo": page, "pageSize": 50}, timeout=60)
+            r.raise_for_status()
+            cats = r.json()["data"]["catalogs"]
+            arts = cats[0]["articles"] if cats else []
+            if not arts:
+                break
+            rows += [{"releaseDate": a["releaseDate"], "title": a["title"]} for a in arts]
+            page += 1
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps(rows))
+    blob = dest.read_bytes()
+    _record(name, sha256(blob))
+    df = pd.DataFrame(json.loads(blob))
+    df["ts"] = pd.to_datetime(df["releaseDate"], unit="ms", utc=True)
+    return df.sort_values("ts").reset_index(drop=True)

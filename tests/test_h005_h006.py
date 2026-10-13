@@ -267,3 +267,11 @@ def test_h031_event_detection_and_trade():
     if (h[s].iloc[10:13] >= 2 * o[s].iloc[10]).any():
         exp = -1.0
     assert r == pytest.approx(exp)
+
+
+def test_h034_parse_tokens():
+    import h034_delisting_drift as h34
+    assert h34.parse_tokens("Binance Will Delist BCD, CND, MTH, NCASH and YOYO on 2022-03-08") == \
+        ["BCD", "CND", "MTH", "NCASH", "YOYO"]
+    assert h34.parse_tokens("Binance Will Delist ICX, SCRT, STORJ on 2026-09-03") == ["ICX", "SCRT", "STORJ"]
+    assert h34.parse_tokens("Binance Will Delist FTT Margin Pairs, USDⓈ-M Futures Contracts") == []

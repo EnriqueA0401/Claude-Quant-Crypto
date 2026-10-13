@@ -38,6 +38,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H031 | propia: cambio de intervalo de funding de Binance | tras acortarse el intervalo de funding, el lado apalancado pierde | rechazada | G1 | train t≈0,5; OOS por outliers (ALPACA +1.805 %); sin top-3 t=0,65 | 2 | B |
 | H032 | flujos de cobertura de dealers de opciones | retorno anómalo en las 48 h antes/después del vencimiento mensual de Deribit | rechazada | G1 | G2: t ≤ 1,9; post-vencimiento ≈ deriva de mercado | 2 | C |
 | H033 | red team de H022 | carry COIN-M siempre cubierto: se mantiene la moneda y solo se rota el futuro | en pausa | G3* | *2023–25 contaminado: 7,6 %/año, Sharpe 1,72, exceso +3,1 % (IC95 [−0,2 %, +7,2 %]); holdout sin usar | 1 | B |
+| H034 | eventos Binance (revisión literatura 2026) | deriva negativa tras el anuncio de deslistado spot: corto en el perp | en curso | G0 | - | 0 | B |
+| H035 | Keyrock 2024, Tokenomist, SSRN 6632838 | corto antes de desbloqueos de tokens (requiere calendarios point-in-time) | pendiente | - | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -445,3 +447,20 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Evaluación: 2023-01 → 2025-09 es informativo pero CONTAMINADO (ya visto por H012/H022).
   El holdout 2025-10 → 2026-09 solo se usará si el resultado informativo supera la caja
   con claridad, y una única vez.
+
+### H034 — Deriva tras el anuncio de deslistado de spot
+- Quién pierde: tenedores forzados o reacios que siguen vendiendo hasta que el token sale
+  de Binance (pérdida de liquidez y de acceso).
+- Predicción falsable: corto en el perp USDT-M del token desde el open del día siguiente
+  al anuncio (excluye la caída de los primeros minutos) durante N días gana neto de
+  costes y funding, y bate al mismo corto en fechas aleatorias del mismo símbolo.
+- Variantes fijadas (2026-10-13, antes de ver resultados): anuncios de la categoría 161
+  de Binance con título "Binance Will Delist <tokens> on <fecha>"; tokens con perp
+  USDT-M vivo al anunciarse. N ∈ {7, 30} días (si el perp deja de cotizar antes, salida al
+  último close) → 2. Costes 0,05 % + 0,15 % slippage por lado (pares ilíquidos); funding;
+  corto liquidado si high ≥ 2× entrada. Train = anuncios 2022-02 → 2023-12; OOS =
+  2024-01 → 2025-09.
+
+### H035 — Corto antes de desbloqueos de tokens
+- Pendiente de datos: calendarios de desbloqueo point-in-time (DefiLlama emissions es de
+  pago; el repo abierto DefiLlama/emissions-adapters tendría el historial en git).
