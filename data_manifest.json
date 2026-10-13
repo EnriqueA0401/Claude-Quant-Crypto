@@ -1,5 +1,5 @@
 {
- "total_files": 489007,
+ "total_files": 489009,
  "groups": {
   "binance/announcements_161.json": {
    "files": 1,
@@ -60,6 +60,14 @@
   "futures/um/monthly/markPriceKlines": {
    "files": 396,
    "digest": "8b3c21a84ef35f557e6e7f22b6335fb638aa340e7d3927f543a8ecdc452cc002"
+  },
+  "hyperliquid/funding_BTC.json": {
+   "files": 1,
+   "digest": "4ae500313f3cd5d799e9e59096c3ed4006cb8a62234a78b9e7fca6a2a20a52fb"
+  },
+  "hyperliquid/funding_ETH.json": {
+   "files": 1,
+   "digest": "c1e09b9cd8b9f8248c54f93838e6d1b9dcfc09fd04cb17960987a7eb15a77f6c"
   },
   "spot/monthly/klines/0GUSDT": {
    "files": 13,
