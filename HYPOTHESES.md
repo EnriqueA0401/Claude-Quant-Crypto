@@ -32,6 +32,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H025 | Bollerslev, Tauchen & Zhou (2009), prima de varianza | VRP alta (DVOL² − RV²) → largo BTC/ETH la semana siguiente | rechazada | G3 | G4: alfa negativo en SOL/BNB/XRP; en BTC/ETH +15,8 %/año no significativo | 4 | C |
 | H026 | on-chain (Coin Metrics): flujos a exchanges | entradas netas anómalas a exchanges anuncian ventas: fuera del mercado 7 días | rechazada | G1* | G2: Sharpe = B&H (0,93 vs 0,94; OOS 1,24 vs 1,26); *datos no point-in-time | 2 | C |
 | H027 | valoración on-chain (MVRV) | fuera del mercado cuando el MVRV está en su zona de euforia | rechazada | G1* | G2: alfa −41 %/año in-sample; OOS +7,8 % n.s. | 2 | C |
+| H028 | microestructura / segmentación de mercados | convergencia COIN-M vs USDT-M del mismo trimestral (neutral) | en curso | G0 | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -367,3 +368,18 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   días previos (mín. 365); p ∈ {0,8; 0,9} → 2. Spot, costes 0,15 % por lado, 50/50
   BTC/ETH. Elegir p en 2020–2022 (Sharpe mensual). Aviso: datos de Coin Metrics
   no point-in-time (el MVRV se revisa menos que los flujos).
+
+### H028 — Spread COIN-M vs USDT-M del mismo vencimiento
+- Quién pierde: demanda segmentada (traders COIN-M y USDT-M distintos, con costes de
+  mover colateral entre cuentas) que separa precios de contratos que liquidan igual.
+- Predicción falsable: cuando el spread anualizado entre el trimestral COIN-M y el
+  USDT-M del mismo vencimiento supera s, la posición contraria (corto el caro, largo el
+  barato) hasta el vencimiento gana neto de 4 lados de costes de futuros.
+- Variantes fijadas (2026-10-13, antes de ver resultados): BTC y ETH, vencimientos con
+  ambos contratos (datos 1h limpios). Spread = CM_close/UM_close − 1, anualizado con los
+  días restantes. Motor de H012 con la pata "spot" sustituida por el contrato barato:
+  entrada si spread anualizado > s, salida al vencimiento o si < s/4; s ∈ {5 %, 10 %}
+  y ambas direcciones (CM caro → corto CM/largo UM; UM caro → al revés) → 2 variantes
+  (s), cada una con las dos direcciones. W = 0,5 por pata, costes 0,10 % por lado en
+  ambas patas, sin liquidación modelada en la pata larga. Train: vencimientos ≤ 2022;
+  OOS: 2023-01 → 2025-09.
