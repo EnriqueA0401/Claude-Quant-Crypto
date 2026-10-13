@@ -47,7 +47,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | rechazada | G1 | cota: −0,01 a −0,03 % (t ≈ −1,1) | 2 | C |
 | H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | rechazada | G1 | G2: no revierte (continúa; t −2,0 OOS) | 2 | C |
 | H042 | contraste pedido por la persona | carry siempre cubierto con trimestrales de Deribit 2018–2026 (no operable; estimar el carry de largo plazo) | cerrada (contraste) | - | BTC +1,05 %/año, ETH +3,1 %/año 2017–26; supera a la caja solo en 3–4 de 9 años | 1 | - |
-| H043 | flujo de órdenes (Chordia & Subrahmanyam 2004, adaptado) | presión compradora agresiva (ratio taker-buy) semanal cross-sectional | en curso | G0 | - | 0 | C |
+| H043 | flujo de órdenes (Chordia & Subrahmanyam 2004, adaptado) | presión compradora agresiva (ratio taker-buy) semanal cross-sectional | en curso | G3 | G2 60 %/año Sharpe 1,79; G3 44,5 %/año, Sharpe 0,93, 3 años positivos | 2 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -571,3 +571,7 @@ resultado sea cual sea; el holdout queda consumido y no se podrá reutilizar.
   (top 50, ≥ 90 días, lunes, costes 0,15 %, funding). G2 train 2020–2022; G3
   walk-forward 2023-01 → 2025-09 (folds de 6 meses). Sin holdout disponible: si pasara
   G3–G6, validación final solo con paper trading (G7).
+- G4 fijado (2026-10-13, tras G3 y antes de verlo): costes ×2; vecinos de ventana 3 y
+  14 días (2 pruebas más); otros activos = mismo ranking en los pares 51–100 por volumen
+  (no usados); control de momentum: regresión de los retornos OOS sobre el factor
+  momentum de 1 semana (H005 L=1) y alfa con IC95.

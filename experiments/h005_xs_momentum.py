@@ -52,7 +52,8 @@ def _rank(score: pd.Series) -> pd.Series:
     return score.loc[df.sort_values(["v", "name"], kind="mergesort").index]
 
 
-def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None, every=1):
+def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None, every=1, n_top=50, skip=0,
+        per_side=None):
     """score_fn(sun, mon, names) -> Series (mayor = largo). Por defecto, retorno de L
     semanas hasta el close del domingo (momentum). every: rebalanceo cada `every`
     semanas (entre medias se mantienen los mismos pares; los deslistados salen)."""
@@ -70,7 +71,7 @@ def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None, every=1):
         if sun - pd.Timedelta(weeks=L) not in c.index or sun not in c.index:
             continue
         alive = o.loc[mon].notna() & (first <= sun - pd.Timedelta("90D"))
-        liquid = vol30.loc[sun][alive].nlargest(50).index
+        liquid = vol30.loc[sun][alive].nlargest(n_top + skip).index[skip:]
         if score_fn is None:
             past = c.loc[sun, liquid] / c.loc[sun - pd.Timedelta(weeks=L), liquid] - 1
         else:
@@ -107,7 +108,8 @@ def run(o, c, h, qv, fd, L, direction, end=None, score_fn=None, every=1):
         turnover = (w - prev_w).abs().sum()
         prev_w = w
         rows.append({"week": mon, "gross": sum(ret.values()), "funding": fpnl,
-                     "cost": turnover * PER_SIDE, "n_universe": len(past)})
+                     "cost": turnover * (PER_SIDE if per_side is None else per_side),
+                     "n_universe": len(past)})
     df = pd.DataFrame(rows).set_index("week")
     df["net"] = df["gross"] - df["cost"]
     return df
