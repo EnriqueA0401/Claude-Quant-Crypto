@@ -6,8 +6,10 @@ data/missing.json.
 """
 from __future__ import annotations
 
+import io
 import json
 import sys
+import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import pandas as pd
@@ -31,7 +33,12 @@ def monthly_paths(symbol: str, start: str, end: str) -> list[str]:
 def _get(rel: str, session: requests.Session) -> tuple[str, str | None]:
     dest = DATA / rel
     if dest.exists():
-        return rel, sha256(dest.read_bytes())
+        blob = dest.read_bytes()
+        try:                                   # un corte a mitad de escritura deja un zip roto
+            zipfile.ZipFile(io.BytesIO(blob)).testzip()
+            return rel, sha256(blob)
+        except zipfile.BadZipFile:
+            dest.unlink()
     for attempt in range(4):
         try:
             r = session.get(f"{BASE_URL}/{rel}", timeout=60)
@@ -39,7 +46,9 @@ def _get(rel: str, session: requests.Session) -> tuple[str, str | None]:
                 return rel, None
             r.raise_for_status()
             dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.write_bytes(r.content)
+            tmp = dest.with_suffix(".part")
+            tmp.write_bytes(r.content)
+            tmp.replace(dest)                  # escritura atómica
             return rel, sha256(r.content)
         except requests.RequestException:
             if attempt == 3:
