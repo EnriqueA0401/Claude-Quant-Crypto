@@ -64,6 +64,10 @@ lo dejó la anterior.
 6. Nunca aplaces trabajo a una sesión futura si puedes hacerlo ahora. Si un paso se
    puede ejecutar en el momento (descargas, experimentos, tests), hazlo en esta misma
    sesión; si es largo, lánzalo en segundo plano y sigue con otra cosa mientras tanto.
+7. Continúa trabajando siempre que se pueda: no esperes a la persona responsable ni a
+   nada externo (descargas, subagentes, confirmaciones) mientras haya trabajo útil que
+   hacer. Si un paso depende de algo externo, avanza en otro (otra hipótesis, tests,
+   documentación) y vuelve cuando esté listo. Solo para cuando no quede nada ejecutable.
 
 # GATES DE VALIDACIÓN (en orden; si falla uno, se rechaza y se documenta el motivo)
 G0 Racional: explicación económica plausible y predicción falsable escrita ANTES de
