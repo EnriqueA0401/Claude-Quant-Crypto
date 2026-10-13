@@ -31,6 +31,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H024 | Moreira & Muir (2017), carteras gestionadas por volatilidad | exposición BTC/ETH ∝ 1/varianza (realizada o implícita DVOL) | rechazada | G1 | G2: alfa −22 %/año in-sample; OOS solo más apalancamiento | 2 | B |
 | H025 | Bollerslev, Tauchen & Zhou (2009), prima de varianza | VRP alta (DVOL² − RV²) → largo BTC/ETH la semana siguiente | rechazada | G3 | G4: alfa negativo en SOL/BNB/XRP; en BTC/ETH +15,8 %/año no significativo | 4 | C |
 | H026 | on-chain (Coin Metrics): flujos a exchanges | entradas netas anómalas a exchanges anuncian ventas: fuera del mercado 7 días | rechazada | G1* | G2: Sharpe = B&H (0,93 vs 0,94; OOS 1,24 vs 1,26); *datos no point-in-time | 2 | C |
+| H027 | valoración on-chain (MVRV) | fuera del mercado cuando el MVRV está en su zona de euforia | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -353,3 +354,16 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - AVISO G1: los flujos de Coin Metrics no son point-in-time (revisados a posteriori);
   cualquier resultado positivo debe considerarse optimista y no podría validarse sin
   datos en tiempo real (G7).
+
+### H027 — MVRV: evitar la euforia
+- Quién pierde: compradores tardíos en fases de euforia, cuando el precio está muy por
+  encima del coste medio de adquisición on-chain (realized cap) y los tenedores con
+  grandes plusvalías venden.
+- Predicción falsable: estar largo en spot BTC/ETH salvo cuando el MVRV supera su
+  percentil p de los 730 días previos da mayor Sharpe y alfa > 0 frente a buy & hold
+  en 2023-01 → 2025-09.
+- Variantes fijadas (2026-10-13, antes de ver resultados): MVRV = CapMVRVCur de Coin
+  Metrics (día d, conocido al cierre de d); fuera si MVRV_d > percentil p de los 730
+  días previos (mín. 365); p ∈ {0,8; 0,9} → 2. Spot, costes 0,15 % por lado, 50/50
+  BTC/ETH. Elegir p en 2020–2022 (Sharpe mensual). Aviso: datos de Coin Metrics
+  no point-in-time (el MVRV se revisa menos que los flujos).

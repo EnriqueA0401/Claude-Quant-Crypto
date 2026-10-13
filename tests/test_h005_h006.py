@@ -238,3 +238,15 @@ def test_h026_flow_signal_timing_and_no_lookahead():
     n2 = net.copy()
     n2.iloc[151:] = 99.0
     pd.testing.assert_series_equal(s.iloc[:151], h26.flow_signal(n2, 2.0).iloc[:151])
+
+
+def test_h027_mvrv_signal_no_lookahead():
+    import h027_mvrv as h27
+    idx = pd.date_range("2019-01-01", periods=1200, freq="1D", tz="UTC")
+    rng = np.random.default_rng(1)
+    mv = pd.Series(np.exp(np.cumsum(rng.normal(0, 0.02, 1200))), index=idx)
+    s = h27.mvrv_signal(mv, 0.9)
+    assert (s.iloc[:365] == 1).all()                    # sin historia suficiente: largo
+    m2 = mv.copy()
+    m2.iloc[801:] *= 10
+    pd.testing.assert_series_equal(s.iloc[:801], h27.mvrv_signal(m2, 0.9).iloc[:801])
