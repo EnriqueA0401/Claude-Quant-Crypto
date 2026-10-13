@@ -43,6 +43,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H036 | Ante et al. (2021); DefiLlama stablecoins | emisión neta de stablecoins (USD) anuncia subidas de BTC/ETH | rechazada | G2 | G3: OOS alfa −12 %/año, Sharpe 0,69 < 1,26 B&H | 2 | C |
 | H037 | revisión literatura 2026 (funding entre exchanges) | divergencia de funding Hyperliquid − Binance como señal contraria | rechazada | G1 | G2: ~0 in-sample; OOS −18 a −20 %/año | 2 | C |
 | H038 | práctica (prima de Coinbase) | prima de Coinbase sobre Binance alta anuncia demanda de EE. UU.: largo BTC | rechazada | G1 | Sharpe ≤ B&H (0,54 vs 0,55; OOS 1,08 vs 1,57) | 2 | C |
+| H039 | Gatev et al. (2006); Fil & Kristoufek (2020) | arbitraje estadístico por pares cointegrados entre perps | en curso | G0 | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -500,3 +501,19 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Variantes fijadas (2026-10-13, antes de ver resultados): W ∈ {7, 30} → 2. Costes
   0,10 % por lado; funding; elegir W en 2020–2022. Aviso: la prima mezcla demanda con el
   diferencial USD/USDT.
+
+### H039 — Pares cointegrados (arbitraje estadístico)
+- Quién pierde: flujos temporales que separan activos con fundamentales comunes
+  (rotaciones de narrativa, órdenes grandes en un solo activo).
+- Predicción falsable: cartera de los 5 pares más cointegrados (formación de 90 días)
+  que opera la convergencia durante los 30 días siguientes gana neto de costes en
+  2023–2025, con IC95 > 0.
+- Variantes fijadas (2026-10-13, antes de ver resultados): cada 30 días, universo top 20
+  perps USDT-M por volumen de 30 días (con deslistados); para todos los pares, spread =
+  log(A) − β·log(B) (β por OLS en los 90 días de formación); elegir los 5 con el
+  estadístico ADF (sin retardos) más negativo y correlación de retornos ≥ 0,7.
+  Trading 30 días: z = (spread − media)/desv. de la formación; entrada si |z| > e
+  (largo el barato, corto el caro; pesos 0,1/(1+|β|) y 0,1·|β|/(1+|β|) por par),
+  salida al cruzar 0 o al final del periodo. e ∈ {2; 2,5} → 2. Costes 0,15 % por
+  lado y pata; funding real; decisión al close, ejecución en el open siguiente.
+  Train 2020-04 → 2022-12; OOS 2023-01 → 2025-09.

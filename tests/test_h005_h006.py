@@ -275,3 +275,13 @@ def test_h034_parse_tokens():
         ["BCD", "CND", "MTH", "NCASH", "YOYO"]
     assert h34.parse_tokens("Binance Will Delist ICX, SCRT, STORJ on 2026-09-03") == ["ICX", "SCRT", "STORJ"]
     assert h34.parse_tokens("Binance Will Delist FTT Margin Pairs, USDⓈ-M Futures Contracts") == []
+
+
+def test_h039_adf_detects_mean_reversion():
+    import h039_pairs as h39
+    rng = np.random.default_rng(0)
+    mr = np.zeros(500)
+    for t in range(1, 500):
+        mr[t] = 0.5 * mr[t - 1] + rng.normal()
+    rw = np.cumsum(rng.normal(size=500))
+    assert h39.adf_t(mr) < -5 < h39.adf_t(rw)
