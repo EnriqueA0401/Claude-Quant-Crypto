@@ -285,3 +285,16 @@ def test_h039_adf_detects_mean_reversion():
         mr[t] = 0.5 * mr[t - 1] + rng.normal()
     rw = np.cumsum(rng.normal(size=500))
     assert h39.adf_t(mr) < -5 < h39.adf_t(rw)
+
+
+def test_h043_score_uses_only_past_week():
+    import h043_taker_flow as h43
+    idx = pd.date_range("2021-01-04", periods=30, freq="1D", tz="UTC")
+    qv = pd.DataFrame(100.0, index=idx, columns=["A", "B"])
+    tb = pd.DataFrame({"A": 70.0, "B": 30.0}, index=idx)
+    sun = idx[13]
+    s = h43.make_score(tb, qv, 1.0)(sun, sun + pd.Timedelta("1D"), ["A", "B"])
+    assert s["A"] == pytest.approx(0.7) and s["B"] == pytest.approx(0.3)
+    tb2 = tb.copy()
+    tb2.loc[sun + pd.Timedelta("1D"):] = 0.0
+    pd.testing.assert_series_equal(s, h43.make_score(tb2, qv, 1.0)(sun, sun + pd.Timedelta("1D"), ["A", "B"]))

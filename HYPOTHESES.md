@@ -47,6 +47,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | rechazada | G1 | cota: −0,01 a −0,03 % (t ≈ −1,1) | 2 | C |
 | H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | rechazada | G1 | G2: no revierte (continúa; t −2,0 OOS) | 2 | C |
 | H042 | contraste pedido por la persona | carry siempre cubierto con trimestrales de Deribit 2018–2026 (no operable; estimar el carry de largo plazo) | cerrada (contraste) | - | BTC +1,05 %/año, ETH +3,1 %/año 2017–26; supera a la caja solo en 3–4 de 9 años | 1 | - |
+| H043 | flujo de órdenes (Chordia & Subrahmanyam 2004, adaptado) | presión compradora agresiva (ratio taker-buy) semanal cross-sectional | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -558,3 +559,15 @@ resultado sea cual sea; el holdout queda consumido y no se podrá reutilizar.
   Tesoro de EE. UU. a 3 meses, medias anuales aproximadas; se indican como aproximadas).
 - Predicción de la investigación: el carry supera a la caja en los años alcistas y queda
   por debajo en los demás (sin ventaja estable).
+
+### H043 — Presión compradora agresiva (ratio taker-buy) cross-sectional
+- Quién pierde: con continuación, los proveedores de liquidez que venden a compradores
+  informados; con reversión, los compradores agresivos que pagan de más.
+- Predicción falsable: ordenar los perps (top 50) por el ratio taker_buy_quote /
+  quote_volume de los 7 días previos predice el retorno de la semana siguiente; el
+  long/short (5+5) gana neto de costes OOS 2023–2025.
+- Variantes fijadas (2026-10-13, antes de ver resultados): dirección ∈ {continuación
+  (largo ratio alto), reversión (largo ratio bajo)} → 2. Motor de H005 corregido
+  (top 50, ≥ 90 días, lunes, costes 0,15 %, funding). G2 train 2020–2022; G3
+  walk-forward 2023-01 → 2025-09 (folds de 6 meses). Sin holdout disponible: si pasara
+  G3–G6, validación final solo con paper trading (G7).
