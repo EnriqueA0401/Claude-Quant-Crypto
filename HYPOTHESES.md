@@ -45,7 +45,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H038 | práctica (prima de Coinbase) | prima de Coinbase sobre Binance alta anuncia demanda de EE. UU.: largo BTC | rechazada | G1 | Sharpe ≤ B&H (0,54 vs 0,55; OOS 1,08 vs 1,57) | 2 | C |
 | H039 | Gatev et al. (2006); Fil & Kristoufek (2020) | arbitraje estadístico por pares cointegrados entre perps | rechazada | G1 | G2: −10 a −14 %/año in-sample; OOS −8 %/año | 2 | B |
 | H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | rechazada | G1 | cota: −0,01 a −0,03 % (t ≈ −1,1) | 2 | C |
-| H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | en curso | G0 | - | 0 | C |
+| H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | rechazada | G1 | G2: no revierte (continúa; t −2,0 OOS) | 2 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 

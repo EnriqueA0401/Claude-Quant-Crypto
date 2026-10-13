@@ -143,3 +143,42 @@ ventaja estadística explotable** en las familias accesibles. Opciones con algú
 Recomendación: seguir con la cola pero con prioridad a hipótesis con mecanismo nuevo y
 evidencia posterior a 2022; documentar a la persona responsable que, tras 30 hipótesis,
 la hipótesis nula ("no hay ventaja") se mantiene.
+
+---
+
+# Meta-review 4 (40 hipótesis cerradas) — 2026-10-13
+
+Contador global: 138 pruebas. Validadas: 0. Rechazadas: 40. En pausa: H033 (mejor
+candidata). Bloqueada por datos: H035 (desbloqueos de tokens).
+
+## Nuevas desde la meta-review 3 (H030–H041)
+Microestructura de minutos y de la hora del funding (H030, H040: cotas brutas por debajo
+del coste maker), cambio de intervalo de funding (H031: outliers), vencimiento de
+opciones (H032), deslistados (H034: 22 eventos), stablecoins (H036), funding de
+Hyperliquid (H037), prima de Coinbase (H038), pares cointegrados (H039), reversión del
+lunes (H041). Todas rechazadas. H033 (carry COIN-M siempre cubierto) es la mejor señal:
+7,6 %/año 2023–25 (periodo contaminado), exceso sobre caja +3,1 % no significativo.
+
+## Familias agotadas (acumulado)
+Todas las accesibles con datos públicos y costes de minorista: direccional XS de
+altcoins, timing de BTC/ETH (técnico, derivados, opciones, on-chain, flujos, otros
+exchanges), eventos (listados, deslistados, liquidaciones, intervalos de funding,
+vencimientos), calendario (hora, lunes, vencimientos), microestructura (minutos, hora del
+funding, basis spot-perp), arbitraje estadístico (pares, CM/UM), carry (perp, trimestral,
+cartera, COIN-M).
+
+## Patrones
+1. Lo que funcionó en 2020–2022 se ha cerrado; 2023–2025 es mucho más eficiente.
+2. La única prima persistente es el carry, del orden del tipo libre de riesgo + 0–3 %.
+3. Los efectos de microestructura existen en bruto pero son menores que el coste maker.
+
+## ¿Cambiar de enfoque?
+La hipótesis nula se mantiene tras 40 hipótesis y 138 pruebas. Opciones:
+1. **Usar el holdout para H033** (decisión pendiente de la persona responsable): única
+   prueba limpia de la mejor candidata; resultado orientativo (~4 rotaciones/activo).
+2. **Datos privados o de pago** (calendarios de desbloqueo point-in-time, libro de
+   órdenes histórico, opciones históricas) para familias aún no accesibles.
+3. **Cambiar restricciones** (más capital → VIP/maker con rebates; otros mercados) —
+   fuera de la misión actual.
+Sin datos nuevos, seguir generando hipótesis del mismo universo tiene rendimiento
+decreciente; se priorizará cualquier mecanismo realmente nuevo.
