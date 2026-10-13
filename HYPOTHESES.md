@@ -25,7 +25,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H018 | práctica (K33): purgas de apalancamiento diarias | largo tras caída diaria de OI ≥ θ (universo top 30) | rechazada | G1 | G2: media −1,2 % a −3,3 %, t −0,5 a −2,4, peor que el nulo | 4 | C |
 | H019 | propia / crowding de cortos | funding negativo sostenido anuncia squeeze: largo 1–2 semanas | rechazada | G2 | G3: variante elegida (t=3,97 train) da −0,39 %/evento OOS | 4 | B |
 | H020 | valor relativo / rotación | reversión del ratio ETH/BTC tras desviaciones extremas (neutral) | rechazada | G1 | G2: −2,6 %/año, 8–11 entradas | 2 | C |
-| H021 | meta-review 2 | cartera carry BTC/ETH: trimestral (H012) y, si no, perp (H001) | en curso | G0 | - | 0 | B |
+| H021 | meta-review 2 | cartera carry BTC/ETH: trimestral (H012) y, si no, perp (H001) | rechazada | G3 | OOS 3,5 %/año < 5 % (USDT) | 1 | B |
+| H022 | estructura clásica coin-margined | carry trimestral COIN-M BTC/ETH con la moneda como margen (capital completo) | en curso | G0 | - | 0 | A |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -280,3 +281,18 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   capital cada uno) H012 con θ = 5 % y salida anticipada (motor corregido); H001 con
   θ = 1e-4, k = 3, señal forzada a 0 mientras H012 tiene posición o entrada pendiente
   (el motor de H001 cobra sus propias entradas y salidas). Periodo OOS 2023-01 → 2025-09.
+
+### H022 — Carry trimestral COIN-M con la moneda como margen
+- Quién pierde: igual que H012 (demanda de apalancamiento largo con vencimiento).
+- Mecanismo distinto de H012: estructura de capital. Se compra la moneda y se deposita
+  como margen de un corto en el trimestral inverso COIN-M por el mismo valor; el
+  capital entero está en la cobertura y el corto no puede liquidarse (el margen sube
+  con el precio). Rendimiento ≈ basis completo sobre el capital.
+- Predicción falsable: OOS 2023-01 → 2025-09 > 5 %/año sobre capital (por encima de
+  USDT), IC95 > 0, positiva los 3 años.
+- Diseño fijado (2026-10-13, antes de ver resultados; 1 variante, regla ya elegida en
+  H012-G3): BTCUSD_/ETHUSD_ trimestrales COIN-M (datos 1h limpios: vencimiento
+  programado, barras sin operaciones excluidas), θ = 5 %, salida anticipada a θ/4,
+  W = 1 por pata (aproximación lineal en USD), sin liquidación (cobertura en moneda),
+  costes spot 0,15 % y futuro 0,10 % por lado. Cartera 50/50 BTC/ETH.
+- Aviso de G4: tendrá < 100 operaciones OOS (≈ 4 vencimientos/año por activo).

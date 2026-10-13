@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-87  (detalle por hipótesis en HYPOTHESES.md)
+88  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (21, todas rechazadas; H014 por cota superior). Meta-review 2 escrita (reports/meta_review.md):
+Cerradas (22, todas rechazadas; H014 por cota superior). Activa: H022 (COIN-M). Meta-review 2 escrita (reports/meta_review.md):
 agotadas las familias direccionales cross-sectional de altcoins, eventos de crowding
 y arbitrajes taker. Única señal limpia: carry trimestral BTC/ETH (< efectivo).
 Reglas: comparar con caja (≈ 4–5 %/año); Sharpe mensual; alfa vs B&H y nulo aleatorio;
