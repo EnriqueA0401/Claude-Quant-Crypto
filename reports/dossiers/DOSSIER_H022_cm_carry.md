@@ -77,7 +77,7 @@ G3 walk-forward OOS: 3,30 %/año, Sharpe 1,56, MDD −1,1 %, 18 entradas (report
 | G4 regímenes / años | ✓ 3 de 3 años positivos (2022 bajista solo en train: +) |
 | G4 otros activos | ✗ altcoins COIN-M −10,8 %/año (contratos ilíquidos) |
 | G4 ≥ 100 operaciones | **eximido por la persona responsable** (31) |
-| G5 | pendiente (DSR con 101+ pruebas, PBO, SPA, bootstrap) |
+| G5 | ✗ — ver sección 9 (pasa DSR, White RC y bootstrap frente a 0; falla PBO; frente a caja falla todo) |
 | G6 | pendiente (tamaño de contrato, capital < 1.000 USD) |
 | G7 | pendiente |
 
@@ -117,3 +117,21 @@ experiments/h022_*.py.
 3. Cerrar si el basis cae bajo 1,25 % anual; si no, dejar vencer y repetir con el
    siguiente contrato.
 4. Ajustar contratos si el precio se mueve > 25 % desde la última referencia.
+
+## 9. G5 (reports/h022_g5.json; retornos semanales, OOS 2023-01 → 2025-09)
+Familia evaluada: θ ∈ {3, 5, 7 %} × {salida anticipada, vencimiento}, cartera 50/50.
+Contador global usado en el DSR: 103 pruebas.
+
+| criterio (CLAUDE.md) | frente a 0 (literal) | frente a caja 5 %/año | umbral |
+|---|---|---|---|
+| Deflated Sharpe | **0,992** ✓ | 0,598 ✗ | > 0,95 |
+| PSR | 0,998 | 0,711 | — |
+| PBO (CSCV, 6 variantes) | 0,51 ✗ | 0,51 ✗ | < 0,20 |
+| White Reality Check (p) | **0,002** ✓ | 0,248 ✗ | < 0,05 |
+| IC95 bootstrap (bloques 13 semanas) | [+0,057 %, +0,198 %]/semana ✓ | [−0,039 %, +0,101 %] ✗ | > 0 |
+| retorno anual | 6,37 % | +1,28 % de exceso | — |
+
+Lectura: el carry es un retorno positivo real y estadísticamente sólido frente a 0, pero
+su exceso sobre el rendimiento de la caja (≈ 1,3 %/año) no es distinguible de 0. El PBO
+de 0,51 refleja que las 6 variantes son casi idénticas (elegir la "mejor" en train no
+predice cuál será mejor fuera): con el criterio literal, G5 no se supera.

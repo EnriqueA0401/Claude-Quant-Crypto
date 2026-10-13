@@ -63,7 +63,12 @@ def main():
     lo, hi = metrics.block_bootstrap_mean_ci(oos[main_v].to_numpy(), block=13, n_boot=5000)
     lo_raw, hi_raw = metrics.block_bootstrap_mean_ci(weekly[main_v][weekly.index >= START].to_numpy(),
                                                      block=13, n_boot=5000)
-    res = {"variants": list(series), "global_trials": GLOBAL_TRIALS, "cash_hurdle": CASH,
+    raw_oos = weekly[weekly.index >= START]
+    dsr_raw = metrics.deflated_sharpe(raw_oos[main_v].to_numpy(), GLOBAL_TRIALS,
+                                      float(raw_oos.apply(lambda c: metrics.sharpe(c.to_numpy())).var(ddof=1)))
+    wrc_raw = white_rc(raw_oos.to_numpy(), block=13)
+    res = {"variants": list(series), "dsr_oos_raw": dsr_raw, "white_rc_pvalue_oos_raw": wrc_raw,
+           "psr_oos_raw": metrics.probabilistic_sharpe(raw_oos[main_v].to_numpy()), "global_trials": GLOBAL_TRIALS, "cash_hurdle": CASH,
            "oos_weekly_sharpe_excess": float(metrics.sharpe(oos[main_v].to_numpy())),
            "psr_oos_excess": psr_oos, "dsr_oos_excess": dsr_oos, "dsr_full_excess": dsr_full,
            "pbo_cscv": pbo, "white_rc_pvalue_oos_excess": wrc,

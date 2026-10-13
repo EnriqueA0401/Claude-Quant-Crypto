@@ -1,0 +1,33 @@
+{
+ "commit": "1f1ef9f626ac9ef0bda9a460af791a4576877143",
+ "results": {
+  "variants": [
+   "theta=0.03|early",
+   "theta=0.03|expiry",
+   "theta=0.05|early",
+   "theta=0.05|expiry",
+   "theta=0.07|early",
+   "theta=0.07|expiry"
+  ],
+  "dsr_oos_raw": 0.9919817842340313,
+  "white_rc_pvalue_oos_raw": 0.0022,
+  "psr_oos_raw": 0.9984971782936387,
+  "global_trials": 103,
+  "cash_hurdle": 0.05,
+  "oos_weekly_sharpe_excess": 0.044004022303639444,
+  "psr_oos_excess": 0.7105880991739886,
+  "dsr_oos_excess": 0.598177749492404,
+  "dsr_full_excess": 0.42234751789299657,
+  "pbo_cscv": 0.5119047619047619,
+  "white_rc_pvalue_oos_excess": 0.2476,
+  "bootstrap_ci95_weekly_excess_oos": [
+   -0.00039258587974932426,
+   0.0010144102377376194
+  ],
+  "bootstrap_ci95_weekly_raw_oos": [
+   0.0005689525817891373,
+   0.0019759486992760814
+  ],
+  "oos_ann_excess": 0.012829165890299692
+ }
+}
