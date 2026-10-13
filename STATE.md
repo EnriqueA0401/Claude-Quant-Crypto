@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-124  (detalle por hipótesis en HYPOTHESES.md)
+126  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (33, todas rechazadas). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
+Cerradas (34, todas rechazadas). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
 Datos externos: Deribit DVOL y Coin Metrics (src/external.py; Coin Metrics NO es point-in-time). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
@@ -21,8 +21,10 @@ desempates deterministas; validar vencimientos y barras sin operaciones (G1).
    [−0,2 %, +7,2 %]. Su única prueba limpia es el holdout 2025-10 → 2026-09
    (`python3 experiments/h033_always_hedged.py holdout`, UNA vez). No cumple
    estrictamente la regla fijada para gastarlo: decisión de la persona responsable.
-2. Mientras tanto, seguir con la cola: ideas de eventos sin datos de anuncio descartadas;
-   buscar mecanismos nuevos (revisar literatura 2024–2026 con un subagente).
+2. Revisión de literatura 2024–2026 hecha (sin edge académico post-2022). H034
+   (deslistados) rechazada por pocos eventos. Siguiente: H035 (corto pre-desbloqueo de
+   tokens, prior medio): necesita calendarios point-in-time (repo abierto
+   DefiLlama/emissions-adapters, historial git) → pedir acceso con add_repo (lectura).
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
