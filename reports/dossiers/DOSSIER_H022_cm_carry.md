@@ -177,3 +177,8 @@ Decisión: la regla fijada exigía superar la caja "con claridad" para gastar el
 2025-10 → 2026-09; no se cumple estrictamente, así que **el holdout sigue intacto**.
 H033 queda como la mejor candidata del proyecto, en pausa: su única prueba limpia
 posible es el holdout (≈ 4 rotaciones por activo), a decidir por la persona responsable.
+
+## 13. Holdout (2026-10-13, autorizado por la persona responsable)
+H033 evaluada UNA vez en 2025-10-01 → 2026-09-30 (reports/h033_holdout.json):
+**2,08 %/año, Sharpe 2,46, MDD −0,7 %; exceso sobre caja (4,5 %) −2,4 %.** Rechazada.
+El holdout queda consumido. Familia carry cerrada: rinde ≈ el tipo libre de riesgo.
