@@ -1,21 +1,22 @@
 # STATE
 
 ## Contador global de pruebas
-77  (detalle por hipótesis en HYPOTHESES.md)
+83  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (18, todas rechazadas): H001–H013, H015–H018. La mejor: H012 (basis
-trimestral BTC/ETH, OOS 3,3 %/año tras corrección) no supera al efectivo ni generaliza.
-Patrón dominante: señales cross-sectional "significativas" en 2020–2022 se invierten en
-2023–2025 (H002, H005, H008, H013, H016).
-Pendiente: H014 (maker, prior bajo: los efectos medidos son menores que el coste maker).
+Cerradas (20, todas rechazadas). Meta-review 2 escrita (reports/meta_review.md):
+agotadas las familias direccionales cross-sectional de altcoins, eventos de crowding
+y arbitrajes taker. Única señal limpia: carry trimestral BTC/ETH (< efectivo).
+Reglas: comparar con caja (≈ 4–5 %/año); Sharpe mensual; alfa vs B&H y nulo aleatorio;
+variantes registradas antes de ejecutar; tests 1–3; liquidaciones pesimistas;
+desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 
 ## Siguiente paso exacto
-1. Generar 2+ hipótesis nuevas con G0 escrito para llegar a 20 cerradas y hacer la
-   meta-review 2. Ideas no probadas: estructura temporal del funding (cambio de signo
-   sostenido), relación OI/volumen como medida de apalancamiento a semanas, spread
-   ETH/BTC con reversión a semanas, efecto fin de mes/trimestre en BTC (rebalanceos).
-2. Meta-review 2 (reports/meta_review.md, sección nueva) al cerrar la 20.ª.
+1. H014 (ejecución maker): descargar aggTrades de BTCUSDT y ETHUSDT perp + spot de
+   1 mes (2022-06, train) y construir src/fills.py: fill de una orden limit solo si un
+   trade posterior cruza el precio (estrictamente) dentro de T minutos; si no, taker.
+   Tests con trades sintéticos. Después re-evaluar H009 (basis 1h) con costes maker.
+2. Prioridad 2 de la meta-review: cartera carry BTC/ETH (H012 + H001) contra USDT.
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).

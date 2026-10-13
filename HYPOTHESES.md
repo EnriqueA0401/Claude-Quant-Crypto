@@ -23,8 +23,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H016 | Frazzini & Pedersen (2014), BAB / baja volatilidad | largo baja volatilidad, corto alta volatilidad (cross-section mensual) | rechazada | G2 | G3: −33 %/año (beta in-sample 1,23 se invierte) | 2 | A |
 | H017 | Zarattini, Pagani & Barbon (2025), SSRN 5209907 | tendencia multi-moneda largo/plano (ensemble Donchian + tamaño por volatilidad) | rechazada | G2 | G3: 4,5 %/año, alfa vs BTC −1,7 % (no significativo) | 2 | B |
 | H018 | práctica (K33): purgas de apalancamiento diarias | largo tras caída diaria de OI ≥ θ (universo top 30) | rechazada | G1 | G2: media −1,2 % a −3,3 %, t −0,5 a −2,4, peor que el nulo | 4 | C |
-| H019 | propia / crowding de cortos | funding negativo sostenido anuncia squeeze: largo 1–2 semanas | en curso | G0 | - | 0 | B |
-| H020 | valor relativo / rotación | reversión del ratio ETH/BTC tras desviaciones extremas (neutral) | en curso | G0 | - | 0 | C |
+| H019 | propia / crowding de cortos | funding negativo sostenido anuncia squeeze: largo 1–2 semanas | rechazada | G2 | G3: variante elegida (t=3,97 train) da −0,39 %/evento OOS | 4 | B |
+| H020 | valor relativo / rotación | reversión del ratio ETH/BTC tras desviaciones extremas (neutral) | rechazada | G1 | G2: −2,6 %/año, 8–11 entradas | 2 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
