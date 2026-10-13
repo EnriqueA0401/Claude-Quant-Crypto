@@ -44,7 +44,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H037 | revisión literatura 2026 (funding entre exchanges) | divergencia de funding Hyperliquid − Binance como señal contraria | rechazada | G1 | G2: ~0 in-sample; OOS −18 a −20 %/año | 2 | C |
 | H038 | práctica (prima de Coinbase) | prima de Coinbase sobre Binance alta anuncia demanda de EE. UU.: largo BTC | rechazada | G1 | Sharpe ≤ B&H (0,54 vs 0,55; OOS 1,08 vs 1,57) | 2 | C |
 | H039 | Gatev et al. (2006); Fil & Kristoufek (2020) | arbitraje estadístico por pares cointegrados entre perps | rechazada | G1 | G2: −10 a −14 %/año in-sample; OOS −8 %/año | 2 | B |
-| H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | en curso | G0 | - | 0 | C |
+| H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | rechazada | G1 | cota: −0,01 a −0,03 % (t ≈ −1,1) | 2 | C |
+| H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -527,3 +528,13 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Variantes fijadas (2026-10-13, antes de ver resultados): BTC, ETH, SOL, BNB, XRP
   perps 1h, 2020–2022; condición |funding| ≥ umbral u ∈ {0; 0,0003} → 2. Cota: si no
   supera 0,04 % con t > 3, se rechaza (como H014/H030).
+
+### H041 — Reversión del lunes tras el fin de semana
+- Quién pierde: operadores de fin de semana que mueven precios con poca liquidez; el
+  lunes los participantes institucionales corrigen el exceso.
+- Predicción falsable: el retorno del lunes (open → close UTC) tiene signo contrario al
+  del fin de semana (open del sábado → open del lunes) y, operado, supera el coste de
+  ida y vuelta (0,20 %) en train y OOS.
+- Variantes fijadas (2026-10-13, antes de ver resultados): BTC y ETH perps diarios;
+  condición |retorno del fin de semana| > m, m ∈ {0; 5 %} → 2. Train 2020–2022,
+  OOS 2023-01 → 2025-09.
