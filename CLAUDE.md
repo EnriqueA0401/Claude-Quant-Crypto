@@ -78,6 +78,10 @@ G2 Exploración in-sample: solo en el periodo de entrenamiento. Anota cada varia
    probada en el contador global.
 G3 Out-of-sample: walk-forward con embargo/purga entre los bloques. Al menos los
    últimos 12 meses quedan reservados como holdout final y se tocan UNA sola vez.
+   [Aclaración de la persona responsable, 2026-10-13] El holdout se puede usar una vez
+   POR HIPÓTESIS distinta (estrategias distintas no lo queman). Salvaguardas: el uso y el
+   criterio de éxito se registran antes de ejecutar; cada uso suma al contador global y
+   se informa cuántas hipótesis lo han usado (corrección por pruebas múltiples).
 G4 Robustez, todo con costes:
    - Sigue siendo rentable con los costes multiplicados por 2.
    - Los parámetros vecinos también son rentables (meseta, no pico aislado).
@@ -91,6 +95,10 @@ G5 Estadística:
    - White Reality Check o Hansen SPA cuando hubo búsqueda sobre muchas variantes.
    - Bootstrap por bloques de los retornos: el intervalo de confianza al 95% del
      retorno medio neto debe ser mayor que 0.
+   - [Permitido por la persona responsable, 2026-10-13] Validación adicional con datos
+     sintéticos que CONSERVEN la estructura del mercado (p. ej. tests de permutación de
+     la señal entre activos manteniendo los retornos reales, bootstrap por bloques del
+     panel completo). Nunca datos sin relación con el mercado real.
 G6 Viabilidad: capacidad suficiente para el capital, drawdown máximo tolerable,
    latencia realista, ejecutable desde un servidor normal.
 G7 Paper trading: script de paper trading con datos en vivo. Compara su rendimiento
