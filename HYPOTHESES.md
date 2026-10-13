@@ -25,6 +25,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H018 | práctica (K33): purgas de apalancamiento diarias | largo tras caída diaria de OI ≥ θ (universo top 30) | rechazada | G1 | G2: media −1,2 % a −3,3 %, t −0,5 a −2,4, peor que el nulo | 4 | C |
 | H019 | propia / crowding de cortos | funding negativo sostenido anuncia squeeze: largo 1–2 semanas | rechazada | G2 | G3: variante elegida (t=3,97 train) da −0,39 %/evento OOS | 4 | B |
 | H020 | valor relativo / rotación | reversión del ratio ETH/BTC tras desviaciones extremas (neutral) | rechazada | G1 | G2: −2,6 %/año, 8–11 entradas | 2 | C |
+| H021 | meta-review 2 | cartera carry BTC/ETH: trimestral (H012) y, si no, perp (H001) | en curso | G0 | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -268,3 +269,14 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Variantes fijadas (2026-10-13, antes de ver resultados): z con media y desviación de
   los 90 días previos (closes diarios); k ∈ {2; 2,5}; salida en z cruza 0 o a los
   30 días → 2 variantes. Train 2020–2022, OOS 2023-01 → 2025-09.
+
+### H021 — Cartera carry "cash-plus" BTC/ETH
+- Quién pierde: demanda de apalancamiento largo (paga basis trimestral y funding).
+- Predicción falsable: combinar el basis trimestral (H012) con el carry del perp (H001)
+  en las horas en que H012 no está invertido rinde OOS > 5 %/año sobre capital (por
+  encima del rendimiento de USDT), con IC95 > 0.
+- Diseño fijado (2026-10-13, antes de ver resultados; 1 variante, parámetros ya
+  elegidos en G3 de cada hipótesis, sin reoptimizar): por activo (BTC, ETH; 0,5 del
+  capital cada uno) H012 con θ = 5 % y salida anticipada (motor corregido); H001 con
+  θ = 1e-4, k = 3, señal forzada a 0 mientras H012 tiene posición o entrada pendiente
+  (el motor de H001 cobra sus propias entradas y salidas). Periodo OOS 2023-01 → 2025-09.
