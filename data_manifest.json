@@ -1,5 +1,5 @@
 {
- "total_files": 488981,
+ "total_files": 489005,
  "groups": {
   "coinmetrics/btc_CapMVRVCur.json": {
    "files": 1,
@@ -46,8 +46,8 @@
    "digest": "8f66e5dbec78ea1a887a10703c094f42648ed281e55dc10c7423d97c71fb0e9f"
   },
   "futures/um/monthly/klines": {
-   "files": 22918,
-   "digest": "3b9f24581433691b1d6a6cf96cb226d810f4b115bed94d3d471d9192a410487a"
+   "files": 22942,
+   "digest": "b72bd199fe1eb2dd973f82f2f71748ef5e1aa4b78eb0e12fa6c8c6b1ae28b69d"
   },
   "futures/um/monthly/markPriceKlines": {
    "files": 396,

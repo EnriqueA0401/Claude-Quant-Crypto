@@ -34,6 +34,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H027 | valoración on-chain (MVRV) | fuera del mercado cuando el MVRV está en su zona de euforia | rechazada | G1* | G2: alfa −41 %/año in-sample; OOS +7,8 % n.s. | 2 | C |
 | H028 | microestructura / segmentación de mercados | convergencia COIN-M vs USDT-M del mismo trimestral (neutral) | rechazada | G2 | G3: OOS ≈ 0 %/año (in-sample ~3 %, Sharpe 1,4): ineficiencia cerrada | 2 | B |
 | H029 | carry relativo BTC/ETH | cobrar el diferencial de funding BTC vs ETH (neutral) | rechazada | G1 | G2: negativa; inactiva desde 2023 | 2 | C |
+| H030 | microestructura (reversión de corto plazo) | reversión tras minutos extremos en BTC/ETH perp (cota bruta) | rechazada | G1 | cota: rebote bruto 0,01–0,05 %, t < 1,9 (≤ coste maker) | 4 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -393,3 +394,14 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 - Variantes fijadas (2026-10-13, antes de ver resultados): semanal (lunes 00:00 UTC),
   funding equivalente 8 h de los 7 días previos; operar si |f_ETH − f_BTC| > d,
   d ∈ {0,5e-4; 1e-4} → 2. Costes 0,10 % por lado; funding real. Elegir d en 2020–2022.
+
+### H030 — Reversión tras minutos extremos (cota bruta)
+- Quién pierde: órdenes de mercado grandes e impacientes que empujan el precio más allá
+  de su valor y pagan el rebote (proveedores de liquidez ganan).
+- Predicción falsable: tras un minuto con |retorno| > k·σ (σ de los 1.440 minutos
+  previos), el retorno de los H minutos siguientes tiene signo contrario y su media
+  bruta supera el coste maker de ida y vuelta (0,04 %).
+- Variantes fijadas (2026-10-13, antes de ver resultados): klines 1m de BTCUSDT y
+  ETHUSDT perp, 2022 (train). k ∈ {4, 6} × H ∈ {5, 30} min → 4. Entrada en el open del
+  minuto siguiente. Métrica: media bruta del retorno contrario y su t. Si ninguna supera
+  0,04 % bruto con t > 3, se rechaza sin más datos (cota superior, como H014).

@@ -1,0 +1,50 @@
+{
+ "BTCUSDT|k=4|H=5": {
+  "events": 3311,
+  "mean_gross": 0.00013552920097631877,
+  "t": 1.4507743412716407,
+  "beats_maker_rt": false
+ },
+ "BTCUSDT|k=4|H=30": {
+  "events": 3311,
+  "mean_gross": 0.0001332284670407447,
+  "t": 0.8723062799827153,
+  "beats_maker_rt": false
+ },
+ "BTCUSDT|k=6|H=5": {
+  "events": 1006,
+  "mean_gross": 0.00040034637190169064,
+  "t": 1.83865420922344,
+  "beats_maker_rt": false
+ },
+ "BTCUSDT|k=6|H=30": {
+  "events": 1006,
+  "mean_gross": 0.0005450552429303439,
+  "t": 1.7007310666403983,
+  "beats_maker_rt": false
+ },
+ "ETHUSDT|k=4|H=5": {
+  "events": 3094,
+  "mean_gross": 0.0001467065994206976,
+  "t": 1.189255550665028,
+  "beats_maker_rt": false
+ },
+ "ETHUSDT|k=4|H=30": {
+  "events": 3094,
+  "mean_gross": -8.94674199582137e-06,
+  "t": -0.04184114167808952,
+  "beats_maker_rt": false
+ },
+ "ETHUSDT|k=6|H=5": {
+  "events": 885,
+  "mean_gross": 0.00048654342532442225,
+  "t": 1.6119717259333735,
+  "beats_maker_rt": false
+ },
+ "ETHUSDT|k=6|H=30": {
+  "events": 885,
+  "mean_gross": 0.00010796854747143432,
+  "t": 0.22974674384443577,
+  "beats_maker_rt": false
+ }
+}
