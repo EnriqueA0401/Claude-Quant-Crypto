@@ -39,7 +39,8 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H032 | flujos de cobertura de dealers de opciones | retorno anómalo en las 48 h antes/después del vencimiento mensual de Deribit | rechazada | G1 | G2: t ≤ 1,9; post-vencimiento ≈ deriva de mercado | 2 | C |
 | H033 | red team de H022 | carry COIN-M siempre cubierto: se mantiene la moneda y solo se rota el futuro | en pausa | G3* | *2023–25 contaminado: 7,6 %/año, Sharpe 1,72, exceso +3,1 % (IC95 [−0,2 %, +7,2 %]); holdout sin usar | 1 | B |
 | H034 | eventos Binance (revisión literatura 2026) | deriva negativa tras el anuncio de deslistado spot: corto en el perp | rechazada | G1 | 22 eventos con perp vivo; t 0,4 (7 d) y −0,7 (30 d) | 2 | B |
-| H035 | Keyrock 2024, Tokenomist, SSRN 6632838 | corto antes de desbloqueos de tokens (requiere calendarios point-in-time) | pendiente | - | - | 0 | B |
+| H035 | Keyrock 2024, Tokenomist, SSRN 6632838 | corto antes de desbloqueos de tokens (requiere calendarios point-in-time) | bloqueada | - | sin datos point-in-time accesibles (DefiLlama de pago; repo sin acceso) | 0 | B |
+| H036 | Ante et al. (2021); DefiLlama stablecoins | emisión neta de stablecoins (USD) anuncia subidas de BTC/ETH | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -464,3 +465,14 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 ### H035 — Corto antes de desbloqueos de tokens
 - Pendiente de datos: calendarios de desbloqueo point-in-time (DefiLlama emissions es de
   pago; el repo abierto DefiLlama/emissions-adapters tendría el historial en git).
+
+### H036 — Emisión neta de stablecoins como señal
+- Quién pierde: vendedores que no anticipan la entrada de liquidez nueva (stablecoins
+  emitidas para comprar cripto).
+- Predicción falsable: estar largo (perp 1x) en BTC/ETH solo cuando la emisión neta de
+  stablecoins en USD de los últimos D días es positiva da mayor Sharpe y alfa > 0 frente
+  a buy & hold en 2023–2025.
+- Variantes fijadas (2026-10-13, antes de ver resultados): oferta total pegged USD
+  (DefiLlama stablecoincharts/all, dato diario conocido al cierre); señal = cambio de 7 o
+  30 días > 0 → 2. Costes 0,10 % por lado, funding, 50/50 BTC/ETH; elegir D en 2020–2022.
+  Aviso: datos agregados posiblemente revisados (no point-in-time garantizado).

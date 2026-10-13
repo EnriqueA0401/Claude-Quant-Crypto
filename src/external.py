@@ -92,3 +92,20 @@ def fetch_binance_announcements(catalog_id: int) -> pd.DataFrame:
     df = pd.DataFrame(json.loads(blob))
     df["ts"] = pd.to_datetime(df["releaseDate"], unit="ms", utc=True)
     return df.sort_values("ts").reset_index(drop=True)
+
+
+def fetch_stablecoin_supply() -> pd.Series:
+    """Oferta total de stablecoins ligadas al USD (DefiLlama), diaria, con hash."""
+    name = "defillama/stablecoins_all.json"
+    dest = DATA / name
+    if not dest.exists():
+        r = requests.get("https://stablecoins.llama.fi/stablecoincharts/all", timeout=60)
+        r.raise_for_status()
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(r.text)
+    blob = dest.read_bytes()
+    _record(name, sha256(blob))
+    rows = json.loads(blob)
+    s = pd.Series({pd.Timestamp(int(x["date"]), unit="s", tz="UTC"):
+                   x["totalCirculatingUSD"].get("peggedUSD", float("nan")) for x in rows})
+    return s.sort_index().astype(float)
