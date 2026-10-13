@@ -60,6 +60,8 @@ def download(paths: list[str], workers: int = 16) -> None:
     man = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
     missing = []
     s = requests.Session()
+    ad = requests.adapters.HTTPAdapter(pool_connections=workers, pool_maxsize=workers)
+    s.mount("https://", ad)
     done = 0
     with ThreadPoolExecutor(workers) as ex:
         for fut in as_completed([ex.submit(_get, p, s) for p in paths]):
