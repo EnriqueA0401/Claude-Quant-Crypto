@@ -41,6 +41,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H034 | eventos Binance (revisión literatura 2026) | deriva negativa tras el anuncio de deslistado spot: corto en el perp | rechazada | G1 | 22 eventos con perp vivo; t 0,4 (7 d) y −0,7 (30 d) | 2 | B |
 | H035 | Keyrock 2024, Tokenomist, SSRN 6632838 | corto antes de desbloqueos de tokens (requiere calendarios point-in-time) | bloqueada | - | sin datos point-in-time accesibles (DefiLlama de pago; repo sin acceso) | 0 | B |
 | H036 | Ante et al. (2021); DefiLlama stablecoins | emisión neta de stablecoins (USD) anuncia subidas de BTC/ETH | rechazada | G2 | G3: OOS alfa −12 %/año, Sharpe 0,69 < 1,26 B&H | 2 | C |
+| H037 | revisión literatura 2026 (funding entre exchanges) | divergencia de funding Hyperliquid − Binance como señal contraria | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -476,3 +477,15 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   (DefiLlama stablecoincharts/all, dato diario conocido al cierre); señal = cambio de 7 o
   30 días > 0 → 2. Costes 0,10 % por lado, funding, 50/50 BTC/ETH; elegir D en 2020–2022.
   Aviso: datos agregados posiblemente revisados (no point-in-time garantizado).
+
+### H037 — Divergencia de funding Hyperliquid vs Binance
+- Quién pierde: el lado apalancado concentrado en Hyperliquid (DEX con minoristas
+  apalancados) cuando su funding se separa del de Binance.
+- Predicción falsable: posición contraria al signo de la divergencia (corto si el funding
+  de Hyperliquid es anormalmente mayor, largo si es menor) en el perp de Binance al día
+  siguiente gana neto de costes y funding.
+- Variantes fijadas (2026-10-13, antes de ver resultados): diff_d = funding medio de
+  Hyperliquid en el día d (horario, ×8) − funding medio de Binance (equivalente 8 h) del
+  día d; z con los 90 días previos; posición del día d+1 = −signo(z) si |z| > k, si no 0;
+  k ∈ {1,5; 2} → 2. BTC y ETH 50/50, perps 1x, costes 0,10 % por lado, funding real.
+  Train 2023-05 → 2024-06; OOS 2024-07 → 2025-09.

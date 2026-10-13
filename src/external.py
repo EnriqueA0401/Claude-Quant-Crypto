@@ -109,3 +109,33 @@ def fetch_stablecoin_supply() -> pd.Series:
     s = pd.Series({pd.Timestamp(int(x["date"]), unit="s", tz="UTC"):
                    x["totalCirculatingUSD"].get("peggedUSD", float("nan")) for x in rows})
     return s.sort_index().astype(float)
+
+
+def fetch_hyperliquid_funding(coin: str, start: str = "2023-01-01",
+                              end: str = "2025-10-01") -> pd.Series:
+    """Funding horario de Hyperliquid (API pública), con hash en el manifest."""
+    name = f"hyperliquid/funding_{coin}.json"
+    dest = DATA / name
+    if not dest.exists():
+        rows, t0 = [], int(pd.Timestamp(start, tz="UTC").timestamp() * 1000)
+        t_end = int(pd.Timestamp(end, tz="UTC").timestamp() * 1000)
+        while t0 < t_end:
+            r = requests.post("https://api.hyperliquid.xyz/info", timeout=60,
+                              json={"type": "fundingHistory", "coin": coin, "startTime": t0})
+            r.raise_for_status()
+            page = r.json()
+            if not page:
+                break
+            rows += page
+            nxt = page[-1]["time"] + 1
+            if nxt <= t0:
+                break
+            t0 = nxt
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps(rows))
+    blob = dest.read_bytes()
+    _record(name, sha256(blob))
+    rows = json.loads(blob)
+    s = pd.Series({pd.Timestamp(int(x["time"]), unit="ms", tz="UTC"): float(x["fundingRate"])
+                   for x in rows})
+    return s[~s.index.duplicated()].sort_index()
