@@ -30,7 +30,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H023 | Schmeling, Schrimpf & Todorov (BIS WP 1087) | basis trimestral alto predice caídas: largo spot BTC/ETH solo con basis bajo | rechazada | G1 | G2: peor que B&H in-sample; OOS Sharpe 1,28 < 1,41 B&H, alfa −2,4 % | 2 | B |
 | H024 | Moreira & Muir (2017), carteras gestionadas por volatilidad | exposición BTC/ETH ∝ 1/varianza (realizada o implícita DVOL) | rechazada | G1 | G2: alfa −22 %/año in-sample; OOS solo más apalancamiento | 2 | B |
 | H025 | Bollerslev, Tauchen & Zhou (2009), prima de varianza | VRP alta (DVOL² − RV²) → largo BTC/ETH la semana siguiente | rechazada | G3 | G4: alfa negativo en SOL/BNB/XRP; en BTC/ETH +15,8 %/año no significativo | 4 | C |
-| H026 | on-chain (Coin Metrics): flujos a exchanges | entradas netas anómalas a exchanges anuncian ventas: fuera del mercado 7 días | en curso | G0 | - | 0 | C |
+| H026 | on-chain (Coin Metrics): flujos a exchanges | entradas netas anómalas a exchanges anuncian ventas: fuera del mercado 7 días | rechazada | G1* | G2: Sharpe = B&H (0,93 vs 0,94; OOS 1,24 vs 1,26); *datos no point-in-time | 2 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
