@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-97  (detalle por hipótesis en HYPOTHESES.md)
+101  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (25, todas rechazadas). La más cercana a una ventaja: H022 (carry trimestral
+Cerradas (26, todas rechazadas). Más prometedoras: H022 (carry COIN-M) y H025 (VRP). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
 DECISIÓN PENDIENTE DE LA PERSONA: el mínimo de 100 ops de G4 es inalcanzable para
