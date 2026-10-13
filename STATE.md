@@ -1,7 +1,7 @@
 # STATE
 
 ## Contador global de pruebas
-146  (detalle por hipótesis en HYPOTHESES.md)
+148  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
 Cerradas (43, todas rechazadas; H035 bloqueada). Mejor XS: H043 (flujo taker), rechazada en G5. H033 rechazada en el holdout (2,1 %/año < caja). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
@@ -17,18 +17,18 @@ variantes registradas antes de ejecutar; tests 1–3; liquidaciones pesimistas;
 desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 
 ## Holdout
-CONSUMIDO por H033 (2026-10-13, autorizado): 2,1 %/año < caja → rechazada. No reutilizable.
-Cualquier candidata futura necesitará un nuevo periodo de prueba limpio (datos que
-lleguen después de 2026-09) o paper trading en vivo (G7).
+Política (persona, 2026-10-13): una vez POR HIPÓTESIS, pre-registrado. Usos: H033 (✗ 2,1 %/año),
+H043 (cont_7d: +101 %/año, Sharpe 1,32, MDD −50 %, IC95 semanal incluye 0).
 
 ## Siguiente paso exacto
-1. Sin holdout disponible: toda hipótesis nueva solo puede validarse con datos
-   posteriores a 2026-09 o con paper trading (G7). H043 (flujo taker) es la mejor señal
-   XS (OOS 44,5 %/año, 3 años +) pero falla G5 por pruebas múltiples. Siguiente: variantes
-   del flujo de órdenes con mecanismo distinto (p. ej. flujo taker en spot vs perp,
-   imbalance horario) — cuidado: cada prueba suma al contador y endurece el DSR.
-2. Familia carry cerrada (H001, H012, H021, H022, H033; contraste H042 con Deribit
-   2017–2026: BTC 1 %/año, ETH 3 %/año, supera a la caja solo en años alcistas).
+1. H043 REABIERTA (en curso): permutación p_familia 0,0045 y holdout pasan el criterio
+   pre-registrado, PERO el holdout depende de 3 semanas (pumps de memecoins: PIPPIN +443 %,
+   SIREN +292 %, RIVER +197 %); sin top-3 = −6 %/año; mediana semanal −0,3 %; funding
+   +66 %/año del bruto 112 %. Pendiente: protocolo pasos 4 (reimplementación independiente)
+   y 6 (red team) — los subagentes fallaron por límite de cuota; relanzar. Luego responder
+   objeciones; si sobrevive → G6 (DD, capacidad, fills en memecoins) y G7 paper trading
+   con datos posteriores a 2026-09 (data.binance.vision diario).
+2. Familia carry cerrada (H001, H012, H021, H022, H033, H042).
 
 ## Bloqueos
 - H035: calendarios de desbloqueo point-in-time no accesibles (DefiLlama de pago; repo
@@ -38,4 +38,4 @@ lleguen después de 2026-09) o paper trading en vivo (G7).
   verificar comisiones en vivo (se usa el supuesto de CLAUDE.md) y a G7 en perps.
 
 ## Hipótesis activa
-Ninguna.
+H043 (validación complementaria; scripts experiments/h043_validation.py).
