@@ -35,6 +35,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H028 | microestructura / segmentación de mercados | convergencia COIN-M vs USDT-M del mismo trimestral (neutral) | rechazada | G2 | G3: OOS ≈ 0 %/año (in-sample ~3 %, Sharpe 1,4): ineficiencia cerrada | 2 | B |
 | H029 | carry relativo BTC/ETH | cobrar el diferencial de funding BTC vs ETH (neutral) | rechazada | G1 | G2: negativa; inactiva desde 2023 | 2 | C |
 | H030 | microestructura (reversión de corto plazo) | reversión tras minutos extremos en BTC/ETH perp (cota bruta) | rechazada | G1 | cota: rebote bruto 0,01–0,05 %, t < 1,9 (≤ coste maker) | 4 | C |
+| H031 | propia: cambio de intervalo de funding de Binance | tras acortarse el intervalo de funding, el lado apalancado pierde | en curso | G0 | - | 0 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -405,3 +406,18 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   ETHUSDT perp, 2022 (train). k ∈ {4, 6} × H ∈ {5, 30} min → 4. Entrada en el open del
   minuto siguiente. Métrica: media bruta del retorno contrario y su t. Si ninguna supera
   0,04 % bruto con t > 3, se rechaza sin más datos (cota superior, como H014).
+
+### H031 — Cambio de intervalo de funding (señal de apalancamiento extremo)
+- Quién pierde: el lado apalancado (largos si el funding es positivo, cortos si es
+  negativo) en el momento en que Binance considera su funding tan extremo como para
+  liquidarlo cada 4 h o 1 h.
+- Predicción falsable: tras el primer acortamiento del intervalo de funding de un perp,
+  la posición contraria al lado que paga (corto si funding > 0, largo si < 0) durante N
+  días gana neto de costes y funding, y bate a la misma operación en fechas aleatorias.
+- Variantes fijadas (2026-10-13, antes de ver resultados): universo = todos los perps
+  USDT-M (deslistados incluidos); evento = primer evento de funding cuyo
+  funding_interval_hours es menor que el del evento anterior; signo = media de los 3
+  últimos eventos (incluido el del cambio). Entrada en el open del día siguiente,
+  N ∈ {3, 7} días → 2. Costes 0,15 % por lado; funding real; corto liquidado si high ≥
+  2× entrada. Nulo: fechas aleatorias del mismo símbolo y misma dirección.
+  Train = eventos 2023-01 → 2024-06; OOS = 2024-07 → 2025-09 (holdout intacto).

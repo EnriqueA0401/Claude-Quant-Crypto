@@ -250,3 +250,20 @@ def test_h027_mvrv_signal_no_lookahead():
     m2 = mv.copy()
     m2.iloc[801:] *= 10
     pd.testing.assert_series_equal(s.iloc[:801], h27.mvrv_signal(m2, 0.9).iloc[:801])
+
+
+def test_h031_event_detection_and_trade():
+    import h031_funding_interval as h31
+    ts = pd.date_range("2023-01-01", periods=10, freq="8h", tz="UTC")
+    df = pd.DataFrame({"funding_interval_hours": [8, 8, 8, 4, 4, 8, 8, 4, 4, 4],
+                       "last_funding_rate": [0.001, 0.002, 0.003, 0.004, 0.0, 0, 0, 0, 0, 0]},
+                      index=ts)
+    ev = h31.find_events(df)
+    assert ev == [(ts[3], -1.0)]                         # primer cambio; funding > 0 → corto
+    o, c, h, qv, fd = _panel(n_days=60, seed=5)
+    s = o.columns[0]
+    r = h31.trade(o, c, h, fd, s, 10, 3, -1.0)
+    exp = -(o[s].iloc[13] / o[s].iloc[10] - 1) - h31.COST
+    if (h[s].iloc[10:13] >= 2 * o[s].iloc[10]).any():
+        exp = -1.0
+    assert r == pytest.approx(exp)
