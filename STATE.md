@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-113  (detalle por hipótesis en HYPOTHESES.md)
+115  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (29, todas rechazadas). H022 rechazada en G5 tras la excepción y el red team.
+Cerradas (30, todas rechazadas). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
 Datos externos: Deribit DVOL y Coin Metrics (src/external.py; Coin Metrics NO es point-in-time). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
@@ -17,12 +17,10 @@ variantes registradas antes de ejecutar; tests 1–3; liquidaciones pesimistas;
 desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 
 ## Siguiente paso exacto
-1. Meta-review 3 al cerrar la 30.ª (faltan 2). Skew histórico de Deribit no es gratuito;
-   MVRV (H027) rechazada. Siguientes ideas: (a) basis COIN-M vs USDT-M (diferencia entre
-   trimestrales de la misma moneda, delta-neutral); (b) funding de BTC vs ETH (spread de
-   funding, neutral); (c) volatilidad realizada vs implícita para vender gamma vía perps
-   no es posible sin opciones → descartar.
-   Fijar variantes antes de ejecutar; comparar siempre con buy & hold y con caja.
+1. Según la meta-review 3: priorizar hipótesis con mecanismo nuevo y evidencia posterior
+   a 2022. Candidata siguiente: efectos de microestructura de minutos con aggTrades en
+   BTC/ETH perp (p. ej. reversión tras grandes órdenes agresivas), acotando primero con
+   la cota de costes maker/taker (como H014) antes de descargar datos pesados.
 2. El holdout 2025-10 → 2026-09 sigue intacto.
 
 ## Bloqueos

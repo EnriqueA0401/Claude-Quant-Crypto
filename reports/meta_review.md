@@ -90,3 +90,56 @@ Contador global: 83 pruebas. Validadas: 0. Rechazadas: 20 (H001–H013, H015–H
    OOS (p. ej. H019 u = 0, N = 14) solo puede probarse en el holdout 2025-10 → 2026-09,
    una única vez, y contando la prueba. Reservar el holdout para la mejor candidata.
 4. **No más** hipótesis direccionales cross-sectional de altcoins sin un mecanismo nuevo.
+
+---
+
+# Meta-review 3 (30 hipótesis cerradas) — 2026-10-13
+
+Contador global: 115 pruebas. Validadas: 0. Rechazadas: 30 (H001–H029, H014 por cota).
+
+## Resultados nuevos (H021–H029)
+| hipótesis | gate | clave |
+|---|---|---|
+| H021 cartera carry BTC/ETH | G3 | 3,5 %/año < caja |
+| H022 carry COIN-M a capital completo | G5 (con excepción de G4) | 6,4 %/año OOS, pero exceso sobre caja ~1,5 % no significativo; depende de 2024-T2; OOS = el de H012 |
+| H023 basis como filtro de riesgo | G2 | peor que buy & hold |
+| H024 gestión por volatilidad (DVOL/RV) | G2 | solo más beta |
+| H025 prima de varianza (DVOL) | G4 | alfa BTC/ETH +16 %/año n.s.; negativo en SOL/BNB/XRP |
+| H026 flujos a exchanges (on-chain) | G2 | = buy & hold; datos no point-in-time |
+| H027 MVRV | G2 | alfa −41 %/año in-sample |
+| H028 spread COIN-M vs USDT-M | G3 | 3 %/año en 2021–22, ≈ 0 después |
+| H029 diferencial de funding BTC/ETH | G2 | negativo; sin oportunidad desde 2023 |
+
+## Familias agotadas (acumulado)
+1. Direccional cross-sectional en altcoins (7 hipótesis).
+2. Timing de BTC/ETH con cualquier señal (momentum, tendencia, basis, volatilidad,
+   VRP, on-chain): 8 hipótesis; ninguna da alfa significativo frente a buy & hold.
+3. Eventos de crowding/capitulación (5).
+4. Arbitrajes de microestructura con taker o maker (basis spot-perp, CM vs UM): las
+   ineficiencias son menores que los costes o se cerraron tras 2022.
+5. Carry (perp, trimestral, cartera, COIN-M): positivo pero ≈ rendimiento de la caja.
+
+## Patrones
+- **Las ineficiencias de 2020–2022 se cerraron.** Spread CM/UM, momentum de altcoins,
+  carry XS: todo funcionaba en el periodo de train y desaparece después. El mercado de
+  Binance en 2023–2025 es mucho más eficiente para un participante sin ventaja de
+  información, latencia ni costes.
+- **El único rendimiento persistente es el carry**, y su prima ≈ tipo libre de riesgo:
+  es compensación por apalancamiento, no ventaja explotable.
+- **El protocolo funciona**: 6 errores de código/datos encontrados por los pasos 4–6,
+  ningún falso positivo ha superado G5.
+
+## ¿Cambiar de enfoque? Conclusión honesta
+Con las restricciones actuales (< 1.000 USD, VIP0, órdenes taker/maker sin prioridad,
+datos públicos diarios/horarios), la evidencia acumulada apunta a que **no existe una
+ventaja estadística explotable** en las familias accesibles. Opciones con algún prior:
+1. **Datos de mayor resolución y microestructura** (aggTrades/libro de órdenes) para
+   efectos de minutos — pero la cota de costes de H014 indica que un minorista VIP0 no
+   puede capturarlos.
+2. **Mercados menos eficientes** (pares recién listados en spot, otros exchanges) —
+   fuera de la misión (Binance) o ya probado (H006).
+3. **Usar el holdout 2025-10 → 2026-09** solo para una candidata que pase G0–G5; ninguna
+   lo ha hecho.
+Recomendación: seguir con la cola pero con prioridad a hipótesis con mecanismo nuevo y
+evidencia posterior a 2022; documentar a la persona responsable que, tras 30 hipótesis,
+la hipótesis nula ("no hay ventaja") se mantiene.
