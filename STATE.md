@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-93  (detalle por hipótesis en HYPOTHESES.md)
+95  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (23, todas rechazadas). La más cercana a una ventaja: H022 (carry trimestral
+Cerradas (24, todas rechazadas). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
 DECISIÓN PENDIENTE DE LA PERSONA: el mínimo de 100 ops de G4 es inalcanzable para
@@ -18,8 +18,9 @@ desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 1. Nuevas fuentes de hipótesis fuera de lo agotado (meta-review 2): datos externos no
    disponibles en data.binance.vision (opciones Deribit, on-chain) requieren acceso de
    red; comprobar si los hosts responden (deribit.com, api.glassnode, etc.).
-2. Mientras tanto: hipótesis de baja rotación en BTC/ETH con funding/basis como filtro
-   de riesgo (BIS WP 1087: basis alto predice caídas) juzgada contra buy & hold.
+2. H023 (basis como filtro de riesgo) rechazada. Siguiente idea interna pendiente:
+   probar H019-bis (funding negativo, N = 14) SOLO en el holdout 2025-10 → 2026-09 si
+   se decide gastar el holdout en ella (una única vez, contándola).
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).
