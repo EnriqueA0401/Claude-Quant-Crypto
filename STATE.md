@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-130  (detalle por hipótesis en HYPOTHESES.md)
+132  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (36, todas rechazadas; H035 bloqueada por datos). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
+Cerradas (37, todas rechazadas; H035 bloqueada por datos). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
 Datos externos: Deribit DVOL y Coin Metrics (src/external.py; Coin Metrics NO es point-in-time). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
@@ -19,8 +19,9 @@ desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 ## Siguiente paso exacto
 1. DECISIÓN DE LA PERSONA: ¿gastar el holdout 2025-10 → 2026-09 en H033 (mejor
    candidata)? Comando: `python3 experiments/h033_always_hedged.py holdout` (UNA vez).
-2. Cola casi agotada. Idea restante de prior bajo: prima de Coinbase (Coinbase public
-   candles) como señal para BTC. H037 (Hyperliquid) rechazada; H035 bloqueada por datos.
+2. Cola agotada (H037, H038 rechazadas; H035 bloqueada). Siguiente: generar nuevas
+   hipótesis (subagente de literatura o ideas propias con mecanismo nuevo) y la
+   meta-review 4 al cerrar la 40.ª.
 3. Meta-review 4 al cerrar la 40.ª.
 
 ## Bloqueos

@@ -1,9 +1,13 @@
 {
- "total_files": 489009,
+ "total_files": 489010,
  "groups": {
   "binance/announcements_161.json": {
    "files": 1,
    "digest": "b514b04fadb6710db9d699f78fdb308c4898c453752fb31e265d0b081b8e221b"
+  },
+  "coinbase/BTC-USD_1d.json": {
+   "files": 1,
+   "digest": "2636dbfcf63924e3a6971ecf10b88179a7351c776614731b405dce3d5278f007"
   },
   "coinmetrics/btc_CapMVRVCur.json": {
    "files": 1,
