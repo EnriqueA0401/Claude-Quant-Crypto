@@ -36,6 +36,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H029 | carry relativo BTC/ETH | cobrar el diferencial de funding BTC vs ETH (neutral) | rechazada | G1 | G2: negativa; inactiva desde 2023 | 2 | C |
 | H030 | microestructura (reversión de corto plazo) | reversión tras minutos extremos en BTC/ETH perp (cota bruta) | rechazada | G1 | cota: rebote bruto 0,01–0,05 %, t < 1,9 (≤ coste maker) | 4 | C |
 | H031 | propia: cambio de intervalo de funding de Binance | tras acortarse el intervalo de funding, el lado apalancado pierde | rechazada | G1 | train t≈0,5; OOS por outliers (ALPACA +1.805 %); sin top-3 t=0,65 | 2 | B |
+| H032 | flujos de cobertura de dealers de opciones | retorno anómalo en las 48 h antes/después del vencimiento mensual de Deribit | en curso | G0 | - | 0 | C |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -421,3 +422,12 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
   N ∈ {3, 7} días → 2. Costes 0,15 % por lado; funding real; corto liquidado si high ≥
   2× entrada. Nulo: fechas aleatorias del mismo símbolo y misma dirección.
   Train = eventos 2023-01 → 2024-06; OOS = 2024-07 → 2025-09 (holdout intacto).
+
+### H032 — Vencimiento mensual de opciones de Deribit
+- Quién pierde: flujos de cobertura (gamma) de los dealers, predecibles en el tiempo.
+- Predicción falsable: el retorno de BTC/ETH en las 48 h previas (o posteriores) al
+  vencimiento mensual (último viernes 08:00 UTC) tiene media distinta de 0 y, operado en
+  la dirección observada en train, supera el coste de ida y vuelta (0,20 %).
+- Variantes fijadas (2026-10-13, antes de ver resultados): ventana ∈ {48 h antes,
+  48 h después} → 2; dirección = signo de la media en train (2020–2022); perps 1x,
+  0,10 % por lado, funding; OOS 2023-01 → 2025-09.
