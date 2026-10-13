@@ -575,3 +575,15 @@ resultado sea cual sea; el holdout queda consumido y no se podrá reutilizar.
   14 días (2 pruebas más); otros activos = mismo ranking en los pares 51–100 por volumen
   (no usados); control de momentum: regresión de los retornos OOS sobre el factor
   momentum de 1 semana (H005 L=1) y alfa con IC95.
+- Validación complementaria (pre-registrada 2026-10-13, ANTES de ejecutar; autorizada por la
+  persona responsable: holdout por hipótesis + datos sintéticos que conserven estructura).
+  Contador: +2 (permutación y holdout). Variante única: cont_7d, sin cambiar nada.
+  (a) Permutación (2023-01 → 2025-09): cada semana se barajan las puntuaciones entre los
+      mismos 50 pares líquidos; retornos, funding, liquidaciones y costes reales intactos.
+      2.000 permutaciones, semilla 0. Estadístico: retorno neto medio. Además, versión de
+      familia (máximo de las 4 variantes por permutación, estilo White). Criterio: p_familia
+      < 0,05.
+  (b) Holdout 2025-10-01 → 2026-09-30, cont_7d, una sola vez. Criterio: retorno neto anual
+      > 4,5 % (caja) y > retorno medio de las permutaciones del mismo periodo.
+  Decisión: si (a) y (b) pasan → H043 pasa a paper trading (G7) como candidata DÉBIL (el DSR
+  sigue fallando y se declara). Si alguno falla → rechazo confirmado.
