@@ -1,7 +1,7 @@
 # STATE
 
 ## Contador global de pruebas
-139  (detalle por hipótesis en HYPOTHESES.md)
+140  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
 Cerradas (41, todas rechazadas; H035 bloqueada por datos). Meta-review 4 escrita. H033 rechazada en el holdout (2,1 %/año < caja). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
@@ -25,7 +25,8 @@ lleguen después de 2026-09) o paper trading en vivo (G7).
 1. Sin holdout disponible: toda hipótesis nueva solo puede validarse con datos
    posteriores a 2026-09 o con paper trading (G7). Priorizar mecanismos realmente nuevos
    o datos nuevos (de pago/privados), según la meta-review 4.
-2. Familia carry cerrada (H001, H012, H021, H022, H033).
+2. Familia carry cerrada (H001, H012, H021, H022, H033; contraste H042 con Deribit
+   2017–2026: BTC 1 %/año, ETH 3 %/año, supera a la caja solo en años alcistas).
 
 ## Bloqueos
 - H035: calendarios de desbloqueo point-in-time no accesibles (DefiLlama de pago; repo

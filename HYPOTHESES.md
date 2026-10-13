@@ -46,7 +46,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H039 | Gatev et al. (2006); Fil & Kristoufek (2020) | arbitraje estadístico por pares cointegrados entre perps | rechazada | G1 | G2: −10 a −14 %/año in-sample; OOS −8 %/año | 2 | B |
 | H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | rechazada | G1 | cota: −0,01 a −0,03 % (t ≈ −1,1) | 2 | C |
 | H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | rechazada | G1 | G2: no revierte (continúa; t −2,0 OOS) | 2 | C |
-| H042 | contraste pedido por la persona | carry siempre cubierto con trimestrales de Deribit 2018–2026 (no operable; estimar el carry de largo plazo) | en curso | G0 | - | 0 | - |
+| H042 | contraste pedido por la persona | carry siempre cubierto con trimestrales de Deribit 2018–2026 (no operable; estimar el carry de largo plazo) | cerrada (contraste) | - | BTC +1,05 %/año, ETH +3,1 %/año 2017–26; supera a la caja solo en 3–4 de 9 años | 1 | - |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
