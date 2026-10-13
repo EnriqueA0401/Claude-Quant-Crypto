@@ -26,7 +26,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H019 | propia / crowding de cortos | funding negativo sostenido anuncia squeeze: largo 1–2 semanas | rechazada | G2 | G3: variante elegida (t=3,97 train) da −0,39 %/evento OOS | 4 | B |
 | H020 | valor relativo / rotación | reversión del ratio ETH/BTC tras desviaciones extremas (neutral) | rechazada | G1 | G2: −2,6 %/año, 8–11 entradas | 2 | C |
 | H021 | meta-review 2 | cartera carry BTC/ETH: trimestral (H012) y, si no, perp (H001) | rechazada | G3 | OOS 3,5 %/año < 5 % (USDT) | 1 | B |
-| H022 | estructura clásica coin-margined | carry trimestral COIN-M BTC/ETH con la moneda como margen (capital completo) | en curso | G0 | - | 0 | A |
+| H022 | estructura clásica coin-margined | carry trimestral COIN-M BTC/ETH con la moneda como margen (capital completo) | rechazada | G3 | G4: 31 ops, altcoins −10,8 %, costes ×2 3,3 % < USDT (OOS base 6,4 %/año, Sharpe 1,35) | 5 | A |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
