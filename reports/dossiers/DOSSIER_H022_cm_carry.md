@@ -159,3 +159,21 @@ episodio (2024-T2), el OOS no es independiente de H012, y G4 falla en otros acti
 costes ×2. Con el criterio literal (frente a 0) también falla por PBO = 0,51.
 Recomendación: no gastar el holdout 2025-10 → 2026-09 en validarla (≈ 8 operaciones, sin
 potencia); si la persona lo desea, usarlo solo como comprobación descriptiva, una vez.
+
+## 12. Variante H033: siempre cubierto, rotando solo el futuro (2026-10-13)
+Propuesta por el red team (objeción 9): mantener la moneda y rotar solo el corto.
+Diseño fijado antes de ver resultados (HYPOTHESES.md, H033): siempre corto en el
+trimestral COIN-M más cercano con ≥ 14 días, hasta vencimiento; costes de futuro 0,10 %
+por lado por rotación; spot 0,15 % por lado solo al inicio y al final. Sin umbral θ.
+Resultados (reports/h033.json):
+| periodo | %/año | Sharpe m. | MDD | exceso vs caja 4,5 % |
+|---|---|---|---|---|
+| 2021–2022 (train) | 5,74 % | 1,65 | −7,2 % | +1,2 % |
+| 2023-01 → 2025-09 (contaminado: ya visto por H012/H022) | **7,57 %** | **1,72** | **−2,5 %** | **+3,1 %** |
+Por año: 2023 +2,4 %, 2024 +13,2 %, 2025 (9 meses) +5,2 %. Trimestres positivos: 9 de 11.
+Sin 2024-T2: 5,6 %/año. IC95 del exceso sobre caja (bloques de 13 semanas):
+[−0,2 %, +7,2 %] anual → incluye 0 por poco.
+Decisión: la regla fijada exigía superar la caja "con claridad" para gastar el holdout
+2025-10 → 2026-09; no se cumple estrictamente, así que **el holdout sigue intacto**.
+H033 queda como la mejor candidata del proyecto, en pausa: su única prueba limpia
+posible es el holdout (≈ 4 rotaciones por activo), a decidir por la persona responsable.

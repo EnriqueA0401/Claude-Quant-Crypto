@@ -1,10 +1,10 @@
 # STATE
 
 ## Contador global de pruebas
-123  (detalle por hipótesis en HYPOTHESES.md)
+124  (detalle por hipótesis en HYPOTHESES.md)
 
 ## Qué se está haciendo
-Cerradas (33, todas rechazadas). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
+Cerradas (33, todas rechazadas). EN PAUSA: H033 (mejor candidata; ver dossier H022 §12). Meta-review 3 escrita (reports/meta_review.md). H022 rechazada en G5 tras la excepción y el red team.
 Datos externos: Deribit DVOL y Coin Metrics (src/external.py; Coin Metrics NO es point-in-time). La más cercana a una ventaja: H022 (carry trimestral
 COIN-M BTC/ETH, moneda como margen): OOS 6,4 %/año, Sharpe 1,35, MDD 2,6 %, 3 años
 positivos; falla G4 (31 ops < 100, altcoins negativas, costes ×2 < USDT).
@@ -17,12 +17,12 @@ variantes registradas antes de ejecutar; tests 1–3; liquidaciones pesimistas;
 desempates deterministas; validar vencimientos y barras sin operaciones (G1).
 
 ## Siguiente paso exacto
-1. Ideas restantes con datos disponibles y mecanismo nuevo: (a) anuncios de deslistado de
-   Binance (detectables por el fin de los datos del perp/spot: ¿caída previa medible?);
-   (b) lanzamiento de perps de un par ya existente en spot (efecto en el spot);
-   (c) efecto de las primeras horas de trading spot de un listado nuevo (solo largo).
-   Fijar variantes antes de ejecutar; comparar con nulo aleatorio.
-2. Meta-review 4 al cerrar la 40.ª.
+1. H033 en pausa: 7,6 %/año en 2023–25 (contaminado), exceso sobre caja +3,1 % con IC95
+   [−0,2 %, +7,2 %]. Su única prueba limpia es el holdout 2025-10 → 2026-09
+   (`python3 experiments/h033_always_hedged.py holdout`, UNA vez). No cumple
+   estrictamente la regla fijada para gastarlo: decisión de la persona responsable.
+2. Mientras tanto, seguir con la cola: ideas de eventos sin datos de anuncio descartadas;
+   buscar mecanismos nuevos (revisar literatura 2024–2026 con un subagente).
 
 ## Bloqueos
 - data.binance.vision y data-api.binance.vision: OK (acceso verificado 2026-10-12).

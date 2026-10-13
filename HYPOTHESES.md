@@ -37,7 +37,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H030 | microestructura (reversión de corto plazo) | reversión tras minutos extremos en BTC/ETH perp (cota bruta) | rechazada | G1 | cota: rebote bruto 0,01–0,05 %, t < 1,9 (≤ coste maker) | 4 | C |
 | H031 | propia: cambio de intervalo de funding de Binance | tras acortarse el intervalo de funding, el lado apalancado pierde | rechazada | G1 | train t≈0,5; OOS por outliers (ALPACA +1.805 %); sin top-3 t=0,65 | 2 | B |
 | H032 | flujos de cobertura de dealers de opciones | retorno anómalo en las 48 h antes/después del vencimiento mensual de Deribit | rechazada | G1 | G2: t ≤ 1,9; post-vencimiento ≈ deriva de mercado | 2 | C |
-| H033 | red team de H022 | carry COIN-M siempre cubierto: se mantiene la moneda y solo se rota el futuro | en curso | G0 | - | 0 | B |
+| H033 | red team de H022 | carry COIN-M siempre cubierto: se mantiene la moneda y solo se rota el futuro | en pausa | G3* | *2023–25 contaminado: 7,6 %/año, Sharpe 1,72, exceso +3,1 % (IC95 [−0,2 %, +7,2 %]); holdout sin usar | 1 | B |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
