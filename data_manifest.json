@@ -1,5 +1,5 @@
 {
- "total_files": 489010,
+ "total_files": 489076,
  "groups": {
   "binance/announcements_161.json": {
    "files": 1,
@@ -36,6 +36,270 @@
   "deribit/dvol_ETH.json": {
    "files": 1,
    "digest": "43c510fd4a5f128633f28b1433c9bb6b68c50628b7252c865361b8a1943e43dc"
+  },
+  "deribit/futures/BTC-24JUN22.json": {
+   "files": 1,
+   "digest": "2596394991c893926b157995ce666556877e60660c82eb41870f00a2a8f44d5e"
+  },
+  "deribit/futures/BTC-24SEP21.json": {
+   "files": 1,
+   "digest": "39a50e19ec840877b8004ecdf6b0ff2ca1a6f40c421be68c0a30eecbd6558ffd"
+  },
+  "deribit/futures/BTC-25DEC20.json": {
+   "files": 1,
+   "digest": "2dfbfd5b9c3f0046462886cd27274bbd7f4864c4e1556a18e9300f3ab9444331"
+  },
+  "deribit/futures/BTC-25JUN21.json": {
+   "files": 1,
+   "digest": "cc9fdb29d35276ebc299c87c103de82ff9ffd120006c5e4e1b3d848aa5d2e35d"
+  },
+  "deribit/futures/BTC-25MAR22.json": {
+   "files": 1,
+   "digest": "bac868ae97bc61ce30c57e48ba842a51fcd0fa3a3f56b79982cec7d1d45e1c05"
+  },
+  "deribit/futures/BTC-25SEP20.json": {
+   "files": 1,
+   "digest": "639b755468dd910e1c665045dbff2de34a50b5a26f21651bff2445f74fe2b869"
+  },
+  "deribit/futures/BTC-25SEP26.json": {
+   "files": 1,
+   "digest": "4476306ce57e8b94445da41acbc991e89e8949d40e6cabe5fca203267d7fe621"
+  },
+  "deribit/futures/BTC-26DEC25.json": {
+   "files": 1,
+   "digest": "d2bf26f60d17a11c4f291f5b2a4512bdccdd3fad25756c169e73ded6a9c0652d"
+  },
+  "deribit/futures/BTC-26JUN20.json": {
+   "files": 1,
+   "digest": "d2183de4f9e22a13f153df484d8d11c5034f5a937204ff45dad292fed40a8da8"
+  },
+  "deribit/futures/BTC-26JUN26.json": {
+   "files": 1,
+   "digest": "bd0258191c066949dea2ef7e153a61152ff5b902d93da3da1186edc7fd343a2c"
+  },
+  "deribit/futures/BTC-26MAR21.json": {
+   "files": 1,
+   "digest": "54164c5f5e1ca99b727344fe9463dfd6c7a92085a2f73c6f1d55bc3586b18c9e"
+  },
+  "deribit/futures/BTC-26SEP25.json": {
+   "files": 1,
+   "digest": "5804b4ead660a1c2b5f63a83ab3b7f24343254f132a3dc8783a1694a7f0e85a2"
+  },
+  "deribit/futures/BTC-27DEC19.json": {
+   "files": 1,
+   "digest": "1c9391134a9c741ebb2ee28b82070d834817bf3cf9e3a0376f4e07b4e1aa9eb7"
+  },
+  "deribit/futures/BTC-27DEC24.json": {
+   "files": 1,
+   "digest": "c5c13df8714dfc28c18eb4281f02c8c2188e52f1b54e89289c74edcd8e9175f2"
+  },
+  "deribit/futures/BTC-27JUN25.json": {
+   "files": 1,
+   "digest": "291dd7dade6a5350a037e3a6c7d2c38b0abddb3b91cba384c3c2f374bb6322d4"
+  },
+  "deribit/futures/BTC-27MAR20.json": {
+   "files": 1,
+   "digest": "63f138e489f7af13b2b81b8984d4bb06b4fdb7c41034eaa6f15b3fc19b86297c"
+  },
+  "deribit/futures/BTC-27MAR26.json": {
+   "files": 1,
+   "digest": "0cfe0515dbc35f33d9f3bc2464041221df0f3a7f0cffccb425000a7eb13d97ae"
+  },
+  "deribit/futures/BTC-27SEP19.json": {
+   "files": 1,
+   "digest": "226efd6f954a5dbb62f8039672bd8504aae43c81aed10975ffb511152640b308"
+  },
+  "deribit/futures/BTC-27SEP24.json": {
+   "files": 1,
+   "digest": "5baf550807ba95c14b18ec134cf3c1b2e26443f8874bc40d6bffcca3017a1c6c"
+  },
+  "deribit/futures/BTC-28DEC18.json": {
+   "files": 1,
+   "digest": "a2578abfe3382da68a6230fd77a720da5abb3fa89e6b649d8f25cbcaa7f9acd0"
+  },
+  "deribit/futures/BTC-28JUN19.json": {
+   "files": 1,
+   "digest": "b86e52e366e192fcd4c96225bf1a7d7c41feea9f59168748fa884a5327476405"
+  },
+  "deribit/futures/BTC-28JUN24.json": {
+   "files": 1,
+   "digest": "2c2f57f865a5ebba73f16113702d92b96d51890d727c26ba5915a2127896093c"
+  },
+  "deribit/futures/BTC-28MAR25.json": {
+   "files": 1,
+   "digest": "887901ab21bd15f7252674165ade9c0e3c0a176efe0dd55b6367ed19f2c1e8aa"
+  },
+  "deribit/futures/BTC-28SEP18.json": {
+   "files": 1,
+   "digest": "0263b56823ade982d0aba3f256601b64a1cbc6ed8b8af6f775eec8f5c5e7ef36"
+  },
+  "deribit/futures/BTC-29DEC23.json": {
+   "files": 1,
+   "digest": "211d9118ea25008406a06514a68b7e221b36ef3b2d0ea3d17f2fdc24d9568614"
+  },
+  "deribit/futures/BTC-29JUN18.json": {
+   "files": 1,
+   "digest": "f4f55cabee7982dc4abde57920d08d22b7e40fd9db69ada8aa5cafc415a522f2"
+  },
+  "deribit/futures/BTC-29MAR19.json": {
+   "files": 1,
+   "digest": "7cafcf0c4eec210ef2efa3046f964f8ed507a075060a0e2a04757bded07ca0ee"
+  },
+  "deribit/futures/BTC-29MAR24.json": {
+   "files": 1,
+   "digest": "30c15734ce04f2aaeb8609a925be5ae89c9372fa57077277f4b05c2acb0ff00f"
+  },
+  "deribit/futures/BTC-29SEP23.json": {
+   "files": 1,
+   "digest": "a082631568b312c305d63ae5706c5e7e2bbdeb50b3b453a3adfa5c6e6ad30840"
+  },
+  "deribit/futures/BTC-30DEC22.json": {
+   "files": 1,
+   "digest": "ba6cfe0ecbefd529fc04631aa8316da5971ff9e072f6edd5704f9adf1243376c"
+  },
+  "deribit/futures/BTC-30JUN23.json": {
+   "files": 1,
+   "digest": "893f180ec064ae57be597c07bf360d0d38c79387a2ef07645d556063ea740c64"
+  },
+  "deribit/futures/BTC-30MAR18.json": {
+   "files": 1,
+   "digest": "da125e82202334eb3ab5892307d5f5a2a90f51620ae31e90310bf5c6b818b892"
+  },
+  "deribit/futures/BTC-30SEP22.json": {
+   "files": 1,
+   "digest": "efc1866e99eb968915668beac3bfad0693dc44c05065598f75fe82e9892a7563"
+  },
+  "deribit/futures/BTC-31DEC21.json": {
+   "files": 1,
+   "digest": "e4476686c6aa2fc8e3b1a84d5849a5278c5f7730f5181b531b66cd1ebffc86ac"
+  },
+  "deribit/futures/BTC-31MAR23.json": {
+   "files": 1,
+   "digest": "eee3086d1e1515a3f56317bbdf14239b1ce644435afeaabce52ba2dae570fdbc"
+  },
+  "deribit/futures/ETH-24JUN22.json": {
+   "files": 1,
+   "digest": "5621dec1f8c9a8fd4a08e1acf10df3b3ce8b686bd4d9eb43232bd0553f8ba1f3"
+  },
+  "deribit/futures/ETH-24SEP21.json": {
+   "files": 1,
+   "digest": "0cd5b8239a014dec48e1d895369cefc5ba8370357cff9b8254f9a4ecf2b06839"
+  },
+  "deribit/futures/ETH-25DEC20.json": {
+   "files": 1,
+   "digest": "a78b3fbb28f5834dd1e6d4c9578b3e38a89caa42c354c8201ab006809c1444a7"
+  },
+  "deribit/futures/ETH-25JUN21.json": {
+   "files": 1,
+   "digest": "ee6eb1a5f0994d7c01d644ac972037c2ce989773978e8b6f66464bbd6f7a21a1"
+  },
+  "deribit/futures/ETH-25MAR22.json": {
+   "files": 1,
+   "digest": "779ae1f6f2dff415d9f7094a6167dab44c3a98d05d0f95d0c4358ecbee770efd"
+  },
+  "deribit/futures/ETH-25SEP20.json": {
+   "files": 1,
+   "digest": "1b33a051237879756257b20b3d2905ddf37586b7ffdc11df2b85ee0f5e2c9ee1"
+  },
+  "deribit/futures/ETH-25SEP26.json": {
+   "files": 1,
+   "digest": "2fb625548bf08e5b9c9555be7d0d0899cf6fdef060c9a538561dfa736e42bc9e"
+  },
+  "deribit/futures/ETH-26DEC25.json": {
+   "files": 1,
+   "digest": "5389dc0e1a60c58c74cb64849a21dae43e10af477d4b327480381ff5c42ea5e5"
+  },
+  "deribit/futures/ETH-26JUN20.json": {
+   "files": 1,
+   "digest": "583e888b0473c37bfc4df74a262a73b079216f403fef66c6b2c04db90dba55d1"
+  },
+  "deribit/futures/ETH-26JUN26.json": {
+   "files": 1,
+   "digest": "9e3c1ade834ab9b243989e8dd9a8fc7724a24a69440a76bcd9346b0467848275"
+  },
+  "deribit/futures/ETH-26MAR21.json": {
+   "files": 1,
+   "digest": "6706f36e88804a06b2cc8d1bdf35dd64df12ed956f3ad1658c8eadb244aaf0f3"
+  },
+  "deribit/futures/ETH-26SEP25.json": {
+   "files": 1,
+   "digest": "0c6da974dece904da9d4d7055d9f6be35f2406ab695214d376defbcba95141a3"
+  },
+  "deribit/futures/ETH-27DEC19.json": {
+   "files": 1,
+   "digest": "ebdf40e34c710e3dbde7371a4c907bcdcd8b8a137b763aa9ba5d81c10a5668d3"
+  },
+  "deribit/futures/ETH-27DEC24.json": {
+   "files": 1,
+   "digest": "46982a905b922bf9d7dd9dc53361e7b6ade33798d9947599d5d7f4f9ffcff630"
+  },
+  "deribit/futures/ETH-27JUN25.json": {
+   "files": 1,
+   "digest": "b360825d4fb1fdd163694868caea91dc07a88f623b5900b854c74cf100e99fd8"
+  },
+  "deribit/futures/ETH-27MAR20.json": {
+   "files": 1,
+   "digest": "baa4c4d3a3c5b6abc2ee2b9b33ed5595d1e0d3db53e2c95365b0c4b6317e5148"
+  },
+  "deribit/futures/ETH-27MAR26.json": {
+   "files": 1,
+   "digest": "e638b53f58bf7b6636ef187a4cb56029dc50e73300ba6f50041c06ccd14e7b1c"
+  },
+  "deribit/futures/ETH-27SEP19.json": {
+   "files": 1,
+   "digest": "a1b17b1de068b164b871c2df104a3d30c77b098f4f6c61ce88dfe05c02813b69"
+  },
+  "deribit/futures/ETH-27SEP24.json": {
+   "files": 1,
+   "digest": "1e9a10da2fb879e094de777c34d7e0d8ee7e33b05574781551c42766c7b6a056"
+  },
+  "deribit/futures/ETH-28JUN19.json": {
+   "files": 1,
+   "digest": "00f4772b8b5e738522dfeec7c82f05ac155b5afe5c51c6bbd8f74a98c500eae0"
+  },
+  "deribit/futures/ETH-28JUN24.json": {
+   "files": 1,
+   "digest": "a3665bbee4de22acb418b599f900cd3dac3c6f7f50141d1ff44bed49b831f56c"
+  },
+  "deribit/futures/ETH-28MAR25.json": {
+   "files": 1,
+   "digest": "63463ee7d500502043fb06db000af8dfd3e2b5f06e240c0c5313213e05ad78ca"
+  },
+  "deribit/futures/ETH-29DEC23.json": {
+   "files": 1,
+   "digest": "41fc4c63adaba8c67063bf9568db2a015a087b7172c5f1edf31722dff74a54dd"
+  },
+  "deribit/futures/ETH-29MAR19.json": {
+   "files": 1,
+   "digest": "9da7f6300b97826c0ad3537cafe0af0c3f0ec0706fc74a369f82553446135a4d"
+  },
+  "deribit/futures/ETH-29MAR24.json": {
+   "files": 1,
+   "digest": "7a83d22bdf37d2817430c1f37c2393e875470fac05138b73d5ba716fdc79d204"
+  },
+  "deribit/futures/ETH-29SEP23.json": {
+   "files": 1,
+   "digest": "36474e1a04bdd3a2a33af0f223f75ca1d4020833c133c3ca4866eb80ab20792c"
+  },
+  "deribit/futures/ETH-30DEC22.json": {
+   "files": 1,
+   "digest": "80bce6ba382e22df5ec69459acb22795ad57116cd8491b235c9ccba264eae690"
+  },
+  "deribit/futures/ETH-30JUN23.json": {
+   "files": 1,
+   "digest": "6bb2b78e1739bd689736b2494ca2eda7678368b3d2dea8b64ff6d9035867a456"
+  },
+  "deribit/futures/ETH-30SEP22.json": {
+   "files": 1,
+   "digest": "ff8de87e8df70a054715434c3c5a7ad002452a997e7b4563734051f2c8536941"
+  },
+  "deribit/futures/ETH-31DEC21.json": {
+   "files": 1,
+   "digest": "639cee23b496112d8a87c6633b1785d27f2d058605f4f40ba1ad74cea53944e3"
+  },
+  "deribit/futures/ETH-31MAR23.json": {
+   "files": 1,
+   "digest": "978d0e98acc2813f6daf07e2136ee07ef2fee1d2a9b9498f53560912cff05561"
   },
   "futures/cm/daily/klines": {
    "files": 37834,

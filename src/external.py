@@ -162,3 +162,44 @@ def fetch_coinbase_daily(product: str = "BTC-USD", start: str = "2019-12-01",
     _record(name, sha256(blob))
     s = pd.Series({pd.Timestamp(int(x[0]), unit="s", tz="UTC"): float(x[4]) for x in json.loads(blob)})
     return s[~s.index.duplicated()].sort_index()
+
+
+DERIBIT_CHART = "https://www.deribit.com/api/v2/public/get_tradingview_chart_data"
+
+
+def deribit_quarterly_names(currency: str, start: str = "2018-01", end: str = "2026-09") -> list[str]:
+    """Nombres de los trimestrales de Deribit (último viernes de mar/jun/sep/dic)."""
+    out = []
+    for m in pd.period_range(start, end, freq="M"):
+        if m.month not in (3, 6, 9, 12):
+            continue
+        d = pd.Timestamp(m.end_time.date())
+        while d.dayofweek != 4:
+            d -= pd.Timedelta("1D")
+        out.append(f"{currency}-{d.day}{d.strftime('%b').upper()}{d.strftime('%y')}")
+    return out
+
+
+def fetch_deribit_future_daily(name: str) -> pd.DataFrame | None:
+    """Velas diarias de un futuro de Deribit (también vencidos), con hash en el manifest."""
+    path = f"deribit/futures/{name}.json"
+    dest = DATA / path
+    if not dest.exists():
+        exp_guess = pd.Timestamp.now(tz="UTC")
+        r = requests.get(DERIBIT_CHART, params={"instrument_name": name, "resolution": "1D",
+                                                "start_timestamp": 1483228800000,
+                                                "end_timestamp": int(exp_guess.timestamp() * 1000)},
+                         timeout=60)
+        if r.status_code != 200 or "result" not in r.json():
+            return None
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(json.dumps(r.json()["result"]))
+    blob = dest.read_bytes()
+    _record(path, sha256(blob))
+    j = json.loads(blob)
+    if not j.get("ticks"):
+        return None
+    df = pd.DataFrame({"open": j["open"], "high": j["high"], "close": j["close"],
+                       "volume": j["volume"]},
+                      index=pd.to_datetime(j["ticks"], unit="ms", utc=True))
+    return df[df["volume"] > 0]

@@ -46,6 +46,7 @@ Prioridad = probabilidad a priori / coste de probarla (A alta, B media, C baja).
 | H039 | Gatev et al. (2006); Fil & Kristoufek (2020) | arbitraje estadístico por pares cointegrados entre perps | rechazada | G1 | G2: −10 a −14 %/año in-sample; OOS −8 %/año | 2 | B |
 | H040 | microestructura del funding | deriva contra el lado que paga en la hora previa a la liquidación del funding (cota bruta) | rechazada | G1 | cota: −0,01 a −0,03 % (t ≈ −1,1) | 2 | C |
 | H041 | liquidez de fin de semana | reversión el lunes de los movimientos del fin de semana (BTC/ETH) | rechazada | G1 | G2: no revierte (continúa; t −2,0 OOS) | 2 | C |
+| H042 | contraste pedido por la persona | carry siempre cubierto con trimestrales de Deribit 2018–2026 (no operable; estimar el carry de largo plazo) | en curso | G0 | - | 0 | - |
 
 ## Detalle G0 (escrito ANTES de ver datos)
 
@@ -544,3 +545,16 @@ Autorizado por la persona responsable. Se ejecuta UNA sola vez
 `python3 experiments/h033_always_hedged.py holdout` sobre 2025-10-01 → 2026-09-30, con el
 diseño ya fijado (sin cambios). Criterio: retorno anual > 4,5 % (caja). Se informará el
 resultado sea cual sea; el holdout queda consumido y no se podrá reutilizar.
+
+### H042 — Contraste: carry de largo plazo con futuros de Deribit (2018–2026)
+- Objetivo: no es una estrategia operable en Binance; amplía el periodo para estimar si
+  el carry siempre cubierto (regla de H033, sin cambios) supera a la caja de forma
+  estable o depende del régimen.
+- Diseño fijado (2026-10-13, antes de ver resultados): trimestrales de Deribit BTC y ETH
+  (último viernes de mar/jun/sep/dic, velas diarias de la API pública), spot de
+  referencia = Binance BTCUSDT/ETHUSDT diario. Motor de H012/H033 en diario: siempre
+  corto en el trimestral más cercano con ≥ 14 días, W = 1, costes de futuro 0,10 % por
+  lado por rotación. Comparación año a año con el rendimiento de la caja (letras del
+  Tesoro de EE. UU. a 3 meses, medias anuales aproximadas; se indican como aproximadas).
+- Predicción de la investigación: el carry supera a la caja en los años alcistas y queda
+  por debajo en los demás (sin ventaja estable).
